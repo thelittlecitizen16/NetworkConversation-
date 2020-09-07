@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "ServerNetworkConversation": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
