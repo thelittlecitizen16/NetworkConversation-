@@ -11,18 +11,28 @@ namespace ServerNetworkConversation
     {
         TcpClient clientSocket;
         ConcurrentDictionary<Guid, TcpClient> ClientsList;
+        Thread ctThread;
 
         public void StartClient(TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
         {
             clientSocket = inClientSocket;
             ClientsList = clientsList;
 
-            Thread ctThread = new Thread(DoChat);
+             ctThread = new Thread(DoChat);
             ctThread.Start();
         }
 
         private void DoChat()
         {
+            var guidClient = ClientsList.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
+
+            foreach (var client in ClientsList)
+            {
+                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes($"{guidClient} enter to global chat");
+                NetworkStream clientStream = client.Value.GetStream();
+                clientStream.Write(bytesToSend, 0, bytesToSend.Length);
+            }
+
             while (true)
             {
                 try
@@ -33,29 +43,46 @@ namespace ServerNetworkConversation
                     int bytesRead = nwStream.Read(buffer, 0, clientSocket.ReceiveBufferSize);
 
                     string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine("Received and Sending back: " + dataReceived);
-
-                    var guidClient = ClientsList.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
-                    foreach (var client in ClientsList)
+                    if (dataReceived == "")
                     {
-                        byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes($"{guidClient} send: {dataReceived}");
-                        NetworkStream clientStream = client.Value.GetStream();
-                        clientStream.Write(bytesToSend, 0, bytesToSend.Length);
+                        TcpClient clientExist;
+                        ClientsList.TryRemove(guidClient, out clientExist);
+                        clientSocket.Close();
+                        ctThread.Abort();
                     }
+                    else
+                    {
+                        Console.WriteLine("Received and Sending back: " + dataReceived);
+
+                        foreach (var client in ClientsList)
+                        {
+                            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes($"{guidClient} send: {dataReceived}");
+                            NetworkStream clientStream = client.Value.GetStream();
+                            clientStream.Write(bytesToSend, 0, bytesToSend.Length);
+                        }
+                    }
+                   
                 }
                 catch (SocketException)
-            {
-                clientSocket.Close();
+                {
+                    clientSocket.Close();
+                }
+                catch (ObjectDisposedException)
+                {
+                    clientSocket.Close();
+                }
+                catch (Exception)
+                {
+                    clientSocket.Close();
+                }
             }
-            catch (ObjectDisposedException)
+
+            foreach (var client in ClientsList)
             {
-                clientSocket.Close();
-            }
-            catch (Exception)
-            {
-                clientSocket.Close();
+                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes($"{guidClient} exist to global chat");
+                NetworkStream clientStream = client.Value.GetStream();
+                clientStream.Write(bytesToSend, 0, bytesToSend.Length);
             }
         }
     }
-}
 }

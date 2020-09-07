@@ -36,6 +36,7 @@ namespace ServerNetworkConversation
                 while (true)
                 {
                     TcpClient tcpClient = listener.AcceptTcpClient();
+                    //Send When enter
                     clientsList.TryAdd(Guid.NewGuid(), tcpClient);
                     Console.WriteLine("new connection from client");
 

@@ -3,6 +3,7 @@ using MenuBuilder;
 using MenuBuilder.Options;
 using System;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Text;
 
 namespace ClientNetworkConversation
@@ -13,11 +14,11 @@ namespace ClientNetworkConversation
         private ConsoleSystem _consoleSystem;
         private Validation _validation;
         private GlobalChatOption _globalChatOption;
-        public Menu()
+        public Menu(TcpClient client)
         {
             _consoleSystem = new ConsoleSystem();
             _validation = new MenuBuilder.Validation();
-            _globalChatOption = new GlobalChatOption();
+            _globalChatOption = new GlobalChatOption(client);
             _menuBuilderInt = new MenuBuilder<int>(_consoleSystem, _validation);
         }
         public void RunMenu()

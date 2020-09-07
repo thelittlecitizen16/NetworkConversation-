@@ -1,15 +1,32 @@
 ﻿using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace ClientNetworkConversation
 {
     class Program
     {
+        public static TcpClient client;
+
         static void Main(string[] args)
         {
-            Menu menuOption1 = new Menu();
-            menuOption1.RunMenu();
+            try
+            {
+                IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
+                IPAddress ipAddr = ipHost.AddressList[0];
 
-            Console.WriteLine("Hello World!");
+                client = new TcpClient();
+                client.Connect(ipAddr, 7777);
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.ToString());
+            }
+
+            Menu menuOption1 = new Menu(client);
+            menuOption1.RunMenu();
         }
     }
 }
