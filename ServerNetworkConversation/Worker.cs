@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ServerNetworkConversation.Options;
 
 namespace ServerNetworkConversation
 {
@@ -15,10 +16,10 @@ namespace ServerNetworkConversation
     {
         private ConcurrentDictionary<Guid, TcpClient> clientsList = new ConcurrentDictionary<Guid, TcpClient>();
         private readonly ILogger<Worker> _logger;
-
         public Worker(ILogger<Worker> logger)
         {
             _logger = logger;
+           
 
         }
 
@@ -36,13 +37,14 @@ namespace ServerNetworkConversation
                 while (true)
                 {
                     TcpClient tcpClient = listener.AcceptTcpClient();
-                    //Send When enter
                     clientsList.TryAdd(Guid.NewGuid(), tcpClient);
                     Console.WriteLine("new connection from client");
 
-                    //check what user want
-                    HandleClient client = new HandleClient();
-                    client.StartClient(tcpClient, clientsList);
+                    var manageClientOptions = new ManageClientOptions(tcpClient, clientsList);
+                  // manageClientOptions.AddClientOptions(1, tcpClient, clientsList).Run();
+                     manageClientOptions.GetClientChoice();
+                  //   GlobalChat client = new GlobalChat(tcpClient, clientsList);
+                  // client.Run();
                 }
             }
 

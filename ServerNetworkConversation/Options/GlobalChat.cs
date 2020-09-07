@@ -5,21 +5,26 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Linq;
-namespace ServerNetworkConversation
+using ServerNetworkConversation.Options.Interfaces;
+
+namespace ServerNetworkConversation.Options
 {
-    public class HandleClient
+    public class GlobalChat : IClientOption
     {
         TcpClient clientSocket;
         ConcurrentDictionary<Guid, TcpClient> ClientsList;
         Thread ctThread;
 
-        public void StartClient(TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
+        public GlobalChat(TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
         {
             clientSocket = inClientSocket;
             ClientsList = clientsList;
-
+        }
+        public Thread Run()
+        {
             ctThread = new Thread(DoChat);
             ctThread.Start();
+            return ctThread;
         }
 
         private void DoChat()
