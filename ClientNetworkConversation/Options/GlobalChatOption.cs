@@ -20,6 +20,7 @@ namespace ClientNetworkConversation.Options
         {
             try
             {
+                endConnection = false;
                 Thread ctThread = new Thread(GetMessage);
                 ctThread.Start();
 
@@ -43,7 +44,7 @@ namespace ClientNetworkConversation.Options
                     }
 
                 }
-                _client.Close();
+                ctThread.Abort();
 
             }
             catch (ArgumentNullException ane)
