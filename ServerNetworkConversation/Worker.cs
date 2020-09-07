@@ -25,6 +25,7 @@ namespace ServerNetworkConversation
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            Data data = new Data();
             IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddr = ipHost.AddressList[0];
 
@@ -40,7 +41,7 @@ namespace ServerNetworkConversation
                     clientsList.TryAdd(Guid.NewGuid(), tcpClient);
                     Console.WriteLine("new connection from client");
 
-                    var manageClientOptions = new ManageClientOptions(tcpClient, clientsList);
+                    var manageClientOptions = new ManageClientOptions(data, tcpClient, clientsList);
                   // manageClientOptions.AddClientOptions(1, tcpClient, clientsList).Run();
                      manageClientOptions.GetClientChoice();
                   //   GlobalChat client = new GlobalChat(tcpClient, clientsList);

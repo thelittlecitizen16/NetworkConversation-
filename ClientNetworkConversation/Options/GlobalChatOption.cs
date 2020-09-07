@@ -24,7 +24,7 @@ namespace ClientNetworkConversation.Options
 
             try
             {
-            
+
                 endConnection = false;
                 Thread ctThread = new Thread(GetMessage);
                 ctThread.Start();
@@ -46,7 +46,7 @@ namespace ClientNetworkConversation.Options
                     }
                     else
                     {
-                         nwStream = _client.GetStream();
+                        nwStream = _client.GetStream();
                         bytesToSend = ASCIIEncoding.ASCII.GetBytes(message);
 
                         nwStream.Write(bytesToSend, 0, bytesToSend.Length);

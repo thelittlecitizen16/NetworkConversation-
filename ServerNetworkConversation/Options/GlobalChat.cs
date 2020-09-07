@@ -13,12 +13,14 @@ namespace ServerNetworkConversation.Options
     {
         TcpClient clientSocket;
         ConcurrentDictionary<Guid, TcpClient> ClientsList;
+        Data _data;
         Thread ctThread;
 
-        public GlobalChat(TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
+        public GlobalChat(Data data,TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
         {
             clientSocket = inClientSocket;
             ClientsList = clientsList;
+            _data = data;
         }
         public Thread Run()
         {
@@ -54,17 +56,16 @@ namespace ServerNetworkConversation.Options
 
                     if (dataReceived == "0")
                     {
-                        TcpClient clientExist;
-                        ClientsList.TryRemove(guidClient, out clientExist);
-                        clientSocket.Close();
+                        _data.Remove(guidClient);
+                        //clientSocket.Close();
+
                         foreach (var client in ClientsList)
                         {
                             byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes($"{guidClient} exist the global chat");
                             NetworkStream clientStream = client.Value.GetStream();
                             clientStream.Write(bytesToSend, 0, bytesToSend.Length);
                         }
-
-                        ctThread.Abort();
+                        Console.WriteLine("client send 0");
                         end = true;
                     }
                     else
@@ -93,6 +94,7 @@ namespace ServerNetworkConversation.Options
                     clientSocket.Close();
                 }
             }
+            Console.WriteLine("client out thread");
 
         }
         private void CheckIfStillContect()

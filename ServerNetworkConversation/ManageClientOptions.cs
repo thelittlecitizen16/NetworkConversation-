@@ -15,10 +15,12 @@ namespace ServerNetworkConversation
         private ConcurrentDictionary<int, IClientOption> _clientOptions;
         private TcpClient _inClientSocket;
         private ConcurrentDictionary<Guid, TcpClient> _clientsList;
-        public ManageClientOptions(TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
+        private Data _data;
+        public ManageClientOptions(Data data, TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
         {
             _inClientSocket = inClientSocket;
             _clientsList = clientsList;
+            _data = data;
             _clientOptions = new ConcurrentDictionary<int, IClientOption>();
         }
         public IClientOption AddClientOptions(int choice, TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
@@ -26,7 +28,7 @@ namespace ServerNetworkConversation
             switch (choice)
             {
                 case 1:
-                    return new GlobalChat(inClientSocket, clientsList);
+                    return new GlobalChat(_data,inClientSocket, clientsList);
                     break;
                 default:
                     return null;
@@ -44,11 +46,11 @@ namespace ServerNetworkConversation
         private void A()
         {
             string choice = "0";
+            NetworkStream serverStream = _inClientSocket.GetStream();
 
             while (true)
             {
 
-                NetworkStream serverStream = _inClientSocket.GetStream();
                 byte[] bytesToRead = new byte[_inClientSocket.ReceiveBufferSize];
                 int bytesRead = serverStream.Read(bytesToRead, 0, _inClientSocket.ReceiveBufferSize);
                 string dataReceived = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
@@ -56,8 +58,12 @@ namespace ServerNetworkConversation
 
                 if (choice == "1")
                 {
-                    Task t = Task.Run(() => AddClientOptions(1, _inClientSocket, _clientsList).Run());
-                    Task.WaitAll(t);
+
+                    _data.Add(Guid.NewGuid(), _inClientSocket);
+
+                    Thread t= AddClientOptions(1, _inClientSocket, _clientsList).Run();
+                    t.Join();
+                   // Task.WaitAll(t);
                 }
                 // Thread t = AddClientOptions(1, _inClientSocket, _clientsList).Run();
             }

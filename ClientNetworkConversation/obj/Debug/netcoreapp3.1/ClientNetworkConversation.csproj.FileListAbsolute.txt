@@ -6,7 +6,6 @@ C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConver
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\bin\Debug\netcoreapp3.1\ClientNetworkConversation.pdb
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\bin\Debug\netcoreapp3.1\MenuBuilder.dll
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\bin\Debug\netcoreapp3.1\MenuBuilder.pdb
-C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.csprojAssemblyReference.cache
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.AssemblyInfoInputs.cache
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.AssemblyInfo.cs
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.csproj.CoreCompileInputs.cache
@@ -14,3 +13,4 @@ C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConver
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.dll
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.pdb
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.genruntimeconfig.cache
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.csprojAssemblyReference.cache
