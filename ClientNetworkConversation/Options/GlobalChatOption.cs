@@ -54,8 +54,6 @@ namespace ClientNetworkConversation.Options
 
                 }
 
-                ctThread.Abort();
-
             }
             catch (ArgumentNullException ane)
             {
@@ -73,7 +71,7 @@ namespace ClientNetworkConversation.Options
             {
                 Console.WriteLine("Unexpected exception : {0}", e.ToString());
             }
-            Console.WriteLine("enter to chat");
+            Console.WriteLine("out of chat");
         }
         private void GetMessage()
         {
