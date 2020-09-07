@@ -34,6 +34,10 @@ namespace ClientNetworkConversation.Options
                     if (message == "0")
                     {
                         endConnection = true;
+                        NetworkStream nwStream = _client.GetStream();
+                        byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(message);
+
+                        nwStream.Write(bytesToSend, 0, bytesToSend.Length);
                     }
                     else
                     {
@@ -44,6 +48,7 @@ namespace ClientNetworkConversation.Options
                     }
 
                 }
+
                 ctThread.Abort();
 
             }

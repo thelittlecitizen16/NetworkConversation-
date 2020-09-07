@@ -18,12 +18,14 @@ namespace ServerNetworkConversation
             clientSocket = inClientSocket;
             ClientsList = clientsList;
 
-             ctThread = new Thread(DoChat);
+            ctThread = new Thread(DoChat);
             ctThread.Start();
         }
 
         private void DoChat()
         {
+            bool end = false;
+
             CheckIfStillContect();
             var guidClient = ClientsList.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
 
@@ -34,7 +36,7 @@ namespace ServerNetworkConversation
                 clientStream.Write(bytesToSend, 0, bytesToSend.Length);
             }
 
-            while (true)
+            while (!end)
             {
                 try
                 {
@@ -45,12 +47,20 @@ namespace ServerNetworkConversation
 
                     string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
-                    if (dataReceived == "")
+                    if (dataReceived == "0")
                     {
                         TcpClient clientExist;
                         ClientsList.TryRemove(guidClient, out clientExist);
                         clientSocket.Close();
+                        foreach (var client in ClientsList)
+                        {
+                            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes($"{guidClient} exist the global chat");
+                            NetworkStream clientStream = client.Value.GetStream();
+                            clientStream.Write(bytesToSend, 0, bytesToSend.Length);
+                        }
+
                         ctThread.Abort();
+                        end = true;
                     }
                     else
                     {
@@ -63,7 +73,7 @@ namespace ServerNetworkConversation
                             clientStream.Write(bytesToSend, 0, bytesToSend.Length);
                         }
                     }
-                   
+
                 }
                 catch (SocketException)
                 {
@@ -79,12 +89,6 @@ namespace ServerNetworkConversation
                 }
             }
 
-            foreach (var client in ClientsList)
-            {
-                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes($"{guidClient} exist to global chat");
-                NetworkStream clientStream = client.Value.GetStream();
-                clientStream.Write(bytesToSend, 0, bytesToSend.Length);
-            }
         }
         private void CheckIfStillContect()
         {
@@ -93,7 +97,7 @@ namespace ServerNetworkConversation
                 if (!client.Value.Connected)
                 {
                     TcpClient clientExist;
-                    ClientsList.TryRemove(client.Key,out clientExist);
+                    ClientsList.TryRemove(client.Key, out clientExist);
                 }
             }
         }

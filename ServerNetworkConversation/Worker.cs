@@ -40,6 +40,7 @@ namespace ServerNetworkConversation
                     clientsList.TryAdd(Guid.NewGuid(), tcpClient);
                     Console.WriteLine("new connection from client");
 
+                    //check what user want
                     HandleClient client = new HandleClient();
                     client.StartClient(tcpClient, clientsList);
                 }
