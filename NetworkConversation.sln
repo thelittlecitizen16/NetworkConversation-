@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerNetworkConversation", "ServerNetworkConversation\ServerNetworkConversation.csproj", "{5A898760-C757-4E52-B42D-691D8FC6ECDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerNetworkConversation", "ServerNetworkConversation\ServerNetworkConversation.csproj", "{5A898760-C757-4E52-B42D-691D8FC6ECDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientNetworkConversation", "ClientNetworkConversation\ClientNetworkConversation.csproj", "{77D06EE0-F6C6-4B15-9805-3AAB17433141}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientNetworkConversation", "ClientNetworkConversation\ClientNetworkConversation.csproj", "{77D06EE0-F6C6-4B15-9805-3AAB17433141}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{0E61660B-089E-4C1D-B995-482EEED6AC0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{77D06EE0-F6C6-4B15-9805-3AAB17433141}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77D06EE0-F6C6-4B15-9805-3AAB17433141}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77D06EE0-F6C6-4B15-9805-3AAB17433141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E61660B-089E-4C1D-B995-482EEED6AC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E61660B-089E-4C1D-B995-482EEED6AC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E61660B-089E-4C1D-B995-482EEED6AC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E61660B-089E-4C1D-B995-482EEED6AC0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
