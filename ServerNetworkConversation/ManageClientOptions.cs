@@ -14,21 +14,21 @@ namespace ServerNetworkConversation
     {
         private ConcurrentDictionary<int, IClientOption> _clientOptions;
         private TcpClient _inClientSocket;
-        private ConcurrentDictionary<Guid, TcpClient> _clientsList;
         private Data _data;
-        public ManageClientOptions(Data data, TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
+        private HandleClient _handleClient;
+        public ManageClientOptions(Data data, TcpClient inClientSocket, HandleClient handleClient)
         {
             _inClientSocket = inClientSocket;
-            _clientsList = clientsList;
             _data = data;
+            _handleClient = handleClient;
             _clientOptions = new ConcurrentDictionary<int, IClientOption>();
         }
-        public IClientOption AddClientOptions(int choice, TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
+        public IClientOption AddClientOptions(int choice, TcpClient inClientSocket)
         {
             switch (choice)
             {
                 case 1:
-                    return new GlobalChat(_data,inClientSocket, clientsList);
+                    return new GlobalChat(_data,inClientSocket, _handleClient);
                     break;
                 default:
                     return null;
@@ -50,22 +50,17 @@ namespace ServerNetworkConversation
 
             while (true)
             {
-
-                byte[] bytesToRead = new byte[_inClientSocket.ReceiveBufferSize];
-                int bytesRead = serverStream.Read(bytesToRead, 0, _inClientSocket.ReceiveBufferSize);
-                string dataReceived = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
+                string dataReceived = _handleClient.GetMessageFromClient(_inClientSocket);
                 choice = dataReceived;
 
                 if (choice == "1")
                 {
 
-                    _data.Add(Guid.NewGuid(), _inClientSocket);
+                    _data.AddClientToGlobalChat(Guid.NewGuid(), _inClientSocket);
 
-                    Thread t= AddClientOptions(1, _inClientSocket, _clientsList).Run();
+                    Thread t= AddClientOptions(1, _inClientSocket).Run();
                     t.Join();
-                   // Task.WaitAll(t);
                 }
-                // Thread t = AddClientOptions(1, _inClientSocket, _clientsList).Run();
             }
         }
     }

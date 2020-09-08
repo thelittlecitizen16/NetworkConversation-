@@ -12,15 +12,15 @@ namespace ServerNetworkConversation.Options
     public class GlobalChat : IClientOption
     {
         TcpClient clientSocket;
-        ConcurrentDictionary<Guid, TcpClient> ClientsList;
         Data _data;
+        HandleClient _handleClient;
         Thread ctThread;
 
-        public GlobalChat(Data data,TcpClient inClientSocket, ConcurrentDictionary<Guid, TcpClient> clientsList)
+        public GlobalChat(Data data, TcpClient inClientSocket, HandleClient handleClient)
         {
             clientSocket = inClientSocket;
-            ClientsList = clientsList;
             _data = data;
+            _handleClient = handleClient;
         }
         public Thread Run()
         {
@@ -33,38 +33,26 @@ namespace ServerNetworkConversation.Options
         {
             bool end = false;
 
-            CheckIfStillContect();
-            var guidClient = ClientsList.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
+            //CheckIfStillContect();
+            var guidClient = _data.ClientsInGlobalChat.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
+            string message = $"{guidClient} enter to global chat";
+            SendMessageToEachClient(message);
 
-            foreach (var client in ClientsList)
-            {
-                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes($"{guidClient} enter to global chat");
-                NetworkStream clientStream = client.Value.GetStream();
-                clientStream.Write(bytesToSend, 0, bytesToSend.Length);
-            }
 
             while (!end)
             {
                 try
                 {
-                    NetworkStream nwStream = clientSocket.GetStream();
-                    byte[] buffer = new byte[clientSocket.ReceiveBufferSize];
+                    string dataReceived = _handleClient.GetMessageFromClient(clientSocket);
 
-                    int bytesRead = nwStream.Read(buffer, 0, clientSocket.ReceiveBufferSize);
-
-                    string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
                     if (dataReceived == "0")
                     {
-                        _data.Remove(guidClient);
-                        //clientSocket.Close();
+                        _data.RemoveClientFromGlobalChat(guidClient);
 
-                        foreach (var client in ClientsList)
-                        {
-                            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes($"{guidClient} exist the global chat");
-                            NetworkStream clientStream = client.Value.GetStream();
-                            clientStream.Write(bytesToSend, 0, bytesToSend.Length);
-                        }
+                         message = $"{guidClient} exist the global chat";
+                        SendMessageToEachClient(message);
+
                         Console.WriteLine("client send 0");
                         end = true;
                     }
@@ -72,12 +60,8 @@ namespace ServerNetworkConversation.Options
                     {
                         Console.WriteLine("Received and Sending back: " + dataReceived);
 
-                        foreach (var client in ClientsList)
-                        {
-                            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes($"{guidClient} send: {dataReceived}");
-                            NetworkStream clientStream = client.Value.GetStream();
-                            clientStream.Write(bytesToSend, 0, bytesToSend.Length);
-                        }
+                         message = $"{guidClient} send: {dataReceived}";
+                        SendMessageToEachClient(message);
                     }
 
                 }
@@ -94,17 +78,29 @@ namespace ServerNetworkConversation.Options
                     clientSocket.Close();
                 }
             }
+
             Console.WriteLine("client out thread");
 
         }
+        private void SendMessageToEachClient(string message)
+        {
+            foreach (var client in _data.ClientsInGlobalChat)
+            {
+                if (client.Value.Connected)
+                {
+                    _handleClient.SendMessageToClient(client.Value, message);
+                }
+            }
+        }
+
         private void CheckIfStillContect()
         {
-            foreach (var client in ClientsList)
+            foreach (var client in _data.ClientsInGlobalChat)
             {
                 if (!client.Value.Connected)
                 {
                     TcpClient clientExist;
-                    ClientsList.TryRemove(client.Key, out clientExist);
+                    _data.ClientsInGlobalChat.TryRemove(client.Key, out clientExist);
                 }
             }
         }

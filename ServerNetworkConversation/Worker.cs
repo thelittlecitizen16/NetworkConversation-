@@ -14,7 +14,6 @@ namespace ServerNetworkConversation
 {
     public class Worker : BackgroundService
     {
-        private ConcurrentDictionary<Guid, TcpClient> clientsList = new ConcurrentDictionary<Guid, TcpClient>();
         private readonly ILogger<Worker> _logger;
         public Worker(ILogger<Worker> logger)
         {
@@ -26,6 +25,7 @@ namespace ServerNetworkConversation
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             Data data = new Data();
+            HandleClient handleClient = new HandleClient();
             IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddr = ipHost.AddressList[0];
 
@@ -38,10 +38,9 @@ namespace ServerNetworkConversation
                 while (true)
                 {
                     TcpClient tcpClient = listener.AcceptTcpClient();
-                    clientsList.TryAdd(Guid.NewGuid(), tcpClient);
                     Console.WriteLine("new connection from client");
 
-                    var manageClientOptions = new ManageClientOptions(data, tcpClient, clientsList);
+                    var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient);
                   // manageClientOptions.AddClientOptions(1, tcpClient, clientsList).Run();
                      manageClientOptions.GetClientChoice();
                   //   GlobalChat client = new GlobalChat(tcpClient, clientsList);
@@ -53,11 +52,6 @@ namespace ServerNetworkConversation
             {
                 Console.WriteLine(e.ToString());
             }
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            //    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-            //    await Task.Delay(1000, stoppingToken);
-            //}
         }
     }
 }

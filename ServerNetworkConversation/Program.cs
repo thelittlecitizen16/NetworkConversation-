@@ -15,7 +15,6 @@ namespace ServerNetworkConversation
         public static ConcurrentDictionary<Guid, TcpClient> clientsList = new ConcurrentDictionary<Guid, TcpClient>();
         public static void Main(string[] args)
         {
-
             CreateHostBuilder(args).Build().Run();
         }
 

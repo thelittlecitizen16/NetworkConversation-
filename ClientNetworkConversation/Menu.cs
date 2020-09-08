@@ -14,11 +14,11 @@ namespace ClientNetworkConversation
         private ConsoleSystem _consoleSystem;
         private Validation _validation;
         private GlobalChatOption _globalChatOption;
-        public Menu(TcpClient client)
+        public Menu(TcpClient client, HandleServer handleServer)
         {
             _consoleSystem = new ConsoleSystem();
             _validation = new MenuBuilder.Validation();
-            _globalChatOption = new GlobalChatOption(client);
+            _globalChatOption = new GlobalChatOption(client, handleServer);
             _menuBuilderInt = new MenuBuilder<int>(_consoleSystem, _validation);
         }
         public void RunMenu()

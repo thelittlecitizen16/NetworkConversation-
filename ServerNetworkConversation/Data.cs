@@ -8,20 +8,20 @@ namespace ServerNetworkConversation
 {
     public class Data
     {
-        private ConcurrentDictionary<Guid, TcpClient> clientsList;
+        public ConcurrentDictionary<Guid, TcpClient> ClientsInGlobalChat { get; private set; }
         public Data()
         {
-            clientsList = new ConcurrentDictionary<Guid, TcpClient>();
+            ClientsInGlobalChat = new ConcurrentDictionary<Guid, TcpClient>();
         }
 
-        public void Add(Guid guid, TcpClient tcpClient)
+        public void AddClientToGlobalChat(Guid guid, TcpClient tcpClient)
         {
-            clientsList.TryAdd(guid, tcpClient);
+            ClientsInGlobalChat.TryAdd(guid, tcpClient);
         }
-        public void Remove(Guid guid)
+        public void RemoveClientFromGlobalChat(Guid guid)
         {
             TcpClient tcpClient;
-            clientsList.TryRemove(guid, out tcpClient);
+            ClientsInGlobalChat.TryRemove(guid, out tcpClient);
         }
     }
 }

@@ -11,16 +11,17 @@ namespace ClientNetworkConversation.Options
     {
         public string OptionMessage => "Enter To Global Chat";
         private static TcpClient _client;
+        private HandleServer _handleServer;
+
         private bool endConnection = false;
-        public GlobalChatOption(TcpClient client)
+        public GlobalChatOption(TcpClient client, HandleServer handleServer)
         {
+            _handleServer = handleServer;
             _client = client;
         }
         public void Run()
         {
-            NetworkStream nwStream = _client.GetStream();
-            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes("1");
-            nwStream.Write(bytesToSend, 0, bytesToSend.Length);
+            _handleServer.SendMessageToServer(_client,"1");
 
             try
             {
@@ -31,27 +32,15 @@ namespace ClientNetworkConversation.Options
 
                 while (!endConnection)
                 {
-
-
                     Console.WriteLine("enter message, if you wand to exist global chat enter: 0");
                     string message = Console.ReadLine();
 
                     if (message == "0")
                     {
                         endConnection = true;
-                        nwStream = _client.GetStream();
-                        bytesToSend = ASCIIEncoding.ASCII.GetBytes(message);
-
-                        nwStream.Write(bytesToSend, 0, bytesToSend.Length);
-                    }
-                    else
-                    {
-                        nwStream = _client.GetStream();
-                        bytesToSend = ASCIIEncoding.ASCII.GetBytes(message);
-
-                        nwStream.Write(bytesToSend, 0, bytesToSend.Length);
                     }
 
+                    _handleServer.SendMessageToServer(_client, message);
                 }
 
             }
@@ -79,10 +68,7 @@ namespace ClientNetworkConversation.Options
             {
                 while (!endConnection)
                 {
-                    NetworkStream serverStream = _client.GetStream();
-                    byte[] bytesToRead = new byte[_client.ReceiveBufferSize];
-                    int bytesRead = serverStream.Read(bytesToRead, 0, _client.ReceiveBufferSize);
-                    string returndata = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
+                    string returndata = _handleServer.GetMessageFromServer(_client);
 
                     if (returndata != "")
                     {
