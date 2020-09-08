@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ServerNetworkConversation.HandleOptions;
 using ServerNetworkConversation.Options;
 
 namespace ServerNetworkConversation
@@ -26,6 +27,7 @@ namespace ServerNetworkConversation
         {
             Data data = new Data();
             HandleClient handleClient = new HandleClient();
+            ClientOptionsFactory clientOptionsFactory = new ClientOptionsFactory();
             IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddr = ipHost.AddressList[0];
 
@@ -40,7 +42,7 @@ namespace ServerNetworkConversation
                     TcpClient tcpClient = listener.AcceptTcpClient();
                     data.AddClientWhenConnect(Guid.NewGuid(), tcpClient);
                     Console.WriteLine("new connection from client");
-                    var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient);
+                    var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient, clientOptionsFactory);
                   // manageClientOptions.AddClientOptions(1, tcpClient, clientsList).Run();
                      manageClientOptions.GetClientChoice();
                   //   GlobalChat client = new GlobalChat(tcpClient, clientsList);

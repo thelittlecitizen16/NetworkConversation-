@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace ClientNetworkConversation
 {
     public class HandleServer
     {
+        public CancellationTokenSource cancellationToken;
         public void SendMessageToServer(TcpClient client, string message)
         {
             NetworkStream nwStream = client.GetStream();

@@ -73,13 +73,15 @@ namespace ServerNetworkConversation.Options
 
                         if (dataReceived == "0")
                         {
+                            _handleClient.SendMessageToClient(clientSocket,"0");
                             end = true;
                         }
                         else
                         {
                             Console.WriteLine("Received and Sending back: " + dataReceived);
                              message = $"{dataReceived}";
-                            if (clientSend.Connected)
+
+                            if (clientSend.Connected)//TODO: check if in chat
                             {
                                 _handleClient.SendMessageToClient(clientSend, message);
                             }

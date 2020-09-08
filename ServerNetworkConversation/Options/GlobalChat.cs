@@ -52,7 +52,7 @@ namespace ServerNetworkConversation.Options
 
                          message = $"{guidClient} exist the global chat";
                         SendMessageToEachClient(message);
-
+                        _handleClient.SendMessageToClient(clientSocket, "0");
                         Console.WriteLine("client send 0");
                         end = true;
                     }

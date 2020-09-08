@@ -1,4 +1,5 @@
-﻿using MenuBuilder.Interfaces;
+﻿using Common.Enums;
+using MenuBuilder.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -22,18 +23,21 @@ namespace ClientNetworkConversation.Options
 
         public void Run()
         {
-            _handleServer.SendMessageToServer(_client, "2");
+            _handleServer.SendMessageToServer(_client, ClientOptions.PRIVATE_CHAT.ToString());
+
 
             try
             {
-
-                endConnection = false; 
-                string messageRecive = _handleServer.GetMessageFromServer(_client);
+                string messageRecive;
+                //  if (!_handleServer.cancellationToken.IsCancellationRequested)
+                // {
+                messageRecive = _handleServer.GetMessageFromServer(_client);
                 Console.WriteLine(messageRecive);
+                // }
 
                 string messageToSend = Console.ReadLine();
                 _handleServer.SendMessageToServer(_client, messageToSend);
-                 messageRecive = _handleServer.GetMessageFromServer(_client);
+                messageRecive = _handleServer.GetMessageFromServer(_client);
 
                 if (messageRecive == "success")
                 {
@@ -44,8 +48,8 @@ namespace ClientNetworkConversation.Options
                     //    Console.WriteLine(messageReciveAfter);
                     //}
                     endConnection = false;
-                    //Thread ctThread = new Thread(GetMessage);
-                    //ctThread.Start();
+                    Thread ctThread = new Thread(GetMessage);
+                    ctThread.Start();
 
                     while (!endConnection)
                     {
@@ -87,15 +91,11 @@ namespace ClientNetworkConversation.Options
         {
             try
             {
-                while (!endConnection)
+                string returndata = "";
+                ; while (returndata != "0")
                 {
-                    string returndata = _handleServer.GetMessageFromServer(_client);
-
-                    if (returndata != "")
-                    {
-                        Console.WriteLine(returndata);
-                        returndata = "";
-                    }
+                    returndata = _handleServer.GetMessageFromServer(_client);
+                    Console.WriteLine(returndata);
                 }
             }
             catch (Exception e)

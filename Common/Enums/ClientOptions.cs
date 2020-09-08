@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Common.Enums
 {
-    enum ClientOptions
+    public enum ClientOptions
     {
         GLOBAL_CHAT,
         PRIVATE_CHAT,

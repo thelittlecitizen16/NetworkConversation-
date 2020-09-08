@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="MenuBuilder">
       <HintPath>..\..\..\..\Desktop\שבוע שני\menu\MenuBuilder\MenuBuilder\bin\Debug\netstandard2.0\MenuBuilder.dll</HintPath>
     </Reference>

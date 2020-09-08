@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using Common.Enums;
+using System.Threading.Tasks;
 
 namespace ClientNetworkConversation.Options
 {
@@ -12,6 +14,7 @@ namespace ClientNetworkConversation.Options
         public string OptionMessage => "Enter To Global Chat";
         private static TcpClient _client;
         private HandleServer _handleServer;
+        private string message;
 
         private bool endConnection = false;
         public GlobalChatOption(TcpClient client, HandleServer handleServer)
@@ -19,30 +22,57 @@ namespace ClientNetworkConversation.Options
             _handleServer = handleServer;
             _client = client;
         }
+
         public void Run()
         {
-            _handleServer.SendMessageToServer(_client,"1");
+            _handleServer.SendMessageToServer(_client, ClientOptions.GLOBAL_CHAT.ToString());
 
             try
             {
-
-                endConnection = false;
-                Thread ctThread = new Thread(GetMessage);
-                ctThread.Start();
+                //_handleServer.cancellationToken = new CancellationTokenSource();
+                //var cancellationToken = _handleServer.cancellationToken;
+                //var task = Task.Factory.StartNew(() =>
+                // {
+                //     while (true)
+                //     {
+                //         if (cancellationToken.Token.IsCancellationRequested)
+                //         {
+                //             Console.WriteLine("task canceled");
+                //             _handleServer.cancellationToken = new CancellationTokenSource();
+                //             break;
+                //         }
+                //         else
+                //         {
+                //             GetMessage(cancellationToken);
+                //         }
+                //     }
+                // }, cancellationToken.Token);
+                Thread thread = new Thread(GetMessage);
+                thread.Start();
 
                 while (!endConnection)
                 {
                     Console.WriteLine("enter message, if you wand to exist global chat enter: 0");
-                    string message = Console.ReadLine();
+                    message = Console.ReadLine();
 
                     if (message == "0")
                     {
                         endConnection = true;
+                        _handleServer.SendMessageToServer(_client, message);
+                        //cancellationToken.Cancel();
+                        break;
                     }
-
-                    _handleServer.SendMessageToServer(_client, message);
+                    else
+                    {
+                        _handleServer.SendMessageToServer(_client, message);
+                    }
                 }
 
+
+            }
+            catch (OperationCanceledException e)
+            {
+                Console.WriteLine($"{nameof(OperationCanceledException)} thrown with message: {e.Message}");
             }
             catch (ArgumentNullException ane)
             {
@@ -60,26 +90,17 @@ namespace ClientNetworkConversation.Options
             {
                 Console.WriteLine("Unexpected exception : {0}", e.ToString());
             }
+            endConnection = false;
             Console.WriteLine("out of chat");
         }
         private void GetMessage()
         {
-            try
-            {
-                while (!endConnection)
-                {
-                    string returndata = _handleServer.GetMessageFromServer(_client);
+            string s = "";
 
-                    if (returndata != "")
-                    {
-                        Console.WriteLine(returndata);
-                        returndata = "";
-                    }
-                }
-            }
-            catch (Exception e)
+            while (s != "0")
             {
-                Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                s = _handleServer.GetMessageFromServer(_client);
+                Console.WriteLine(s);
             }
         }
     }
