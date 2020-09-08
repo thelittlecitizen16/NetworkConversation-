@@ -82,20 +82,12 @@ namespace ServerNetworkConversation.Options
                     _handleClient.SendMessageToClient(clientSocket, message);
                 }
             }
-            catch (SocketException)
-            {
-                RemoveClientWhenOut();
-            }
-            catch (ObjectDisposedException)
-            {
-                RemoveClientWhenOut();
-            }
             catch (Exception)
             {
                 RemoveClientWhenOut();
             }
-
         }
+
         private void RemoveClientWhenOut()
         {
             clientSocket.Close();

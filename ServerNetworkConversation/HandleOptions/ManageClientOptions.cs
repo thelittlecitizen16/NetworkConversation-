@@ -24,17 +24,15 @@ namespace ServerNetworkConversation.HandleOptions
             _clientOptionsFactory = clientOptionsFactory;
         }
 
-        public void GetClientChoice()
+        public void Run()
         {
             Task.Run(() =>
-             A()
+             GetClientChoice()
             );
 
         }
-        private void A()
+        private void GetClientChoice()
         {
-            NetworkStream serverStream = _clientSocket.GetStream();
-
             while (true)
             {
                 if (!_clientSocket.Connected)
@@ -55,9 +53,15 @@ namespace ServerNetworkConversation.HandleOptions
                                 Thread globalChat = _clientOptionsFactory.AddClientOptions(ClientOptions.GLOBAL_CHAT,_data, _clientSocket,_handleClient).Run();
                                 globalChat.Join();
                                 break;
+
                             case ClientOptions.PRIVATE_CHAT:
                                 Thread privateChat = _clientOptionsFactory.AddClientOptions(ClientOptions.PRIVATE_CHAT, _data, _clientSocket, _handleClient).Run();
                                 privateChat.Join();
+                                break;
+
+                            case ClientOptions.CREATE_GROUP_CHAT:
+                                Thread CreateGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.CREATE_GROUP_CHAT, _data, _clientSocket, _handleClient).Run();
+                                CreateGroupChat.Join();
                                 break;
                             default:
                                 break;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerNetworkConversation.HandleData;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace ServerNetworkConversation
 {
     public class Data
     {
+        public AllGroupsChat allGroupsChat {  get; private set; }
         public ConcurrentDictionary<Guid, TcpClient> ClientsInGlobalChat { get; private set; }
         public ConcurrentDictionary<Guid, TcpClient> ClientsConnected { get; private set; }
         public List<Tuple<Guid, Guid>> ClientsConnectedInChat { get; private set; }
@@ -21,9 +23,10 @@ namespace ServerNetworkConversation
             ClientsInGlobalChat = new ConcurrentDictionary<Guid, TcpClient>();
             ClientsConnected = new ConcurrentDictionary<Guid, TcpClient>();
             MessagesInPrivateChat = new List<Tuple<Guid, Guid, List<string>>>();
-
             ClientsConnectedInChat = new List<Tuple<Guid, Guid>>();
+            allGroupsChat = new AllGroupsChat();
         }
+        
         public bool ClientHaveMessage(Guid reciver, Guid sender)
         {
             return MessagesInPrivateChat.Where(c => c.Item1 == reciver && c.Item2 == sender).Any();

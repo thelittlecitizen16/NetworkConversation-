@@ -60,21 +60,8 @@ namespace ClientNetworkConversation.Options
                     Console.WriteLine("you enter guid that not exist");
                 }
             }
-            catch (ArgumentNullException ane)
-            {
-
-                Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
-            }
-
-            catch (SocketException se)
-            {
-
-                Console.WriteLine("SocketException : {0}", se.ToString());
-            }
-
             catch (Exception e)
             {
-                Console.WriteLine("Unexpected exception : {0}", e.ToString());
             }
             Console.WriteLine("out of chat");
         }
@@ -91,7 +78,6 @@ namespace ClientNetworkConversation.Options
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unexpected exception : {0}", e.ToString());
             }
         }
     }

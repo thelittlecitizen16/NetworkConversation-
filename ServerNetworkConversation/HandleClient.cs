@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace ServerNetworkConversation
@@ -23,7 +25,31 @@ namespace ServerNetworkConversation
 
             return Encoding.ASCII.GetString(buffer, 0, bytesRead);
         }
+        public void SendToClient(TcpClient client, object obj)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            byte[] bytesToSend;
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                bytesToSend = ms.ToArray();
+            }
 
+            NetworkStream nwStream = client.GetStream();
+            nwStream.Write(bytesToSend, 0, bytesToSend.Length);
+        }
+        public Object GetFromClient(TcpClient client)
+        {
+            NetworkStream serverStream = client.GetStream();
+            byte[] bytesToRead = new byte[client.ReceiveBufferSize];
 
+            using (var memStream = new MemoryStream())
+            {
+                var binForm = new BinaryFormatter();
+                memStream.Write(bytesToRead, 0, client.ReceiveBufferSize);
+                memStream.Seek(0, SeekOrigin.Begin);
+                return binForm.Deserialize(memStream);
+            }
+        }
     }
 }

@@ -8,6 +8,6 @@ namespace Common.Enums
     {
         GLOBAL_CHAT,
         PRIVATE_CHAT,
-        GROUP_CHAT
+        CREATE_GROUP_CHAT
     }
 }

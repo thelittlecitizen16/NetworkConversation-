@@ -20,6 +20,9 @@ namespace ServerNetworkConversation.HandleOptions
                 case ClientOptions.PRIVATE_CHAT:
                     return new PrivateChat(data, client, handleClient);
                     break;
+                case ClientOptions.CREATE_GROUP_CHAT:
+                    return new CreateGroupChat(data, client, handleClient);
+                    break;
                 default:
                     return null;
                     break;

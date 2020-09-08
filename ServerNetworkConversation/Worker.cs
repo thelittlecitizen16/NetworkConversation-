@@ -42,10 +42,11 @@ namespace ServerNetworkConversation
                     TcpClient tcpClient = listener.AcceptTcpClient();
                     data.AddClientWhenConnect(Guid.NewGuid(), tcpClient);
                     Console.WriteLine("new connection from client");
-                    var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient, clientOptionsFactory);
-                     manageClientOptions.GetClientChoice();
-            }
 
+                    var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient, clientOptionsFactory);
+                    manageClientOptions.Run();
+                }
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());

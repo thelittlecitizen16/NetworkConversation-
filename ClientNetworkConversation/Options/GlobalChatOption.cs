@@ -51,25 +51,8 @@ namespace ClientNetworkConversation.Options
 
 
             }
-            catch (OperationCanceledException e)
-            {
-                Console.WriteLine($"{nameof(OperationCanceledException)} thrown with message: {e.Message}");
-            }
-            catch (ArgumentNullException ane)
-            {
-
-                Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
-            }
-
-            catch (SocketException se)
-            {
-
-                Console.WriteLine("SocketException : {0}", se.ToString());
-            }
-
             catch (Exception e)
             {
-                Console.WriteLine("Unexpected exception : {0}", e.ToString());
             }
             endConnection = false;
             Console.WriteLine("out of chat");
