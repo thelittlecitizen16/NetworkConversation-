@@ -23,21 +23,6 @@ namespace ServerNetworkConversation.HandleOptions
             _handleClient = handleClient;
             _clientOptionsFactory = clientOptionsFactory;
         }
-        //public IClientOption AddClientOptions(int choice, TcpClient inClientSocket)
-        //{
-        //    switch (choice)
-        //    {
-        //        case 0:
-        //            return new GlobalChat(_data, inClientSocket, _handleClient);
-        //            break;
-        //        case 1:
-        //            return new PrivateChat(_data, inClientSocket, _handleClient);
-        //            break;
-        //        default:
-        //            return null;
-        //            break;
-        //    }
-        //}
 
         public void GetClientChoice()
         {
@@ -48,7 +33,6 @@ namespace ServerNetworkConversation.HandleOptions
         }
         private void A()
         {
-           // string choice = "0";
             NetworkStream serverStream = _clientSocket.GetStream();
 
             while (true)
@@ -78,21 +62,6 @@ namespace ServerNetworkConversation.HandleOptions
                             default:
                                 break;
                         }
-
-                        //if (choice == "1")
-                        //{
-
-                        //    _data.AddClientToGlobalChat(_data.GetClientGuid(_clientSocket), _clientSocket);
-
-                        //    Thread t = AddClientOptions(0, _clientSocket).Run();
-                        //    t.Join();
-                        //}
-                        //if (choice == "2")
-                        //{
-
-                        //    Thread t = AddClientOptions(1, _clientSocket).Run();
-                        //    t.Join();
-                        //}
                     }
                 } 
             }

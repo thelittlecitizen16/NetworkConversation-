@@ -43,11 +43,7 @@ namespace ServerNetworkConversation
                     data.AddClientWhenConnect(Guid.NewGuid(), tcpClient);
                     Console.WriteLine("new connection from client");
                     var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient, clientOptionsFactory);
-                  // manageClientOptions.AddClientOptions(1, tcpClient, clientsList).Run();
                      manageClientOptions.GetClientChoice();
-                  //   GlobalChat client = new GlobalChat(tcpClient, clientsList);
-                  // client.Run();
-                }
             }
 
             catch (Exception e)

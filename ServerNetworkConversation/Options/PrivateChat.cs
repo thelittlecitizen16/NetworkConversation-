@@ -53,19 +53,6 @@ namespace ServerNetworkConversation.Options
                     _handleClient.SendMessageToClient(clientSocket, message);
                     _data.ClientsConnectedInChat.Add(new Tuple<Guid, Guid>(clientGuid, guidToSend));
 
-                    ////TODO: check if have message in this chat
-                    //string messageToSend = "";
-
-                    //if (_data.ClientHaveMessage(clientGuid, guidToSend))
-                    //{
-                    //    foreach (var clientMessage in _data.ClientGetMessages(clientGuid, guidToSend))
-                    //    {
-                    //        messageToSend += clientMessage + "\n";
-                    //    }
-
-                    //}
-                    //_handleClient.SendMessageToClient(clientSocket, messageToSend);
-
                     while (!end)
                     {
                         dataReceived = _handleClient.GetMessageFromClient(clientSocket);

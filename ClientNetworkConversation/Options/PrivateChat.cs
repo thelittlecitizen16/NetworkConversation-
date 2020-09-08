@@ -38,17 +38,6 @@ namespace ClientNetworkConversation.Options
 
                 if (messageRecive == "success")
                 {
-                    //messageRecive = _handleServer.GetMessageFromServer(_client);
-                    //if (messageRecive != "non")
-                    //{
-                    //    Console.WriteLine(messageRecive);
-                    //}
-                    //var messageReciveAfter = _handleServer.GetMessageFromServer(_client);
-
-                    //if (messageReciveAfter != "")
-                    //{
-                    //    Console.WriteLine(messageReciveAfter);
-                    //}
                     endConnection = false;
                     Thread ctThread = new Thread(GetMessage);
                     ctThread.Start();
