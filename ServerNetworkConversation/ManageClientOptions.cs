@@ -30,6 +30,9 @@ namespace ServerNetworkConversation
                 case 1:
                     return new GlobalChat(_data,inClientSocket, _handleClient);
                     break;
+                case 2:
+                    return new PrivateChat(_data, inClientSocket, _handleClient);
+                    break;
                 default:
                     return null;
                     break;
@@ -65,6 +68,12 @@ namespace ServerNetworkConversation
                         _data.AddClientToGlobalChat(_data.GetClientGuid(_inClientSocket), _inClientSocket);
 
                         Thread t = AddClientOptions(1, _inClientSocket).Run();
+                        t.Join();
+                    }
+                    if (choice == "2")
+                    {
+
+                        Thread t = AddClientOptions(2, _inClientSocket).Run();
                         t.Join();
                     }
                 } 

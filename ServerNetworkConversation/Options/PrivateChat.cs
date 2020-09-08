@@ -1,6 +1,7 @@
 ﻿using ServerNetworkConversation.Options.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -28,56 +29,71 @@ namespace ServerNetworkConversation.Options
 
         private void DoChat()
         {
-            //bool end = false;
+            try
+            {
+                string message = "";
+                foreach (var clientConnected in _data.ClientsConnected)
+                {
+                    var guidClient = _data.ClientsConnected.Where(c => c.Value == clientConnected.Value).Select(c => c.Key).First();
+                     message = $"the clients you can chat with: \n";
+                    message += $"{guidClient} \n";
+                }
 
-            ////CheckIfStillContect();
-            //var guidClient = _data.ClientsInGlobalChat.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
-            //string message = $"{guidClient} enter to global chat";
-            //SendMessageToEachClient(message);
+                _handleClient.SendMessageToClient(clientSocket, message);
+                string dataReceived = _handleClient.GetMessageFromClient(clientSocket);
+                TcpClient clientSend;
+                Guid guid;
+                Guid.TryParse(dataReceived, out guid);
+                if (_data.ClientsConnected.TryGetValue(guid, out clientSend))
+                {
+                    bool end = false;
+                    message = $"success";
+                    _handleClient.SendMessageToClient(clientSocket, message);
 
+                    while (!end)
+                    {
+                       
+                        dataReceived = _handleClient.GetMessageFromClient(clientSocket);
 
-            //while (!end)
-            //{
-            //    try
-            //    {
-            //        string dataReceived = _handleClient.GetMessageFromClient(clientSocket);
-
-
-            //        if (dataReceived == "0")
-            //        {
-            //            _data.RemoveClientFromGlobalChat(guidClient);
-
-            //            message = $"{guidClient} exist the global chat";
-            //            SendMessageToEachClient(message);
-
-            //            Console.WriteLine("client send 0");
-            //            end = true;
-            //        }
-            //        else
-            //        {
-            //            Console.WriteLine("Received and Sending back: " + dataReceived);
-
-            //            message = $"{guidClient} send: {dataReceived}";
-            //            SendMessageToEachClient(message);
-            //        }
-
-            //    }
-            //    catch (SocketException)
-            //    {
-            //        clientSocket.Close();
-            //    }
-            //    catch (ObjectDisposedException)
-            //    {
-            //        clientSocket.Close();
-            //    }
-            //    catch (Exception)
-            //    {
-            //        clientSocket.Close();
-            //    }
-            //}
-
-            //Console.WriteLine("client out thread");
+                        if (dataReceived == "0")
+                        {
+                            end = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Received and Sending back: " + dataReceived);
+                             message = $"{dataReceived}";
+                            _handleClient.SendMessageToClient(clientSend , message);
+                        }
+                    }          
+                }
+                else
+                {
+                     message = $"fail";
+                    _handleClient.SendMessageToClient(clientSocket, message);
+                }
+            }
+            catch (SocketException)
+            {
+                RemoveClientWhenOut();
+            }
+            catch (ObjectDisposedException)
+            {
+                RemoveClientWhenOut();
+            }
+            catch (Exception)
+            {
+                RemoveClientWhenOut();
+            }
 
         }
+        private void RemoveClientWhenOut()
+        {
+            clientSocket.Close();
+            var guid = _data.GetClientGuid(clientSocket);
+            TcpClient clientExist;
+            _data.ClientsConnected.TryRemove(guid, out clientExist);
+        }
+
     }
 }
