@@ -42,6 +42,7 @@ namespace ClientNetworkConversation
         {
             NetworkStream serverStream = client.GetStream();
             byte[] bytesToRead = new byte[client.ReceiveBufferSize];
+            int bytesRead = serverStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
 
             using (var memStream = new MemoryStream())
             {

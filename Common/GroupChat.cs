@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Common
 {
+    [Serializable()]
     public class GroupChat
     {
         public string Name { get; set; }

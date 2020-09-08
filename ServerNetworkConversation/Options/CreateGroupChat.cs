@@ -30,11 +30,35 @@ namespace ServerNetworkConversation.Options
         }
         public void DoChat()
         {
-            Participants participants = new Participants(_data.ClientsConnected.Keys.ToList());
-            _handleClient.SendToClient(_client,participants);
+            try
+            {
+                Guid clientGuid = _data.ClientsConnected.Where(c => c.Value == _client).Select(c => c.Key).First();
+                List<Guid> clientsToAdd = _data.ClientsConnected.Keys.ToList();
+                clientsToAdd.Remove(clientGuid);
 
-            GroupChat groupChat = (GroupChat)_handleClient.GetFromClient(_client);
-            _data.allGroupsChat.groupsChat.Add(groupChat);
+                Participants participants = new Participants(clientsToAdd);
+                _handleClient.SendToClient(_client, participants);
+
+                GroupChat groupChat = (GroupChat)_handleClient.GetFromClient(_client);
+
+                while (groupChat == null)
+                {
+                    groupChat = (GroupChat)_handleClient.GetFromClient(_client);
+                }
+                var guidClient = _data.ClientsConnected.Where(c => c.Value == _client).Select(c => c.Key).First();
+
+                groupChat.Managers.Add(guidClient);
+                groupChat.Participants.Add(guidClient);
+                _data.allGroupsChat.groupsChat.Add(groupChat);
+            }
+            catch (Exception)
+            {
+                var guid = _data.GetClientGuid(_client);
+                TcpClient clientExist;
+                _data.ClientsConnected.TryRemove(guid, out clientExist);
+                _client.Close();
+
+            }
         }
     }
 }

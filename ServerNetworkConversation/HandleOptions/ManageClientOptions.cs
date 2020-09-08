@@ -63,6 +63,10 @@ namespace ServerNetworkConversation.HandleOptions
                                 Thread CreateGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.CREATE_GROUP_CHAT, _data, _clientSocket, _handleClient).Run();
                                 CreateGroupChat.Join();
                                 break;
+                            case ClientOptions.GROUP_CHAT:
+                                Thread EnterGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.GROUP_CHAT, _data, _clientSocket, _handleClient).Run();
+                                EnterGroupChat.Join();
+                                break;
                             default:
                                 break;
                         }

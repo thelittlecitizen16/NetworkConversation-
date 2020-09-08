@@ -35,25 +35,31 @@ namespace ClientNetworkConversation.Options
 
             Console.WriteLine("add all participants, when end send 0");
             List<Guid> usersToAdd = new List<Guid>();
-            string exist = "";
+            string userResponse = "";
 
-            while (exist != "0")
+            while (userResponse != "0")
             {
-                string user = Console.ReadLine();
+                userResponse = Console.ReadLine();
                 Guid userGuid;
-
-                if (Guid.TryParse(user, out userGuid))
+                if (Guid.TryParse(userResponse, out userGuid))
                 {
-                    usersToAdd.Add(userGuid);
+                    if (participants.AllParticipants.Contains(userGuid))
+                    {
+                        usersToAdd.Add(userGuid);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"the user guid not exist");
+                    }
+                  
                 }
-                else
+                else if (userResponse != "0")
                 {
-                    Console.WriteLine($"thr user guid not exist");
+                    Console.WriteLine($"the user guid not exist");
                 }
             }
 
-              GroupChat groupChat = new GroupChat(gropuName, usersToAdd);
-             string messageToSend = Console.ReadLine();
+            GroupChat groupChat = new GroupChat(gropuName, usersToAdd, new List<Guid>());
             _handleServer.SendToServer(_client, groupChat);
         }
     }

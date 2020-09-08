@@ -27,14 +27,18 @@ namespace ServerNetworkConversation
         }
         public void SendToClient(TcpClient client, object obj)
         {
+            //BinaryFormatter bf = new BinaryFormatter();
+            //byte[] bytesToSend;
+            //using (var ms = new MemoryStream())
+            //{
+            //    bf.Serialize(ms, obj);
+            //    bytesToSend = ms.ToArray();
+            //}
             BinaryFormatter bf = new BinaryFormatter();
-            byte[] bytesToSend;
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                bytesToSend = ms.ToArray();
-            }
+            MemoryStream ms = new MemoryStream();
+            bf.Serialize(ms, obj);
 
+            byte[] bytesToSend = ms.ToArray();
             NetworkStream nwStream = client.GetStream();
             nwStream.Write(bytesToSend, 0, bytesToSend.Length);
         }
@@ -42,14 +46,23 @@ namespace ServerNetworkConversation
         {
             NetworkStream serverStream = client.GetStream();
             byte[] bytesToRead = new byte[client.ReceiveBufferSize];
-
-            using (var memStream = new MemoryStream())
+            int bytesRead = serverStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
+            try
             {
-                var binForm = new BinaryFormatter();
-                memStream.Write(bytesToRead, 0, client.ReceiveBufferSize);
-                memStream.Seek(0, SeekOrigin.Begin);
-                return binForm.Deserialize(memStream);
+                using (var memStream = new MemoryStream())
+                {
+                    var binForm = new BinaryFormatter();
+                    memStream.Write(bytesToRead, 0, client.ReceiveBufferSize);
+                    memStream.Seek(0, SeekOrigin.Begin);
+                    return (Object)binForm.Deserialize(memStream);
+                }
             }
+            catch (Exception)
+            {
+
+                return null;
+            }
+           
         }
     }
 }

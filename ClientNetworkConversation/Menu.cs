@@ -16,6 +16,8 @@ namespace ClientNetworkConversation
         private GlobalChatOption _globalChatOption;
         private PrivateChat _privateChat;
         private CreateGroupChat _createGroupChat;
+        private EnterGroupChat _enterGroupChat;
+
 
         public Menu(TcpClient client, HandleServer handleServer)
         {
@@ -24,6 +26,7 @@ namespace ClientNetworkConversation
             _globalChatOption = new GlobalChatOption(client, handleServer);
             _privateChat = new PrivateChat(client, handleServer);
             _createGroupChat = new CreateGroupChat(client, handleServer);
+            _enterGroupChat=new EnterGroupChat(client, handleServer);
             _menuBuilderInt = new MenuBuilder<int>(_consoleSystem, _validation);
         }
         public void RunMenu()
@@ -32,6 +35,7 @@ namespace ClientNetworkConversation
                .AddOption(1, _globalChatOption)
                .AddOption(2, _privateChat)
                .AddOption(3, _createGroupChat)
+               .AddOption(4, _enterGroupChat)
                .Build();
 
             mainMenu.RunMenu();

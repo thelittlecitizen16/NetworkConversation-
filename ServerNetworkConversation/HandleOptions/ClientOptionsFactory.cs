@@ -23,6 +23,9 @@ namespace ServerNetworkConversation.HandleOptions
                 case ClientOptions.CREATE_GROUP_CHAT:
                     return new CreateGroupChat(data, client, handleClient);
                     break;
+                case ClientOptions.GROUP_CHAT:
+                    return new EnterGroupChat(data, client, handleClient);
+                    break;
                 default:
                     return null;
                     break;
