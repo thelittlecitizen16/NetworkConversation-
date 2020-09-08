@@ -37,6 +37,16 @@ namespace ClientNetworkConversation.Options
 
                 if (messageRecive == "success")
                 {
+                    //var messageReciveAfter = _handleServer.GetMessageFromServer(_client);
+
+                    //if (messageReciveAfter != "")
+                    //{
+                    //    Console.WriteLine(messageReciveAfter);
+                    //}
+                    endConnection = false;
+                    //Thread ctThread = new Thread(GetMessage);
+                    //ctThread.Start();
+
                     while (!endConnection)
                     {
                         Console.WriteLine("enter message, if you wand to exist chat enter: 0");
@@ -73,6 +83,25 @@ namespace ClientNetworkConversation.Options
             }
             Console.WriteLine("out of chat");
         }
-        // private void GetMessage()
+        private void GetMessage()
+        {
+            try
+            {
+                while (!endConnection)
+                {
+                    string returndata = _handleServer.GetMessageFromServer(_client);
+
+                    if (returndata != "")
+                    {
+                        Console.WriteLine(returndata);
+                        returndata = "";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unexpected exception : {0}", e.ToString());
+            }
+        }
     }
 }

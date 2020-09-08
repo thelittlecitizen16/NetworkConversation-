@@ -30,25 +30,41 @@ namespace ServerNetworkConversation.Options
         private void DoChat()
         {
             try
-            {
-                string message = "";
+            {     
+                var clientGuid = _data.ClientsConnected.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
+                string message = $"the clients you can chat with: \n";
+
                 foreach (var clientConnected in _data.ClientsConnected)
                 {
                     var guidClient = _data.ClientsConnected.Where(c => c.Value == clientConnected.Value).Select(c => c.Key).First();
-                     message = $"the clients you can chat with: \n";
                     message += $"{guidClient} \n";
                 }
 
                 _handleClient.SendMessageToClient(clientSocket, message);
                 string dataReceived = _handleClient.GetMessageFromClient(clientSocket);
                 TcpClient clientSend;
-                Guid guid;
-                Guid.TryParse(dataReceived, out guid);
-                if (_data.ClientsConnected.TryGetValue(guid, out clientSend))
-                {
+                Guid guidToSend;
+                Guid.TryParse(dataReceived, out guidToSend);
+
+                if (_data.ClientsConnected.TryGetValue(guidToSend, out clientSend))
+                {      
                     bool end = false;
                     message = $"success";
                     _handleClient.SendMessageToClient(clientSocket, message);
+
+                    ////TODO: check if have message in this chat
+                    //string messageToSend = "";
+                    //if (_data.ClientHaveMessage(clientGuid, guidToSend))
+                    //{
+
+                    //    foreach (var clientMessage in _data.ClientGetMessages(clientGuid, guidToSend))
+                    //    {
+                    //        messageToSend += clientMessage + "\n";
+                    //    }
+
+
+                    //}
+                    //_handleClient.SendMessageToClient(clientSocket, messageToSend);
 
                     while (!end)
                     {
@@ -63,7 +79,14 @@ namespace ServerNetworkConversation.Options
                         {
                             Console.WriteLine("Received and Sending back: " + dataReceived);
                              message = $"{dataReceived}";
-                            _handleClient.SendMessageToClient(clientSend , message);
+                            if (clientSend.Connected)
+                            {
+                                _handleClient.SendMessageToClient(clientSend, message);
+                            }
+                            else
+                            {
+                                _data.AddMessagesInPrivateChat(guidToSend, clientGuid, new List<string>() { message });
+                            }   
                         }
                     }          
                 }
