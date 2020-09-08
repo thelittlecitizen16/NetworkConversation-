@@ -29,24 +29,6 @@ namespace ClientNetworkConversation.Options
 
             try
             {
-                //_handleServer.cancellationToken = new CancellationTokenSource();
-                //var cancellationToken = _handleServer.cancellationToken;
-                //var task = Task.Factory.StartNew(() =>
-                // {
-                //     while (true)
-                //     {
-                //         if (cancellationToken.Token.IsCancellationRequested)
-                //         {
-                //             Console.WriteLine("task canceled");
-                //             _handleServer.cancellationToken = new CancellationTokenSource();
-                //             break;
-                //         }
-                //         else
-                //         {
-                //             GetMessage(cancellationToken);
-                //         }
-                //     }
-                // }, cancellationToken.Token);
                 Thread thread = new Thread(GetMessage);
                 thread.Start();
 
@@ -59,7 +41,6 @@ namespace ClientNetworkConversation.Options
                     {
                         endConnection = true;
                         _handleServer.SendMessageToServer(_client, message);
-                        //cancellationToken.Cancel();
                         break;
                     }
                     else

@@ -11,6 +11,8 @@ namespace ServerNetworkConversation
     {
         public ConcurrentDictionary<Guid, TcpClient> ClientsInGlobalChat { get; private set; }
         public ConcurrentDictionary<Guid, TcpClient> ClientsConnected { get; private set; }
+        public List<Tuple<Guid, Guid>> ClientsConnectedInChat { get; private set; }
+
         // public ConcurrentDictionary<Guid, ConcurrentDictionary<Guid, List<string>>> MessagesInPrivateChat { get; private set; }
         public List<Tuple<Guid, Guid, List<string>>> MessagesInPrivateChat { get; private set; }
 
@@ -19,6 +21,8 @@ namespace ServerNetworkConversation
             ClientsInGlobalChat = new ConcurrentDictionary<Guid, TcpClient>();
             ClientsConnected = new ConcurrentDictionary<Guid, TcpClient>();
             MessagesInPrivateChat = new List<Tuple<Guid, Guid, List<string>>>();
+
+            ClientsConnectedInChat = new List<Tuple<Guid, Guid>>();
         }
         public bool ClientHaveMessage(Guid reciver, Guid sender)
         {

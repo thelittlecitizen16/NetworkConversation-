@@ -33,7 +33,6 @@ namespace ServerNetworkConversation.Options
         {
             bool end = false;
 
-            //CheckIfStillContect();
             var guidClient = _data.ClientsInGlobalChat.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
             string message = $"{guidClient} enter to global chat";
             SendMessageToEachClient(message);

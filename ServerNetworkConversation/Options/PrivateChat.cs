@@ -51,24 +51,23 @@ namespace ServerNetworkConversation.Options
                     bool end = false;
                     message = $"success";
                     _handleClient.SendMessageToClient(clientSocket, message);
+                    _data.ClientsConnectedInChat.Add(new Tuple<Guid, Guid>(clientGuid, guidToSend));
 
                     ////TODO: check if have message in this chat
                     //string messageToSend = "";
+
                     //if (_data.ClientHaveMessage(clientGuid, guidToSend))
                     //{
-
                     //    foreach (var clientMessage in _data.ClientGetMessages(clientGuid, guidToSend))
                     //    {
                     //        messageToSend += clientMessage + "\n";
                     //    }
-
 
                     //}
                     //_handleClient.SendMessageToClient(clientSocket, messageToSend);
 
                     while (!end)
                     {
-                       
                         dataReceived = _handleClient.GetMessageFromClient(clientSocket);
 
                         if (dataReceived == "0")
@@ -79,16 +78,14 @@ namespace ServerNetworkConversation.Options
                         else
                         {
                             Console.WriteLine("Received and Sending back: " + dataReceived);
-                             message = $"{dataReceived}";
-
-                            if (clientSend.Connected)//TODO: check if in chat
+                            if (_data.ClientsConnectedInChat.Where(c=>c.Item1 == guidToSend && c.Item2 == clientGuid).Any())
                             {
-                                _handleClient.SendMessageToClient(clientSend, message);
+                                _handleClient.SendMessageToClient(clientSend, dataReceived);
                             }
                             else
                             {
-                                _data.AddMessagesInPrivateChat(guidToSend, clientGuid, new List<string>() { message });
-                            }   
+                                _data.AddMessagesInPrivateChat(guidToSend, clientGuid, new List<string>() { dataReceived });
+                            }
                         }
                     }          
                 }

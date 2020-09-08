@@ -29,11 +29,8 @@ namespace ClientNetworkConversation.Options
             try
             {
                 string messageRecive;
-                //  if (!_handleServer.cancellationToken.IsCancellationRequested)
-                // {
                 messageRecive = _handleServer.GetMessageFromServer(_client);
                 Console.WriteLine(messageRecive);
-                // }
 
                 string messageToSend = Console.ReadLine();
                 _handleServer.SendMessageToServer(_client, messageToSend);
@@ -41,6 +38,11 @@ namespace ClientNetworkConversation.Options
 
                 if (messageRecive == "success")
                 {
+                    //messageRecive = _handleServer.GetMessageFromServer(_client);
+                    //if (messageRecive != "non")
+                    //{
+                    //    Console.WriteLine(messageRecive);
+                    //}
                     //var messageReciveAfter = _handleServer.GetMessageFromServer(_client);
 
                     //if (messageReciveAfter != "")
