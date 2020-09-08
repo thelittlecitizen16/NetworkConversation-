@@ -56,7 +56,7 @@ namespace ServerNetworkConversation
                 if (choice == "1")
                 {
 
-                    _data.AddClientToGlobalChat(Guid.NewGuid(), _inClientSocket);
+                    _data.AddClientToGlobalChat(_data.GetClientGuid(_inClientSocket), _inClientSocket);
 
                     Thread t= AddClientOptions(1, _inClientSocket).Run();
                     t.Join();

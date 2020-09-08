@@ -38,8 +38,8 @@ namespace ServerNetworkConversation
                 while (true)
                 {
                     TcpClient tcpClient = listener.AcceptTcpClient();
+                    data.AddClientWhenConnect(Guid.NewGuid(), tcpClient);
                     Console.WriteLine("new connection from client");
-
                     var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient);
                   // manageClientOptions.AddClientOptions(1, tcpClient, clientsList).Run();
                      manageClientOptions.GetClientChoice();
