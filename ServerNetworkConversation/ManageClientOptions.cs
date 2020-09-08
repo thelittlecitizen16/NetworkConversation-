@@ -50,17 +50,24 @@ namespace ServerNetworkConversation
 
             while (true)
             {
-                string dataReceived = _handleClient.GetMessageFromClient(_inClientSocket);
-                choice = dataReceived;
-
-                if (choice == "1")
+                if (!_inClientSocket.Connected)
                 {
-
-                    _data.AddClientToGlobalChat(_data.GetClientGuid(_inClientSocket), _inClientSocket);
-
-                    Thread t= AddClientOptions(1, _inClientSocket).Run();
-                    t.Join();
+                    break;
                 }
+                else
+                {
+                    string dataReceived = _handleClient.GetMessageFromClient(_inClientSocket);
+                    choice = dataReceived;
+
+                    if (choice == "1")
+                    {
+
+                        _data.AddClientToGlobalChat(_data.GetClientGuid(_inClientSocket), _inClientSocket);
+
+                        Thread t = AddClientOptions(1, _inClientSocket).Run();
+                        t.Join();
+                    }
+                } 
             }
         }
     }

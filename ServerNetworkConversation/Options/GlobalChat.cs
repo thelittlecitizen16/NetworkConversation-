@@ -59,7 +59,6 @@ namespace ServerNetworkConversation.Options
                     else
                     {
                         Console.WriteLine("Received and Sending back: " + dataReceived);
-
                          message = $"{guidClient} send: {dataReceived}";
                         SendMessageToEachClient(message);
                     }
@@ -67,15 +66,18 @@ namespace ServerNetworkConversation.Options
                 }
                 catch (SocketException)
                 {
-                    clientSocket.Close();
+                    end = true;
+                    RemoveClientWhenOut();
                 }
                 catch (ObjectDisposedException)
                 {
-                    clientSocket.Close();
+                    end = true;
+                    RemoveClientWhenOut();
                 }
                 catch (Exception)
                 {
-                    clientSocket.Close();
+                    end = true;
+                    RemoveClientWhenOut();
                 }
             }
 
@@ -93,16 +95,13 @@ namespace ServerNetworkConversation.Options
             }
         }
 
-        private void CheckIfStillContect()
+        private void RemoveClientWhenOut()
         {
-            foreach (var client in _data.ClientsInGlobalChat)
-            {
-                if (!client.Value.Connected)
-                {
-                    TcpClient clientExist;
-                    _data.ClientsInGlobalChat.TryRemove(client.Key, out clientExist);
-                }
-            }
+            clientSocket.Close();
+            var guid = _data.GetClientGuid(clientSocket);
+            TcpClient clientExist;
+            _data.ClientsInGlobalChat.TryRemove(guid, out clientExist);
+            _data.ClientsConnected.TryRemove(guid, out clientExist);
         }
     }
 }
