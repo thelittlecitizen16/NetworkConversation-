@@ -68,18 +68,22 @@ namespace ServerNetworkConversation.HandleOptions
                                 Thread CreateGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.CREATE_GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient).Run();
                                 CreateGroupChat.Join();
                                 break;
+
                             case ClientOptions.GROUP_CHAT:
                                 Thread EnterGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient).Run();
                                 EnterGroupChat.Join();
                                 break;
+
                             case ClientOptions.MANAGER_SETTINGS:
                                 Thread managerSettings = _clientOptionsFactory.AddClientOptions(ClientOptions.MANAGER_SETTINGS, _data, _clientSocket, _handleClient, _removeClient).Run();
                                 managerSettings.Join();
                                 break;
+
                             case ClientOptions.LEAVE_GROUP_CHAT:
                                 Thread leavrGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.LEAVE_GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient).Run();
                                 leavrGroupChat.Join();
                                 break;
+
                             default:
                                 break;
                         }

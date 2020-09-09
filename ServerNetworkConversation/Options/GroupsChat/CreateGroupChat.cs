@@ -73,7 +73,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
         {
             groupChat.Managers.Add(clientGuid);
             groupChat.Participants.Add(clientGuid);
-            _data.AllGroupsChat.groupsChat.Add(groupChat);
+            _data.AllGroupsChat.GroupsChat.Add(groupChat);
         }
     }
 }

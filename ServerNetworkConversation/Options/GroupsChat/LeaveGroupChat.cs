@@ -48,7 +48,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
                 }
                 else
                 {
-                    _data.AllGroupsChat.groupsChat.Where(g => g.Name == dataReceived).First().Participants.Remove(clientGuid);
+                    _data.AllGroupsChat.GroupsChat.Where(g => g.Name == dataReceived).First().Participants.Remove(clientGuid);
                 }
             }
             catch (Exception)
@@ -62,7 +62,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
 
         private void SendAllClientGroups(Guid clientGuid)
         {
-            List<string> grouspName = _data.AllGroupsChat.groupsChat
+            List<string> grouspName = _data.AllGroupsChat.GroupsChat
                .Where(g => g.Participants.Contains(clientGuid))
                .Select(g => g.Name).ToList();
 

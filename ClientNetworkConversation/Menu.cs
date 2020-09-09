@@ -25,7 +25,7 @@ namespace ClientNetworkConversation
         public Menu(TcpClient client, HandleServer handleServer)
         {
             _consoleSystem = new ConsoleSystem();
-            _validation = new MenuBuilder.Validation();
+            _validation = new Validation();
             _globalChatOption = new GlobalChatOption(client, handleServer);
             _privateChat = new PrivateChat(client, handleServer);
             _createGroupChat = new CreateGroupChat(client, handleServer);

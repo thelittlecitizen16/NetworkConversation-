@@ -20,21 +20,27 @@ namespace ServerNetworkConversation.HandleOptions
                 case ClientOptions.GLOBAL_CHAT:
                     return new GlobalChat(data, client, handleClient, removeClient);
                     break;
+
                 case ClientOptions.PRIVATE_CHAT:
                     return new PrivateChat(data, client, handleClient, removeClient);
                     break;
+
                 case ClientOptions.CREATE_GROUP_CHAT:
                     return new CreateGroupChat(data, client, handleClient,removeClient);
                     break;
+
                 case ClientOptions.GROUP_CHAT:
                     return new EnterGroupChat(data, client, handleClient, removeClient);
                     break;
+
                 case ClientOptions.MANAGER_SETTINGS:
                     return new ManagerSettings(data, client, handleClient, removeClient);
                     break;
+
                 case ClientOptions.LEAVE_GROUP_CHAT:
                     return new LeaveGroupChat(data, client, handleClient, removeClient);
                     break;
+
                 default:
                     return null;
                     break;

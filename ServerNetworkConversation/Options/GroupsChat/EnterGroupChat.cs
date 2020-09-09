@@ -52,7 +52,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
                 else
                 {
 
-                    group = _data.AllGroupsChat.groupsChat.Where(g => g.Name == dataReceived).First();
+                    group = _data.AllGroupsChat.GroupsChat.Where(g => g.Name == dataReceived).First();
                     _data.AllGroupsChat.AddClientConnected(group, _client);
 
                     while (!end)
@@ -99,7 +99,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         private void SendAllClientGroups(Guid clientGuid)
         {
-            List<string> grouspName = _data.AllGroupsChat.groupsChat
+            List<string> grouspName = _data.AllGroupsChat.GroupsChat
                .Where(g => g.Participants.Contains(clientGuid))
                .Select(g => g.Name).ToList();
 

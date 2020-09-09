@@ -8,12 +8,12 @@ namespace ServerNetworkConversation.HandleData
 {
     public class AllGroupsChat
     {
-        public List<GroupChat> groupsChat { get; private set; }
+        public List<GroupChat> GroupsChat { get; private set; }
         public Dictionary<GroupChat, List<TcpClient>> ClientConnectToGroup { get; private set; }
 
         public AllGroupsChat()
         {
-            groupsChat = new List<GroupChat>();
+            GroupsChat = new List<GroupChat>();
             ClientConnectToGroup = new Dictionary<GroupChat, List<TcpClient>>();
         }
         public void AddClientConnected(GroupChat group, TcpClient client)

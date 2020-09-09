@@ -79,7 +79,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
             }
             return usersToAdd;
         }
-        private bool CheckIfParticipantsExist(Guid userGuid, List<Guid> participants)
+        private bool CheckIfParticipantsExists(Guid userGuid, List<Guid> participants)
         {
             return participants.Contains(userGuid);   
         }
