@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Enums;
+using ServerNetworkConversation.HandleData;
+
 namespace ServerNetworkConversation.HandleOptions
 {
     public class ManageClientOptions

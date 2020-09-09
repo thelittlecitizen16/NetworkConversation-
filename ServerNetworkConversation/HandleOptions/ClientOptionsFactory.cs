@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using Common.Enums;
 using System.Text;
+using ServerNetworkConversation.HandleData;
 
 namespace ServerNetworkConversation.HandleOptions
 {
