@@ -54,7 +54,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
                 else
                 {
 
-                    group = _data.AllGroupsChat.GroupsChat.Where(g => g.Name == dataReceived).First();
+                    group = _data.AllGroupsChat.GetGroupsChat().Where(g => g.Name == dataReceived).First();
                     _data.AllGroupsChat.AddClientConnected(group, _client);
                     _logger.LogInformation($"client {clientGuid} enter to group chat {group.Name}");
 
@@ -102,7 +102,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         private void SendAllClientGroups(Guid clientGuid)
         {
-            List<string> grouspName = _data.AllGroupsChat.GroupsChat
+            List<string> grouspName = _data.AllGroupsChat.GetGroupsChat()
                .Where(g => g.Participants.Contains(clientGuid))
                .Select(g => g.Name).ToList();
 

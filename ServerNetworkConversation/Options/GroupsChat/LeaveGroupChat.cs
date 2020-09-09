@@ -45,13 +45,15 @@ namespace ServerNetworkConversation.Options.GroupsChat
                 SendAllClientGroups(clientGuid);
 
                 string dataReceived = _handleClient.GetMessageFromClient(_client);
+
                 if (dataReceived == "0")
                 {
-                    _logger.LogInformation($"client {clientGuid} send 0- dont want to leave any group");
+                    _logger.LogInformation($"client {clientGuid} dont want to leave any group");
                 }
                 else
                 {
-                    _data.AllGroupsChat.GroupsChat.Where(g => g.Name == dataReceived).First().Participants.Remove(clientGuid);
+                    _data.AllGroupsChat.GetGroupsChat().Where(g => g.Name == dataReceived).First().Participants.Remove(clientGuid);
+                    _logger.LogInformation($"client {clientGuid} leave group {dataReceived}");
                 }
             }
             catch (Exception)
@@ -65,7 +67,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
 
         private void SendAllClientGroups(Guid clientGuid)
         {
-            List<string> grouspName = _data.AllGroupsChat.GroupsChat
+            List<string> grouspName = _data.AllGroupsChat.GetGroupsChat()
                .Where(g => g.Participants.Contains(clientGuid))
                .Select(g => g.Name).ToList();
 

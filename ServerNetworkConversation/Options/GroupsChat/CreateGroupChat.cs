@@ -76,8 +76,8 @@ namespace ServerNetworkConversation.Options.GroupsChat
         {
             groupChat.Managers.Add(clientGuid);
             groupChat.Participants.Add(clientGuid);
-            _data.AllGroupsChat.GroupsChat.Add(groupChat);
-            _logger.LogInformation($"add new group {groupChat.Name}")
+            _data.AllGroupsChat.AddGroupChat(groupChat);
+            _logger.LogInformation($"add new group {groupChat.Name}");
         }
     }
 }

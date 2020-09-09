@@ -104,6 +104,7 @@ namespace ServerNetworkConversation.Options
 
             string message = $"{clientGuid} send: {dataReceived}";
             SendMessageToEachClient(message);
+            _logger.LogInformation($"client {clientGuid} send {message} in global chat");
         }
     }
 

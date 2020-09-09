@@ -75,7 +75,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         private void AllGroupsManagedByClient(Guid clientGuid)
         {
-            List<string> grouspName = _data.AllGroupsChat.GroupsChat
+            List<string> grouspName = _data.AllGroupsChat.GetGroupsChat()
                .Where(g => g.Managers.Contains(clientGuid))
                .Select(g => g.Name).ToList();
 
@@ -84,7 +84,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         private GroupChat SendGroup(string groupName)
         {
-            GroupChat groupChat = _data.AllGroupsChat.GroupsChat.Where(g=>g.Name == groupName).First();
+            GroupChat groupChat = _data.AllGroupsChat.GetGroupsChat().Where(g=>g.Name == groupName).First();
             _handleClient.SendToClient(_client, groupChat);
 
             return groupChat;
@@ -102,8 +102,8 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         private void AddGroup(GroupChat newGroupChat, GroupChat oldGroupChat)
         {
-            _data.AllGroupsChat.GroupsChat.Remove(oldGroupChat);
-            _data.AllGroupsChat.GroupsChat.Add(newGroupChat);
+            _data.AllGroupsChat.RemoveGroupChat(oldGroupChat);
+            _data.AllGroupsChat.AddGroupChat(newGroupChat);
         }
     }
 }
