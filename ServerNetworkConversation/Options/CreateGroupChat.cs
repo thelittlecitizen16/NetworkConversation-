@@ -36,7 +36,6 @@ namespace ServerNetworkConversation.Options
         {
             Guid clientGuid = _data.ClientsConnectedInServer.GetGuid(_client);
 
-
             try
             {
                 List<Guid> clientsToAdd = _data.ClientsConnectedInServer.Clients.Keys.ToList();

@@ -33,7 +33,7 @@ namespace ServerNetworkConversation.Options
 
         private void DoChat()
         {
-            var clientGuid = _data.ClientsConnectedInServer.GetGuid(clientSocket);
+            Guid clientGuid = _data.ClientsConnectedInServer.GetGuid(clientSocket);
             Guid guidToSend;
 
             try
@@ -77,29 +77,36 @@ namespace ServerNetworkConversation.Options
             }
         }
 
-        private void SendAllClientsConnected()
+        private void SendAllClientsConnected(Guid clientGuid)
         {
             string message = $"the clients you can chat with: \n";
 
             foreach (var clientConnected in _data.ClientsConnectedInServer.Clients)
             {
                 var guidClient = _data.ClientsConnectedInServer.GetGuid(clientConnected.Value);
-                message += $"{guidClient} \n";
+
+                if (guidClient!= clientGuid)
+                {
+                    message += $"{guidClient} \n";
+                }
             }
 
             _handleClient.SendMessageToClient(clientSocket, message);
         }
+
         private void AddPrivateChat(Guid clientGuid, Guid guidToSend)
         {
             string message = $"success";
             _handleClient.SendMessageToClient(clientSocket, message);
             _data.ClientsConnectedInChat.Add(clientGuid, guidToSend);
         }
+
         private void ExistChat(Guid clientGuid, Guid guidToSend)
         {
             _handleClient.SendMessageToClient(clientSocket, "0");
             _data.ClientsConnectedInChat.Remove(clientGuid, guidToSend);
         }
+
         private void SendMessage(string dataReceived,Guid clientGuid, Guid guidToSend, TcpClient clientSend)
         {
             Console.WriteLine("Received and Sending back: " + dataReceived);
