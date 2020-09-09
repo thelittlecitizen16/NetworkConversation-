@@ -7,6 +7,7 @@ namespace Common
     [Serializable()]
     public class Participants
     {
+
         public List<Guid> AllParticipants { get; set; }
         public Participants(List<Guid> allParticipants)
         {

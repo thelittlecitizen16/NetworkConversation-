@@ -9,7 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace ServerNetworkConversation.Options
+namespace ServerNetworkConversation.Options.GroupsChat
 {
     public class CreateGroupChat : IClientOption
     {

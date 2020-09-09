@@ -31,6 +31,7 @@ namespace ServerNetworkConversation.Options
             _thread = new Thread(DoChat);
             _thread.Start();
             return _thread;
+
         }
 
         private void DoChat()
@@ -76,11 +77,13 @@ namespace ServerNetworkConversation.Options
                 }
             }
         }
+
         private void SendAllAboutEnter(Guid clientGuid)
         {
             string message = $"{clientGuid} enter to global chat";
             SendMessageToEachClient(message);
         }
+
         private void SendAllAboutExist(Guid clientGuid)
         {
             string message = $"{clientGuid} exist the global chat";
@@ -89,6 +92,7 @@ namespace ServerNetworkConversation.Options
             _handleClient.SendMessageToClient(clientSocket, "0");
             Console.WriteLine("client send 0");
         }
+
         private void SendAllMessage(Guid clientGuid, string dataReceived)
         {
             Console.WriteLine("Received and Sending back: " + dataReceived);

@@ -22,11 +22,10 @@ namespace ClientNetworkConversation.Options
         public void Run()
         {
             _handleServer.SendMessageToServer(_client, ClientOptions.CREATE_GROUP_CHAT.ToString());
+            Participants participants = (Participants)_handleServer.GetFromServer(_client);
 
             Console.WriteLine("enter group name");
             string gropuName = Console.ReadLine();
-
-            Participants participants = (Participants)_handleServer.GetFromServer(_client);
 
             foreach (var participant in participants.AllParticipants)
             {
