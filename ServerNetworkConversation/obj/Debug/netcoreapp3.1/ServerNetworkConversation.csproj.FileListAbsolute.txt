@@ -45,3 +45,4 @@ C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConver
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\obj\Debug\netcoreapp3.1\ServerNetworkConversation.dll
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\obj\Debug\netcoreapp3.1\ServerNetworkConversation.pdb
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\obj\Debug\netcoreapp3.1\ServerNetworkConversation.genruntimeconfig.cache
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

@@ -61,7 +61,9 @@ namespace ServerNetworkConversation.Options.GroupsChat
 
                         if (dataReceived == "0")
                         {
+                            _handleClient.SendMessageToClient(_client, "0");
                             ClientOutOfGroup(group);
+                            _data.AllGroupsChat.RemoveClientUnConnected(group, _client);
                             end = true;
                         }
                         else

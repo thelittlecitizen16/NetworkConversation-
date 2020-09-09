@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CwzNoBf9k+pCf401Ojx4tmUvJAD65V+nswoS1gbvl6VPxM4TrO/JuJnCyYdUJ4xnky50IhSWvQC9XGNV42UNwg==",
+  "dgSpecHash": "l0oXkedCkasQC/cJVCJX6TDYt7NoOwRviJD2S29yX2nT4h2FIwGHX4err/4aEbWr2H+mtjLtzXthTnxbPHZr/A==",
   "success": true,
   "projectFilePath": "C:\\Users\\thelittlecitizen16\\source\\repos\\NetworkConversation\\ServerNetworkConversation\\ServerNetworkConversation.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,7 @@
     "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.5\\microsoft.extensions.primitives.3.1.5.nupkg.sha512",
     "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\system.diagnostics.eventlog\\4.7.0\\system.diagnostics.eventlog.4.7.0.nupkg.sha512",
     "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
