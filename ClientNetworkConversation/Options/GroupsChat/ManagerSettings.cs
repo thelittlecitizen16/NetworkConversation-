@@ -14,11 +14,12 @@ namespace ClientNetworkConversation.Options.GroupsChat
         public string OptionMessage => "Manager Settings";
         private static TcpClient _client;
         private HandleServer _handleServer;
-
-        public ManagerSettings(TcpClient client, HandleServer handleServer)
+        private ISystem _system;
+        public ManagerSettings(TcpClient client, HandleServer handleServer, ISystem system)
         {
             _handleServer = handleServer;
             _client = client;
+            _system = system;
         }
 
         public void Run()
@@ -31,7 +32,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
                 PrintAllGroups(allGroupChat);
 
                 Console.WriteLine("enter group name");
-                string userResponse = Console.ReadLine();
+                string userResponse = _system.ReadString();
 
                 if (CheckGroupName(userResponse, allGroupChat))
                 {
@@ -61,7 +62,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
                 else
                 {
                     _handleServer.SendMessageToServer(_client, "0");
-                    Console.WriteLine("the group  not exist");
+                    _system.Write("the group  not exist");
                 }
             }
             catch (Exception)
@@ -73,14 +74,14 @@ namespace ClientNetworkConversation.Options.GroupsChat
         {
             foreach (var groupName in allGroupChat.GroupsName)
             {
-                Console.WriteLine(groupName);
+                _system.Write(groupName);
             }
         }
         private void PrintParticipants(List<Guid> participants)
         {
             foreach (var participant in participants)
             {
-                Console.WriteLine(participant);
+                _system.Write(participant.ToString());
             }
         }
         private bool CheckGroupName(string userResponse, AllGroupChat allGroupChat)
@@ -98,7 +99,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
 
             while (userResponse != "0")
             {
-                userResponse = Console.ReadLine();
+                userResponse = _system.ReadString();
 
                 Guid userGuid;
 
@@ -110,13 +111,13 @@ namespace ClientNetworkConversation.Options.GroupsChat
                     }
                     else
                     {
-                        Console.WriteLine($"the user guid not exist");
+                        _system.Write($"the user guid not exist");
                     }
 
                 }
                 else if (userResponse != "0")
                 {
-                    Console.WriteLine($"the user guid not exist");
+                    _system.Write($"the user guid not exist");
                 }
             }
 

@@ -14,13 +14,15 @@ namespace ClientNetworkConversation.Options
         public string OptionMessage => "Enter To Global Chat";
         private static TcpClient _client;
         private HandleServer _handleServer;
+        private ISystem _system;
         private string message;
 
         private bool endConnection = false;
-        public GlobalChatOption(TcpClient client, HandleServer handleServer)
+        public GlobalChatOption(TcpClient client, HandleServer handleServer, ISystem system)
         {
             _handleServer = handleServer;
             _client = client;
+            _system = system;
         }
 
         public void Run()
@@ -34,8 +36,8 @@ namespace ClientNetworkConversation.Options
 
                 while (!endConnection)
                 {
-                    Console.WriteLine("enter message, if you wand to exist global chat enter: 0");
-                    message = Console.ReadLine();
+                    _system.Write("enter message, if you wand to exist global chat enter: 0");
+                    message = _system.ReadString();
 
                     if (message == "0")
                     {
@@ -60,12 +62,12 @@ namespace ClientNetworkConversation.Options
         }
         private void GetMessage()
         {
-            string s = "";
+            string message = "";
 
-            while (s != "0")
+            while (message != "0")
             {
-                s = _handleServer.GetMessageFromServer(_client);
-                Console.WriteLine(s);
+                message = _handleServer.GetMessageFromServer(_client);
+                _system.Write(message);
             }
         }
     }

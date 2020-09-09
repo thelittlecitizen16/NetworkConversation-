@@ -31,13 +31,13 @@ namespace ServerNetworkConversation.Options
         }
         public Thread Run()
         {
-            _thread = new Thread(DoChat);
+            _thread = new Thread(StartGlobalChat);
             _thread.Start();
             return _thread;
 
         }
 
-        private void DoChat()
+        private void StartGlobalChat()
         {
             bool end = false;
             var clientGuid = _data.ClientsInGlobalChat.GetClient(clientSocket);

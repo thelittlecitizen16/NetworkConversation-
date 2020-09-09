@@ -31,11 +31,11 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         public Thread Run()
         {
-            _thread = new Thread(DoChat);
+            _thread = new Thread(StartManagerSettings);
             _thread.Start();
             return _thread;
         }
-        public void DoChat()
+        public void StartManagerSettings()
         {
             Guid clientGuid = _data.ClientsConnectedInServer.GetGuid(_client);
 

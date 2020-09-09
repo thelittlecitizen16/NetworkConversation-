@@ -31,12 +31,12 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         public Thread Run()
         {
-            _thread = new Thread(DoChat);
+            _thread = new Thread(StartGroupChat);
             _thread.Start();
             return _thread;
         }
 
-        private void DoChat()
+        private void StartGroupChat()
         {
             bool end = false;
             GroupChat group = null;

@@ -13,11 +13,13 @@ namespace ClientNetworkConversation.Options.GroupsChat
         public string OptionMessage => "Create Group Chat";
         private static TcpClient _client;
         private HandleServer _handleServer;
+        private ISystem _system;
 
-        public CreateGroupChat(TcpClient client, HandleServer handleServer)
+        public CreateGroupChat(TcpClient client, HandleServer handleServer, ISystem system)
         {
             _handleServer = handleServer;
             _client = client;
+            _system = system;
         }
 
         public void Run()
@@ -28,7 +30,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
                 Participants participants = (Participants)_handleServer.GetFromServer(_client);
 
                 Console.WriteLine("enter group name");
-                string gropuName = Console.ReadLine();
+                string gropuName = _system.ReadString();
 
                 PrintAllParticipants(participants.AllParticipants);
 
@@ -47,7 +49,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
         {
             foreach (var participant in participants)
             {
-                Console.WriteLine(participant);
+                _system.Write(participant.ToString());
             }
         }
         private List<Guid> GetAllParticipants(string userResponse, List<Guid> participants)
@@ -56,7 +58,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
 
             while (userResponse != "0")
             {
-                userResponse = Console.ReadLine();
+                userResponse = _system.ReadString();
 
                 Guid userGuid;
 
@@ -68,13 +70,13 @@ namespace ClientNetworkConversation.Options.GroupsChat
                     }
                     else
                     {
-                        Console.WriteLine($"the user guid not exist");
+                        _system.Write($"the user guid not exist");
                     }
 
                 }
                 else if (userResponse != "0")
                 {
-                    Console.WriteLine($"the user guid not exist");
+                    _system.Write($"the user guid not exist");
                 }
             }
             return usersToAdd;

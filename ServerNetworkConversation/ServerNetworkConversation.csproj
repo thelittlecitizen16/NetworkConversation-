@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Logs\logsFile.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

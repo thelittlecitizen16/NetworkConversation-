@@ -32,11 +32,11 @@ namespace ServerNetworkConversation.Options.GroupsChat
 
         public Thread Run()
         {
-            _thread = new Thread(DoChat);
+            _thread = new Thread(LeaveGroup);
             _thread.Start();
             return _thread;
         }
-        private void DoChat()
+        private void LeaveGroup()
         {
             var clientGuid = _data.ClientsConnectedInServer.GetGuid(_client);
 

@@ -30,12 +30,12 @@ namespace ServerNetworkConversation.Options
         }
         public Thread Run()
         {
-            _thread = new Thread(DoChat);
+            _thread = new Thread(StartPrivateChat);
             _thread.Start();
             return _thread;
         }
 
-        private void DoChat()
+        private void StartPrivateChat()
         {
             Guid clientGuid = _data.ClientsConnectedInServer.GetGuid(clientSocket);
             Guid guidToSend;

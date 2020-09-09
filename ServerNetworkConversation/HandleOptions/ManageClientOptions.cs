@@ -11,6 +11,7 @@ using Common.Enums;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using Microsoft.Extensions.Logging;
+using ServerNetworkConversation.Interfaces;
 
 namespace ServerNetworkConversation.HandleOptions
 {
@@ -20,9 +21,9 @@ namespace ServerNetworkConversation.HandleOptions
         private Data _data;
         private HandleClient _handleClient;
         private  RemoveClient _removeClient;
-        private ClientOptionsFactory _clientOptionsFactory;
+        private IClientOptionsFactory _clientOptionsFactory;
         private ILogger<Worker> _logger;
-        public ManageClientOptions(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient, ClientOptionsFactory clientOptionsFactory, ILogger<Worker> logger)
+        public ManageClientOptions(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient, IClientOptionsFactory clientOptionsFactory, ILogger<Worker> logger)
         {
             _clientSocket = inClientSocket;
             _data = data;

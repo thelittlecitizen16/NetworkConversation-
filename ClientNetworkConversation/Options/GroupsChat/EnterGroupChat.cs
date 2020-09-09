@@ -14,12 +14,13 @@ namespace ClientNetworkConversation.Options.GroupsChat
         public string OptionMessage => "Enter To Open Group Chat";
         private static TcpClient _client;
         private HandleServer _handleServer;
-
+        private ISystem _system;
         private bool endConnection = false;
-        public EnterGroupChat(TcpClient client, HandleServer handleServer)
+        public EnterGroupChat(TcpClient client, HandleServer handleServer, ISystem system)
         {
             _handleServer = handleServer;
             _client = client;
+            _system = system;
         }
 
         public void Run()
@@ -32,8 +33,8 @@ namespace ClientNetworkConversation.Options.GroupsChat
                 AllGroupChat allGroupChat = (AllGroupChat)_handleServer.GetFromServer(_client);
                 PrintAllGroups(allGroupChat);
 
-                Console.WriteLine("enter group name");
-                string userResponse = Console.ReadLine();
+                _system.Write("enter group name");
+                string userResponse = _system.ReadString();
 
                 if (CheckGroupName(userResponse, allGroupChat))
                 {
@@ -42,8 +43,8 @@ namespace ClientNetworkConversation.Options.GroupsChat
 
                     while (!endConnection)
                     {
-                        Console.WriteLine("enter message, if you wand to exist chat enter: 0");
-                        string message = Console.ReadLine();
+                        _system.Write("enter message, if you wand to exist chat enter: 0");
+                        string message = _system.ReadString();
 
                         if (message == "0")
                         {
@@ -56,13 +57,12 @@ namespace ClientNetworkConversation.Options.GroupsChat
                 else 
                 {
                     _handleServer.SendMessageToServer(_client, "0");
-                    Console.WriteLine("the group  not exist");
+                    _system.Write("the group  not exist");
                 }
             }
             catch (Exception e)
             {
             }
-            Console.WriteLine("out of chat");
         }
         private void GetMessage()
         {
@@ -72,7 +72,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
                 while (returndata != "0")
                 {
                     returndata = _handleServer.GetMessageFromServer(_client);
-                    Console.WriteLine(returndata);
+                    _system.Write(returndata);
                 }
             }
             catch (Exception e)
@@ -83,7 +83,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
         {
             foreach (var groupName in allGroupChat.GroupsName)
             {
-                Console.WriteLine(groupName);
+                _system.Write(groupName);
             }
         }
         private bool CheckGroupName(string userResponse, AllGroupChat allGroupChat)

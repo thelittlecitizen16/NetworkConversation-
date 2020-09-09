@@ -13,6 +13,7 @@ namespace ClientNetworkConversation
         static void Main(string[] args)
         { 
             HandleServer handleServer = new HandleServer();
+
             try
             {
                 IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
@@ -23,8 +24,6 @@ namespace ClientNetworkConversation
             }
             catch (Exception e)
             {
-
-                Console.WriteLine(e.ToString());
             }
 
             Menu menuOption1 = new Menu(client, handleServer);

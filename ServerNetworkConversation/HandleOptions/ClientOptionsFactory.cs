@@ -9,10 +9,11 @@ using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.GroupsChat;
 using Microsoft.Extensions.Logging;
+using ServerNetworkConversation.Interfaces;
 
 namespace ServerNetworkConversation.HandleOptions
 {
-    public class ClientOptionsFactory
+    public class ClientOptionsFactory: IClientOptionsFactory
     {
         public IClientOption AddClientOptions(ClientOptions choice, Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient,  ILogger<Worker> logger)
         {
