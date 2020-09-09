@@ -55,6 +55,7 @@ namespace ServerNetworkConversation.Options
                     AddPrivateChat(clientGuid, guidToSend);
 
                     while (!end)
+                    while (!end)
                     {
                         dataReceived = _handleClient.GetMessageFromClient(clientSocket);
 
@@ -115,7 +116,7 @@ namespace ServerNetworkConversation.Options
 
         private void SendMessage(string dataReceived,Guid clientGuid, Guid guidToSend, TcpClient clientSend)
         {
-            Console.WriteLine("Received and Sending back: " + dataReceived);
+           _logger.LogInformation($"Received from {clientGuid} and Sending to {guidToSend} : {dataReceived}");
 
             if (_data.ClientsConnectedInChat.HaveConversition(clientGuid, guidToSend))
             {

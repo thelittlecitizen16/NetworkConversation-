@@ -68,8 +68,6 @@ namespace ServerNetworkConversation.Options
                     _data.ClientsInGlobalChat.Remove(clientGuid);
                 }
             }
-
-            Console.WriteLine("client out thread");
         }
         private void SendMessageToEachClient(string message)
         {
@@ -100,7 +98,7 @@ namespace ServerNetworkConversation.Options
 
         private void SendAllMessage(Guid clientGuid, string dataReceived)
         {
-            Console.WriteLine("Received and Sending back: " + dataReceived);
+          _logger.LogInformation($"send {dataReceived} from {clientGuid} in globalchat");
 
             string message = $"{clientGuid} send: {dataReceived}";
             SendMessageToEachClient(message);

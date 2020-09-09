@@ -71,7 +71,8 @@ namespace ServerNetworkConversation.Options.GroupsChat
                         }
                         else
                         {
-                            SendMessageToEachClient(group, dataReceived);
+                            string message = $"{clientGuid} send:  {dataReceived}";
+                            SendMessageToEachClient(group, message);
                         }
                     }
 
