@@ -38,7 +38,7 @@ namespace ServerNetworkConversation.Options
 
             try
             {
-                SendAllClientsConnected();
+                SendAllClientsConnected(clientGuid);
 
                 string dataReceived = _handleClient.GetMessageFromClient(clientSocket);
                 TcpClient clientSend;
