@@ -410,6 +410,16 @@
             "rid": "win"
           }
         }
+      },
+      "Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Common.dll": {}
+        }
       }
     }
   },
@@ -1008,10 +1018,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Common/1.0.0": {
+      "type": "project",
+      "path": "../Common/Common.csproj",
+      "msbuildProject": "../Common/Common.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Common >= 1.0.0",
       "Microsoft.Extensions.Hosting >= 3.1.5"
     ]
   },
@@ -1040,7 +1056,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\thelittlecitizen16\\source\\repos\\NetworkConversation\\Common\\Common.csproj": {
+              "projectPath": "C:\\Users\\thelittlecitizen16\\source\\repos\\NetworkConversation\\Common\\Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

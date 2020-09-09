@@ -1,0 +1,9 @@
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\Common\bin\Debug\netstandard2.0\Common.deps.json
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\Common\bin\Debug\netstandard2.0\Common.dll
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\Common\bin\Debug\netstandard2.0\Common.pdb
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\Common\obj\Debug\netstandard2.0\Common.AssemblyInfoInputs.cache
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\Common\obj\Debug\netstandard2.0\Common.AssemblyInfo.cs
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\Common\obj\Debug\netstandard2.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\Common\obj\Debug\netstandard2.0\Common.dll
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\Common\obj\Debug\netstandard2.0\Common.pdb
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\Common\obj\Debug\netstandard2.0\Common.csprojAssemblyReference.cache
