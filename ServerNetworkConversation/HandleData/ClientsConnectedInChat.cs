@@ -18,6 +18,10 @@ namespace ServerNetworkConversation.HandleData
         {
             Clients.Add(new Tuple<Guid, Guid>(clientGuid, clientGuidToSend));
         }
+        public void Remove(Guid clientGuid, Guid clientGuidToSend)
+        {
+            Clients.Remove(new Tuple<Guid, Guid>(clientGuid, clientGuidToSend));
+        }
         public bool HaveConversition(Guid clientGuid, Guid clientGuidToSend)
         {
             return Clients.Where(c => c.Item1 == clientGuidToSend && c.Item2 == clientGuid).Any();

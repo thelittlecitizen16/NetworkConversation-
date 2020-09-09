@@ -1,5 +1,6 @@
 ﻿using Common;
 using ServerNetworkConversation.HandleData;
+using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,32 +13,34 @@ namespace ServerNetworkConversation.Options
 {
     class EnterGroupChat : IClientOption
     {
-        TcpClient clientSocket;
-        Data _data;
-        HandleClient _handleClient;
-        Thread ctThread;
-        public EnterGroupChat(Data data, TcpClient inClientSocket, HandleClient handleClient)
+        private TcpClient clientSocket;
+        private Data _data;
+        private HandleClient _handleClient;
+        private RemoveClient _removeClient;
+        private Thread _thread;
+        public EnterGroupChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient)
         {
             clientSocket = inClientSocket;
             _data = data;
             _handleClient = handleClient;
+            _removeClient = removeClient;
         }
         public Thread Run()
         {
-            ctThread = new Thread(DoChat);
-            ctThread.Start();
-            return ctThread;
+            _thread = new Thread(DoChat);
+            _thread.Start();
+            return _thread;
         }
         private void DoChat()
         {
             bool end = false;
             GroupChat group = null;
+            var clientGuid = _data.ClientsConnectedInServer.GetGuid(clientSocket);
 
             try
             {
-                var guidClient = _data.ClientsConnectedInServer.GetGuid(clientSocket);
                 List<string> grouspName = _data.AllGroupsChat.groupsChat
-                    .Where(g => g.Participants.Contains(guidClient))
+                    .Where(g => g.Participants.Contains(clientGuid))
                     .Select(g => g.Name).ToList();
                 AllGroupChat allGroupChat = new AllGroupChat(grouspName);
                 _handleClient.SendToClient(clientSocket, allGroupChat);
@@ -61,9 +64,9 @@ namespace ServerNetworkConversation.Options
 
                         if (dataReceived == "0")
                         {
+                            _data.AllGroupsChat.RemoveClientUnConnected(group, clientSocket);
                             Console.WriteLine("client send 0");
                             end = true;
-                            _data.AllGroupsChat.RemoveClientUnConnected(group, clientSocket);
                         }
                         else
                         {
@@ -78,7 +81,9 @@ namespace ServerNetworkConversation.Options
             catch (Exception)
             {
                 end = true;
-                RemoveClientWhenOut(group, clientSocket);
+                _data.AllGroupsChat.RemoveClientUnConnected(group, clientSocket);
+                _removeClient.RemoveClientWhenOut(clientSocket, clientGuid);
+               // RemoveClientWhenOut(group, clientSocket);
             }
 
 
@@ -94,14 +99,6 @@ namespace ServerNetworkConversation.Options
                     _handleClient.SendMessageToClient(client, message);
                 }
             }
-        }
-
-        private void RemoveClientWhenOut(GroupChat group, TcpClient client)
-        {
-            clientSocket.Close();
-            var guid = _data.ClientsConnectedInServer.GetGuid(clientSocket);
-            _data.AllGroupsChat.RemoveClientUnConnected(group, client);
-            _data.ClientsConnectedInServer.Remove(guid);
         }
     }
 }

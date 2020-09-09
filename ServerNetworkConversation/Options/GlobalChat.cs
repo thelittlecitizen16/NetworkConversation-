@@ -7,35 +7,38 @@ using System.Threading;
 using System.Linq;
 using ServerNetworkConversation.Options.Interfaces;
 using ServerNetworkConversation.HandleData;
+using ServerNetworkConversation.Options.HandleOptions;
 
 namespace ServerNetworkConversation.Options
 {
     public class GlobalChat : IClientOption
     {
-        TcpClient clientSocket;
-        Data _data;
-        HandleClient _handleClient;
-        Thread ctThread;
+        private TcpClient clientSocket;
+        private Data _data;
+        private HandleClient _handleClient;
+        private RemoveClient _removeClient;
+        private Thread _thread;
 
-        public GlobalChat(Data data, TcpClient inClientSocket, HandleClient handleClient)
+        public GlobalChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient)
         {
             clientSocket = inClientSocket;
             _data = data;
             _handleClient = handleClient;
+            _removeClient = removeClient;
         }
         public Thread Run()
         {
-            ctThread = new Thread(DoChat);
-            ctThread.Start();
-            return ctThread;
+            _thread = new Thread(DoChat);
+            _thread.Start();
+            return _thread;
         }
 
         private void DoChat()
         {
             bool end = false;
 
-            var guidClient = _data.ClientsInGlobalChat.GetClient(clientSocket);
-            string message = $"{guidClient} enter to global chat";
+            var clientGuid = _data.ClientsInGlobalChat.GetClient(clientSocket);
+            string message = $"{clientGuid} enter to global chat";
             SendMessageToEachClient(message);
 
 
@@ -48,19 +51,22 @@ namespace ServerNetworkConversation.Options
 
                     if (dataReceived == "0")
                     {
-                        _data.ClientsInGlobalChat.Remove(guidClient);
+                        _data.ClientsInGlobalChat.Remove(clientGuid);
 
-                         message = $"{guidClient} exist the global chat";
+                        message = $"{clientGuid} exist the global chat";
                         SendMessageToEachClient(message);
 
                         _handleClient.SendMessageToClient(clientSocket, "0");
+
                         Console.WriteLine("client send 0");
+
                         end = true;
                     }
                     else
                     {
                         Console.WriteLine("Received and Sending back: " + dataReceived);
-                         message = $"{guidClient} send: {dataReceived}";
+
+                        message = $"{clientGuid} send: {dataReceived}";
                         SendMessageToEachClient(message);
                     }
 
@@ -68,7 +74,9 @@ namespace ServerNetworkConversation.Options
                 catch (Exception)
                 {
                     end = true;
-                    RemoveClientWhenOut();
+
+                    _removeClient.RemoveClientWhenOut(clientSocket,clientGuid);
+                    _data.ClientsInGlobalChat.Remove(clientGuid);
                 }
             }
 
@@ -84,14 +92,6 @@ namespace ServerNetworkConversation.Options
                     _handleClient.SendMessageToClient(client.Value, message);
                 }
             }
-        }
-
-        private void RemoveClientWhenOut()
-        {
-            clientSocket.Close();
-            var guid = _data.ClientsConnectedInServer.GetGuid(clientSocket);
-            _data.ClientsInGlobalChat.Remove(guid);
-            _data.ClientsConnectedInServer.Remove(guid);
         }
     }
 }
