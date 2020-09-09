@@ -8,42 +8,52 @@ using System.Linq;
 using ServerNetworkConversation.Options.Interfaces;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
+using Microsoft.Extensions.Logging;
+using Common.Enums;
+using Common.HandleRequests;
+using Common.HandleRequests.HandleMessages;
 
 namespace ServerNetworkConversation.Options
 {
     public class GlobalChat : IClientOption
     {
-        private TcpClient clientSocket;
+        private TcpClient _client;
         private Data _data;
         private HandleClient _handleClient;
         private RemoveClient _removeClient;
         private Thread _thread;
+        private ILogger<Worker> _logger;
 
-        public GlobalChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient)
+        public GlobalChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
         {
-            clientSocket = inClientSocket;
+            _client = inClientSocket;
             _data = data;
             _handleClient = handleClient;
             _removeClient = removeClient;
+            _logger = logger;
         }
         public Thread Run()
         {
-            _thread = new Thread(DoChat);
+            _thread = new Thread(StartGlobalChat);
             _thread.Start();
             return _thread;
+
         }
 
-        private void DoChat()
+        private void StartGlobalChat()
         {
             bool end = false;
-            var clientGuid = _data.ClientsInGlobalChat.GetClient(clientSocket);
+            var clientGuid = _data.ClientsInGlobalChat.GetClient(_client);
+
+            SendMessagesHistory();
             SendAllAboutEnter(clientGuid);
 
             while (!end)
             {
                 try
                 {
-                    string dataReceived = _handleClient.GetMessageFromClient(clientSocket);
+
+                    string dataReceived = _handleClient.GetMessageFromClient(_client);
 
                     if (dataReceived == "0")
                     {
@@ -59,12 +69,22 @@ namespace ServerNetworkConversation.Options
                 catch (Exception)
                 {
                     end = true;
-                    _removeClient.RemoveClientWhenOut(clientSocket,clientGuid);
+                    _removeClient.RemoveClientWhenOut(_client,clientGuid);
                     _data.ClientsInGlobalChat.Remove(clientGuid);
                 }
             }
-
-            Console.WriteLine("client out thread");
+        }
+        private void SendMessagesHistory()
+        {
+            string allMessages = "";
+            foreach (var message in _data.ClientsInGlobalChat.MessagesHistory)
+            {
+                allMessages += message + "\n";
+            }
+            if (allMessages != "")
+            {
+                _handleClient.SendMessageToClient(_client, allMessages);
+            }
         }
         private void SendMessageToEachClient(string message)
         {
@@ -76,25 +96,32 @@ namespace ServerNetworkConversation.Options
                 }
             }
         }
+
         private void SendAllAboutEnter(Guid clientGuid)
         {
             string message = $"{clientGuid} enter to global chat";
             SendMessageToEachClient(message);
+            _logger.LogInformation($"client {clientGuid} enter global chat");
         }
+
         private void SendAllAboutExist(Guid clientGuid)
         {
             string message = $"{clientGuid} exist the global chat";
             SendMessageToEachClient(message);
 
-            _handleClient.SendMessageToClient(clientSocket, "0");
-            Console.WriteLine("client send 0");
+            _handleClient.SendMessageToClient(_client, "0");
+            _logger.LogInformation($"client {clientGuid} exit global chat");
         }
+
         private void SendAllMessage(Guid clientGuid, string dataReceived)
         {
-            Console.WriteLine("Received and Sending back: " + dataReceived);
+          _logger.LogInformation($"send {dataReceived} from {clientGuid} in globalchat");
 
             string message = $"{clientGuid} send: {dataReceived}";
             SendMessageToEachClient(message);
+           _data.ClientsInGlobalChat.MessagesHistory.Add(message);
+
+            _logger.LogInformation($"client {clientGuid} send {message} in global chat");
         }
     }
 

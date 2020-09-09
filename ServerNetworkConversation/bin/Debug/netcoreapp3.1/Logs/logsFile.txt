@@ -1,0 +1,106 @@
+﻿2020-09-09 18:06:18.750 +03:00 [INF] starting up the service
+2020-09-09 18:06:21.890 +03:00 [INF] server wait for first connection...
+2020-09-09 18:06:21.958 +03:00 [INF] new client connected
+2020-09-09 18:06:23.206 +03:00 [INF] client c751154c-9f22-4b62-b65a-5b5fb0eb70fc enter global chat
+2020-09-09 18:06:24.019 +03:00 [INF] client c751154c-9f22-4b62-b65a-5b5fb0eb70fc exit global chat
+2020-09-09 19:45:34.715 +03:00 [INF] starting up the service
+2020-09-09 19:45:38.482 +03:00 [INF] server wait for first connection...
+2020-09-09 19:45:38.694 +03:00 [INF] new client connected
+2020-09-09 19:45:39.986 +03:00 [INF] new client connected
+2020-09-09 19:45:42.246 +03:00 [INF] client f5f689b7-f5a7-4f23-9bb2-7ead3bda122b enter global chat
+2020-09-09 19:45:43.648 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 enter global chat
+2020-09-09 19:45:45.478 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 send 471f5922-5e5e-4ecd-a4fb-972768dabaa8 send: aaaa in global chat
+2020-09-09 19:45:47.764 +03:00 [INF] client f5f689b7-f5a7-4f23-9bb2-7ead3bda122b exit global chat
+2020-09-09 19:45:49.225 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 exit global chat
+2020-09-09 19:45:55.576 +03:00 [INF] client f5f689b7-f5a7-4f23-9bb2-7ead3bda122b send success to client success
+2020-09-09 19:46:13.956 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 send success to client success
+2020-09-09 19:46:15.218 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 leave chat with client f5f689b7-f5a7-4f23-9bb2-7ead3bda122b
+2020-09-09 19:46:32.640 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 send success to client success
+2020-09-09 19:46:34.003 +03:00 [INF] client System.Net.Sockets.TcpClient get message aaaa
+2020-09-09 19:46:37.201 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 leave chat with client f5f689b7-f5a7-4f23-9bb2-7ead3bda122b
+2020-09-09 19:46:39.242 +03:00 [INF] client f5f689b7-f5a7-4f23-9bb2-7ead3bda122b leave chat with client 471f5922-5e5e-4ecd-a4fb-972768dabaa8
+2020-09-09 19:46:52.297 +03:00 [INF] add new group afek
+2020-09-09 19:46:55.728 +03:00 [INF] client f5f689b7-f5a7-4f23-9bb2-7ead3bda122b enter to group chat afek
+2020-09-09 19:46:56.652 +03:00 [INF] Received in group afek and Sending all: aaa
+2020-09-09 19:47:01.160 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 enter to group chat afek
+2020-09-09 19:47:02.335 +03:00 [INF] Received in group afek and Sending all: aaaa
+2020-09-09 19:47:13.076 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-09 19:47:13.076 +03:00 [INF] client out chat
+2020-09-09 19:47:14.150 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-09 19:47:14.150 +03:00 [INF] client out chat
+2020-09-09 19:47:33.495 +03:00 [INF] client f5f689b7-f5a7-4f23-9bb2-7ead3bda122b change settings group afek
+2020-09-09 19:47:42.604 +03:00 [INF] client dont want to enter chat in any group
+2020-09-09 19:47:42.604 +03:00 [INF] client out chat
+2020-09-09 19:47:49.465 +03:00 [INF] add new group afek
+2020-09-09 19:47:52.751 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 leave group afek
+2020-09-09 19:47:57.761 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 leave group afek
+2020-09-09 19:48:06.365 +03:00 [INF] client dont want to enter chat in any group
+2020-09-09 19:48:06.366 +03:00 [INF] client out chat
+2020-09-09 19:48:11.453 +03:00 [INF] client f5f689b7-f5a7-4f23-9bb2-7ead3bda122b leave group afek
+2020-09-09 19:48:14.545 +03:00 [INF] client f5f689b7-f5a7-4f23-9bb2-7ead3bda122b dont want to leave any group
+2020-09-09 19:48:17.979 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 leave group afek
+2020-09-09 19:48:21.355 +03:00 [INF] client 471f5922-5e5e-4ecd-a4fb-972768dabaa8 leave group afek
+2020-09-09 19:48:28.362 +03:00 [INF] new client connected
+2020-09-09 19:48:33.808 +03:00 [INF] add new group aaa
+2020-09-09 19:48:36.482 +03:00 [INF] client edd0f01b-df93-4a13-9f88-370ac374c814 leave group aaa
+2020-09-09 19:48:39.022 +03:00 [INF] client edd0f01b-df93-4a13-9f88-370ac374c814 dont want to leave any group
+2020-09-09 19:49:04.311 +03:00 [INF] new client connected
+2020-09-09 19:49:14.644 +03:00 [INF] add new group 
+2020-09-09 20:33:23.435 +03:00 [INF] starting up the service
+2020-09-09 20:33:25.143 +03:00 [INF] server wait for first connection...
+2020-09-09 20:33:26.305 +03:00 [INF] new client connected
+2020-09-09 20:33:27.877 +03:00 [INF] new client connected
+2020-09-09 20:33:33.499 +03:00 [INF] client dont want to enter chat in any group
+2020-09-09 20:33:33.499 +03:00 [INF] client out chat
+2020-09-09 20:33:36.560 +03:00 [INF] client dont want to enter manager settings to any group
+2020-09-09 20:33:39.195 +03:00 [INF] client 69527916-96a7-4481-a2be-42c589f0b70f dont want to leave any group
+2020-09-09 20:33:44.098 +03:00 [INF] add new group afek
+2020-09-09 20:33:47.096 +03:00 [INF] client 69527916-96a7-4481-a2be-42c589f0b70f enter to group chat afek
+2020-09-09 20:33:47.767 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-09 20:33:47.767 +03:00 [INF] client out chat
+2020-09-09 20:33:50.268 +03:00 [INF] client 69527916-96a7-4481-a2be-42c589f0b70f leave group afek
+2020-09-09 20:33:51.313 +03:00 [INF] client 69527916-96a7-4481-a2be-42c589f0b70f dont want to leave any group
+2020-09-09 20:37:09.144 +03:00 [INF] starting up the service
+2020-09-09 20:37:11.014 +03:00 [INF] server wait for first connection...
+2020-09-09 20:37:13.100 +03:00 [INF] new client connected
+2020-09-09 20:37:43.709 +03:00 [INF] add new group afek
+2020-09-09 20:38:05.633 +03:00 [INF] client b18b5fd3-42fd-447e-b5cf-96eedde2d158 change settings group afek
+2020-09-09 20:54:22.577 +03:00 [INF] starting up the service
+2020-09-09 20:54:24.861 +03:00 [INF] server wait for first connection...
+2020-09-09 20:54:25.048 +03:00 [INF] new client connected
+2020-09-09 20:54:53.754 +03:00 [INF] starting up the service
+2020-09-09 20:54:55.684 +03:00 [INF] server wait for first connection...
+2020-09-09 20:55:00.880 +03:00 [INF] new client connected
+2020-09-09 20:56:09.502 +03:00 [INF] starting up the service
+2020-09-09 20:56:11.259 +03:00 [INF] server wait for first connection...
+2020-09-09 20:56:14.919 +03:00 [INF] new client connected
+2020-09-09 20:57:02.170 +03:00 [INF] starting up the service
+2020-09-09 20:57:03.647 +03:00 [INF] server wait for first connection...
+2020-09-09 20:57:03.874 +03:00 [INF] new client connected
+2020-09-09 20:59:19.269 +03:00 [INF] starting up the service
+2020-09-09 20:59:21.308 +03:00 [INF] server wait for first connection...
+2020-09-09 20:59:22.782 +03:00 [INF] new client connected
+2020-09-09 20:59:30.369 +03:00 [INF] add new group 0
+2020-09-09 21:00:16.066 +03:00 [INF] starting up the service
+2020-09-09 21:00:18.212 +03:00 [INF] server wait for first connection...
+2020-09-09 21:00:18.239 +03:00 [INF] new client connected
+2020-09-09 21:00:22.780 +03:00 [INF] add new group afek
+2020-09-09 21:00:26.121 +03:00 [INF] client 6c158fd1-5222-49c4-88a8-75cf93cad2da enter to group chat afek
+2020-09-09 21:00:27.621 +03:00 [INF] client out chat
+2020-09-09 21:00:30.013 +03:00 [INF] Application is shutting down...
+2020-09-09 21:03:46.338 +03:00 [INF] starting up the service
+2020-09-09 21:03:48.330 +03:00 [INF] server wait for first connection...
+2020-09-09 21:03:55.166 +03:00 [INF] Application is shutting down...
+2020-09-09 21:04:14.142 +03:00 [INF] starting up the service
+2020-09-09 21:04:15.443 +03:00 [INF] server wait for first connection...
+2020-09-09 21:04:16.206 +03:00 [INF] Application is shutting down...
+2020-09-09 21:05:44.900 +03:00 [INF] starting up the service
+2020-09-09 21:05:47.119 +03:00 [INF] server wait for first connection...
+2020-09-09 21:06:36.952 +03:00 [INF] starting up the service
+2020-09-09 21:06:37.574 +03:00 [INF] server wait for first connection...
+2020-09-09 21:06:47.778 +03:00 [INF] new client connected
+2020-09-09 21:07:56.836 +03:00 [INF] starting up the service
+2020-09-09 21:07:59.464 +03:00 [INF] server wait for first connection...
+2020-09-09 21:08:13.772 +03:00 [INF] starting up the service
+2020-09-09 21:08:14.400 +03:00 [INF] server wait for first connection...
+2020-09-09 21:08:55.278 +03:00 [INF] Application is shutting down...

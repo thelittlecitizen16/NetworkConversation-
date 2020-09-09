@@ -13,12 +13,15 @@ namespace ClientNetworkConversation.Options
         public string OptionMessage => "Enter To private Chats";
         private static TcpClient _client;
         private HandleServer _handleServer;
+        private ISystem _system;
+
 
         private bool endConnection = false;
-        public PrivateChat(TcpClient client, HandleServer handleServer)
+        public PrivateChat(TcpClient client, HandleServer handleServer, ISystem system)
         {
             _handleServer = handleServer;
             _client = client;
+            _system = system;
         }
 
         public void Run()
@@ -30,9 +33,9 @@ namespace ClientNetworkConversation.Options
             {
                 string messageRecive;
                 messageRecive = _handleServer.GetMessageFromServer(_client);
-                Console.WriteLine(messageRecive);
+                _system.Write(messageRecive);
 
-                string messageToSend = Console.ReadLine();
+                string messageToSend = _system.ReadString();
                 _handleServer.SendMessageToServer(_client, messageToSend);
                 messageRecive = _handleServer.GetMessageFromServer(_client);
 
@@ -44,8 +47,8 @@ namespace ClientNetworkConversation.Options
 
                     while (!endConnection)
                     {
-                        Console.WriteLine("enter message, if you wand to exist chat enter: 0");
-                        string message = Console.ReadLine();
+                        _system.Write("enter message, if you wand to exist chat enter: 0");
+                        string message = _system.ReadString();
 
                         if (message == "0")
                         {
@@ -57,27 +60,21 @@ namespace ClientNetworkConversation.Options
                 }
                 else
                 {
-                    Console.WriteLine("you enter guid that not exist");
+                    _system.Write("you enter guid that not exist");
                 }
             }
             catch (Exception e)
             {
             }
-            Console.WriteLine("out of chat");
         }
         private void GetMessage()
         {
-            try
+            string message = "";
+
+            while (message != "0")
             {
-                string returndata = "";
-                ; while (returndata != "0")
-                {
-                    returndata = _handleServer.GetMessageFromServer(_client);
-                    Console.WriteLine(returndata);
-                }
-            }
-            catch (Exception e)
-            {
+                message = _handleServer.GetMessageFromServer(_client);
+                _system.Write(message);
             }
         }
     }

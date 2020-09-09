@@ -1,4 +1,5 @@
 ﻿using ClientNetworkConversation.Options;
+using ClientNetworkConversation.Options.GroupsChat;
 using MenuBuilder;
 using MenuBuilder.Options;
 using System;
@@ -17,17 +18,23 @@ namespace ClientNetworkConversation
         private PrivateChat _privateChat;
         private CreateGroupChat _createGroupChat;
         private EnterGroupChat _enterGroupChat;
+        private ManagerSettings _managerSettings;
+        private LeaveGroupChat _leaveGroupChat;
 
 
         public Menu(TcpClient client, HandleServer handleServer)
         {
             _consoleSystem = new ConsoleSystem();
-            _validation = new MenuBuilder.Validation();
-            _globalChatOption = new GlobalChatOption(client, handleServer);
-            _privateChat = new PrivateChat(client, handleServer);
-            _createGroupChat = new CreateGroupChat(client, handleServer);
-            _enterGroupChat=new EnterGroupChat(client, handleServer);
+            _validation = new Validation();
+            _globalChatOption = new GlobalChatOption(client, handleServer, _consoleSystem);
+            _privateChat = new PrivateChat(client, handleServer, _consoleSystem);
+            _createGroupChat = new CreateGroupChat(client, handleServer, _consoleSystem);
+            _enterGroupChat=new EnterGroupChat(client, handleServer, _consoleSystem);
+            _managerSettings = new ManagerSettings(client, handleServer, _consoleSystem);
+            _leaveGroupChat = new LeaveGroupChat(client, handleServer, _consoleSystem);
             _menuBuilderInt = new MenuBuilder<int>(_consoleSystem, _validation);
+            _menuBuilderInt = new MenuBuilder<int>(_consoleSystem, _validation);
+  
         }
         public void RunMenu()
         {
@@ -36,6 +43,8 @@ namespace ClientNetworkConversation
                .AddOption(2, _privateChat)
                .AddOption(3, _createGroupChat)
                .AddOption(4, _enterGroupChat)
+               .AddOption(5, _managerSettings)
+               .AddOption(6, _leaveGroupChat)
                .Build();
 
             mainMenu.RunMenu();

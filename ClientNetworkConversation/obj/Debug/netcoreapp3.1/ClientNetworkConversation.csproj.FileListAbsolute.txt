@@ -16,3 +16,4 @@ C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConver
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.dll
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.pdb
 C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\obj\Debug\netcoreapp3.1\ClientNetworkConversation.genruntimeconfig.cache
+C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ClientNetworkConversation\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
