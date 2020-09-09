@@ -36,11 +36,8 @@ namespace ServerNetworkConversation.Options
         private void DoChat()
         {
             bool end = false;
-
             var clientGuid = _data.ClientsInGlobalChat.GetClient(clientSocket);
-            string message = $"{clientGuid} enter to global chat";
-            SendMessageToEachClient(message);
-
+            SendAllAboutEnter(clientGuid);
 
             while (!end)
             {
@@ -48,40 +45,26 @@ namespace ServerNetworkConversation.Options
                 {
                     string dataReceived = _handleClient.GetMessageFromClient(clientSocket);
 
-
                     if (dataReceived == "0")
                     {
                         _data.ClientsInGlobalChat.Remove(clientGuid);
-
-                        message = $"{clientGuid} exist the global chat";
-                        SendMessageToEachClient(message);
-
-                        _handleClient.SendMessageToClient(clientSocket, "0");
-
-                        Console.WriteLine("client send 0");
-
+                        SendAllAboutExist(clientGuid);
                         end = true;
                     }
                     else
                     {
-                        Console.WriteLine("Received and Sending back: " + dataReceived);
-
-                        message = $"{clientGuid} send: {dataReceived}";
-                        SendMessageToEachClient(message);
+                        SendAllMessage(clientGuid, dataReceived);
                     }
-
                 }
                 catch (Exception)
                 {
                     end = true;
-
                     _removeClient.RemoveClientWhenOut(clientSocket,clientGuid);
                     _data.ClientsInGlobalChat.Remove(clientGuid);
                 }
             }
 
             Console.WriteLine("client out thread");
-
         }
         private void SendMessageToEachClient(string message)
         {
@@ -93,5 +76,26 @@ namespace ServerNetworkConversation.Options
                 }
             }
         }
+        private void SendAllAboutEnter(Guid clientGuid)
+        {
+            string message = $"{clientGuid} enter to global chat";
+            SendMessageToEachClient(message);
+        }
+        private void SendAllAboutExist(Guid clientGuid)
+        {
+            string message = $"{clientGuid} exist the global chat";
+            SendMessageToEachClient(message);
+
+            _handleClient.SendMessageToClient(clientSocket, "0");
+            Console.WriteLine("client send 0");
+        }
+        private void SendAllMessage(Guid clientGuid, string dataReceived)
+        {
+            Console.WriteLine("Received and Sending back: " + dataReceived);
+
+            string message = $"{clientGuid} send: {dataReceived}";
+            SendMessageToEachClient(message);
+        }
     }
+
 }
