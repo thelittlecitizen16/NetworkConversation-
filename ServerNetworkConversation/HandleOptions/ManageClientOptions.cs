@@ -72,6 +72,10 @@ namespace ServerNetworkConversation.HandleOptions
                                 Thread EnterGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient).Run();
                                 EnterGroupChat.Join();
                                 break;
+                            case ClientOptions.MANAGER_SETTINGS:
+                                Thread managerSettings = _clientOptionsFactory.AddClientOptions(ClientOptions.MANAGER_SETTINGS, _data, _clientSocket, _handleClient, _removeClient).Run();
+                                managerSettings.Join();
+                                break;
                             default:
                                 break;
                         }

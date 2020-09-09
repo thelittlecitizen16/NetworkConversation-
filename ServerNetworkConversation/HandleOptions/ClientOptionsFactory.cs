@@ -29,6 +29,9 @@ namespace ServerNetworkConversation.HandleOptions
                 case ClientOptions.GROUP_CHAT:
                     return new EnterGroupChat(data, client, handleClient, removeClient);
                     break;
+                case ClientOptions.MANAGER_SETTINGS:
+                    return new ManagerSettings(data, client, handleClient, removeClient);
+                    break;
                 default:
                     return null;
                     break;
