@@ -34,8 +34,8 @@ namespace ServerNetworkConversation.Options
 
             try
             {
-                var guidClient = _data.ClientsConnected.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
-                List<string> grouspName = _data.allGroupsChat.groupsChat
+                var guidClient = _data.ClientsConnectedInServer.GetGuid(clientSocket);
+                List<string> grouspName = _data.AllGroupsChat.groupsChat
                     .Where(g => g.Participants.Contains(guidClient))
                     .Select(g => g.Name).ToList();
                 AllGroupChat allGroupChat = new AllGroupChat(grouspName);
@@ -51,8 +51,8 @@ namespace ServerNetworkConversation.Options
                 else
                 {
 
-                    group = _data.allGroupsChat.groupsChat.Where(g => g.Name == dataReceived).First();
-                    _data.allGroupsChat.AddClientConnected(group, clientSocket);
+                    group = _data.AllGroupsChat.groupsChat.Where(g => g.Name == dataReceived).First();
+                    _data.AllGroupsChat.AddClientConnected(group, clientSocket);
 
                     while (!end)
                     {
@@ -62,7 +62,7 @@ namespace ServerNetworkConversation.Options
                         {
                             Console.WriteLine("client send 0");
                             end = true;
-                            _data.allGroupsChat.RemoveClientUnConnected(group, clientSocket);
+                            _data.AllGroupsChat.RemoveClientUnConnected(group, clientSocket);
                         }
                         else
                         {
@@ -86,7 +86,7 @@ namespace ServerNetworkConversation.Options
         }
         private void SendMessageToEachClient(GroupChat group, string message)
         {
-            foreach (var client in _data.allGroupsChat.ClientConnectToGroup[group])
+            foreach (var client in _data.AllGroupsChat.ClientConnectToGroup[group])
             {
                 if (client.Connected)
                 {
@@ -98,10 +98,9 @@ namespace ServerNetworkConversation.Options
         private void RemoveClientWhenOut(GroupChat group, TcpClient client)
         {
             clientSocket.Close();
-            var guid = _data.GetClientGuid(clientSocket);
-            TcpClient clientExist;
-            _data.allGroupsChat.RemoveClientUnConnected(group, client);
-            _data.ClientsConnected.TryRemove(guid, out clientExist);
+            var guid = _data.ClientsConnectedInServer.GetGuid(clientSocket);
+            _data.AllGroupsChat.RemoveClientUnConnected(group, client);
+            _data.ClientsConnectedInServer.Remove(guid);
         }
     }
 }

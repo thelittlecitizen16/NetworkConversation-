@@ -32,8 +32,8 @@ namespace ServerNetworkConversation.Options
         {
             try
             {
-                Guid clientGuid = _data.ClientsConnected.Where(c => c.Value == _client).Select(c => c.Key).First();
-                List<Guid> clientsToAdd = _data.ClientsConnected.Keys.ToList();
+                Guid clientGuid = _data.ClientsConnectedInServer.GetGuid(_client);
+                List<Guid> clientsToAdd = _data.ClientsConnectedInServer.Clients.Keys.ToList();
                 clientsToAdd.Remove(clientGuid);
 
                 Participants participants = new Participants(clientsToAdd);
@@ -45,19 +45,17 @@ namespace ServerNetworkConversation.Options
                 {
                     groupChat = (GroupChat)_handleClient.GetFromClient(_client);
                 }
-                var guidClient = _data.ClientsConnected.Where(c => c.Value == _client).Select(c => c.Key).First();
+                var guidClient = _data.ClientsConnectedInServer.GetGuid(_client);
 
                 groupChat.Managers.Add(guidClient);
                 groupChat.Participants.Add(guidClient);
-                _data.allGroupsChat.groupsChat.Add(groupChat);
+                _data.AllGroupsChat.groupsChat.Add(groupChat);
             }
             catch (Exception)
             {
-                var guid = _data.GetClientGuid(_client);
-                TcpClient clientExist;
-                _data.ClientsConnected.TryRemove(guid, out clientExist);
+                var guid = _data.ClientsConnectedInServer.GetGuid(_client);
+                _data.ClientsConnectedInServer.Remove(guid);
                 _client.Close();
-
             }
         }
     }

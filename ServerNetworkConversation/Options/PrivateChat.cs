@@ -30,13 +30,13 @@ namespace ServerNetworkConversation.Options
         private void DoChat()
         {
             try
-            {     
-                var clientGuid = _data.ClientsConnected.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
+            {
+                var clientGuid = _data.ClientsConnectedInServer.GetGuid(clientSocket);
                 string message = $"the clients you can chat with: \n";
 
-                foreach (var clientConnected in _data.ClientsConnected)
+                foreach (var clientConnected in _data.ClientsConnectedInServer.Clients)
                 {
-                    var guidClient = _data.ClientsConnected.Where(c => c.Value == clientConnected.Value).Select(c => c.Key).First();
+                    var guidClient = _data.ClientsConnectedInServer.GetGuid(clientConnected.Value);
                     message += $"{guidClient} \n";
                 }
 
@@ -46,12 +46,12 @@ namespace ServerNetworkConversation.Options
                 Guid guidToSend;
                 Guid.TryParse(dataReceived, out guidToSend);
 
-                if (_data.ClientsConnected.TryGetValue(guidToSend, out clientSend))
+                if (_data.ClientsConnectedInServer.Clients.TryGetValue(guidToSend, out clientSend))
                 {      
                     bool end = false;
                     message = $"success";
                     _handleClient.SendMessageToClient(clientSocket, message);
-                    _data.ClientsConnectedInChat.Add(new Tuple<Guid, Guid>(clientGuid, guidToSend));
+                    _data.ClientsConnectedInChat.Add(clientGuid, guidToSend);
 
                     while (!end)
                     {
@@ -65,13 +65,14 @@ namespace ServerNetworkConversation.Options
                         else
                         {
                             Console.WriteLine("Received and Sending back: " + dataReceived);
-                            if (_data.ClientsConnectedInChat.Where(c=>c.Item1 == guidToSend && c.Item2 == clientGuid).Any())
+
+                            if (_data.ClientsConnectedInChat.HaveConversition(clientGuid, guidToSend))
                             {
                                 _handleClient.SendMessageToClient(clientSend, dataReceived);
                             }
                             else
                             {
-                                _data.AddMessagesInPrivateChat(guidToSend, clientGuid, new List<string>() { dataReceived });
+                               // _data.AddMessagesInPrivateChat(guidToSend, clientGuid, new List<string>() { dataReceived });
                             }
                         }
                     }          
@@ -91,9 +92,8 @@ namespace ServerNetworkConversation.Options
         private void RemoveClientWhenOut()
         {
             clientSocket.Close();
-            var guid = _data.GetClientGuid(clientSocket);
-            TcpClient clientExist;
-            _data.ClientsConnected.TryRemove(guid, out clientExist);
+            var guid = _data.ClientsConnectedInServer.GetGuid(clientSocket);
+            _data.ClientsConnectedInServer.Remove(guid);
         }
 
     }

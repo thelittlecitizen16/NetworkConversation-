@@ -33,14 +33,14 @@ namespace ServerNetworkConversation
 
             TcpListener listener = new TcpListener(ipAddr, 7777);
             listener.Start();
-            Console.WriteLine("wait for first connection");
+            Console.WriteLine("wait for first connection...");
 
             try
             {
                 while (true)
                 {
                     TcpClient tcpClient = listener.AcceptTcpClient();
-                    data.AddClientWhenConnect(Guid.NewGuid(), tcpClient);
+                    data.ClientsConnectedInServer.AddWhenConnect(Guid.NewGuid(), tcpClient);
                     Console.WriteLine("new connection from client");
 
                     var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient, clientOptionsFactory);

@@ -25,6 +25,7 @@ namespace ClientNetworkConversation
             int bytesRead = serverStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
             return Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
         }
+
         public void SendToServer(TcpClient client, object obj)
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -38,6 +39,7 @@ namespace ClientNetworkConversation
             NetworkStream nwStream = client.GetStream();
             nwStream.Write(bytesToSend, 0, bytesToSend.Length);
         }
+
         public Object GetFromServer(TcpClient client)
         {
             NetworkStream serverStream = client.GetStream();

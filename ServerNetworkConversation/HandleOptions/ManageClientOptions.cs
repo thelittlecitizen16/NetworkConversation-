@@ -49,7 +49,7 @@ namespace ServerNetworkConversation.HandleOptions
                         switch (choice)
                         {
                             case ClientOptions.GLOBAL_CHAT:
-                                _data.AddClientToGlobalChat(_data.GetClientGuid(_clientSocket), _clientSocket);
+                                _data.ClientsInGlobalChat.Add(_data.ClientsConnectedInServer.GetGuid(_clientSocket), _clientSocket);
                                 Thread globalChat = _clientOptionsFactory.AddClientOptions(ClientOptions.GLOBAL_CHAT,_data, _clientSocket,_handleClient).Run();
                                 globalChat.Join();
                                 break;

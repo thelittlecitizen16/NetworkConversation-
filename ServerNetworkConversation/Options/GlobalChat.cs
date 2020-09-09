@@ -33,7 +33,7 @@ namespace ServerNetworkConversation.Options
         {
             bool end = false;
 
-            var guidClient = _data.ClientsInGlobalChat.Where(c => c.Value == clientSocket).Select(c => c.Key).First();
+            var guidClient = _data.ClientsInGlobalChat.GetClient(clientSocket);
             string message = $"{guidClient} enter to global chat";
             SendMessageToEachClient(message);
 
@@ -47,7 +47,7 @@ namespace ServerNetworkConversation.Options
 
                     if (dataReceived == "0")
                     {
-                        _data.RemoveClientFromGlobalChat(guidClient);
+                        _data.ClientsInGlobalChat.Remove(guidClient);
 
                          message = $"{guidClient} exist the global chat";
                         SendMessageToEachClient(message);
@@ -76,7 +76,7 @@ namespace ServerNetworkConversation.Options
         }
         private void SendMessageToEachClient(string message)
         {
-            foreach (var client in _data.ClientsInGlobalChat)
+            foreach (var client in _data.ClientsInGlobalChat.Clients)
             {
                 if (client.Value.Connected)
                 {
@@ -88,10 +88,9 @@ namespace ServerNetworkConversation.Options
         private void RemoveClientWhenOut()
         {
             clientSocket.Close();
-            var guid = _data.GetClientGuid(clientSocket);
-            TcpClient clientExist;
-            _data.ClientsInGlobalChat.TryRemove(guid, out clientExist);
-            _data.ClientsConnected.TryRemove(guid, out clientExist);
+            var guid = _data.ClientsConnectedInServer.GetGuid(clientSocket);
+            _data.ClientsInGlobalChat.Remove(guid);
+            _data.ClientsConnectedInServer.Remove(guid);
         }
     }
 }
