@@ -30,19 +30,15 @@ namespace ClientNetworkConversation.Options
             try
             {
                 AllGroupChat allGroupChat = (AllGroupChat)_handleServer.GetFromServer(_client);
-                foreach (var groupName in allGroupChat.GroupsName)
-                {
-                    Console.WriteLine(groupName);
-                }
+                PrintAllGroups(allGroupChat);
 
                 Console.WriteLine("enter group name");
                 string userResponse = Console.ReadLine();
 
-                if (allGroupChat.GroupsName.Contains(userResponse))
+                if (CheckGroupName(userResponse, allGroupChat))
                 {
                     _handleServer.SendMessageToServer(_client, userResponse);
-                    Thread ctThread = new Thread(GetMessage);
-                    ctThread.Start();
+                    ListenToServer();
 
                     while (!endConnection)
                     {
@@ -82,6 +78,22 @@ namespace ClientNetworkConversation.Options
             catch (Exception e)
             {
             }
+        }
+        private void PrintAllGroups(AllGroupChat allGroupChat)
+        {
+            foreach (var groupName in allGroupChat.GroupsName)
+            {
+                Console.WriteLine(groupName);
+            }
+        }
+        private bool CheckGroupName(string userResponse, AllGroupChat allGroupChat)
+        {
+            return allGroupChat.GroupsName.Contains(userResponse);
+        }
+        private void ListenToServer()
+        {
+            Thread ctThread = new Thread(GetMessage);
+            ctThread.Start();
         }
     }
 }
