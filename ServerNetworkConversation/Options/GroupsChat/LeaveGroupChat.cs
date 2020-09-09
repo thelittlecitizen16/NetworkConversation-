@@ -60,9 +60,6 @@ namespace ServerNetworkConversation.Options.GroupsChat
             {
                 _removeClient.RemoveClientWhenOut(_client, clientGuid);
             }
-
-
-            Console.WriteLine("client out thread");
         }
 
         private void SendAllClientGroups(Guid clientGuid)

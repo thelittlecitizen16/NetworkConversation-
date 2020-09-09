@@ -57,6 +57,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
                     group = _data.AllGroupsChat.GetGroupsChat().Where(g => g.Name == dataReceived).First();
                     _data.AllGroupsChat.AddClientConnected(group, _client);
                     _logger.LogInformation($"client {clientGuid} enter to group chat {group.Name}");
+                    SendMessagesHistory(group);
 
                     while (!end)
                     {
@@ -89,6 +90,18 @@ namespace ServerNetworkConversation.Options.GroupsChat
 
             _logger.LogInformation("client out chat");
         }
+        private void SendMessagesHistory(GroupChat groupChat)
+        {
+            string allMessages = "";
+            foreach (var message in _data.AllGroupsChat.GetAllGroupHistory(groupChat))
+            {
+                allMessages += message + "\n";
+            }
+            if (allMessages != "")
+            {
+                _handleClient.SendMessageToClient(_client, allMessages);
+            }
+        }
         private void SendMessageToEachClient(GroupChat group, string message)
         {
             foreach (var client in _data.AllGroupsChat.ClientConnectToGroup[group])
@@ -99,6 +112,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
                 }
             }
 
+            _data.AllGroupsChat.AddMessageToHistory(group, message);
             _logger.LogInformation($"Received in group {group.Name} and Sending all: {message}");
         }
         private void SendAllClientGroups(Guid clientGuid)

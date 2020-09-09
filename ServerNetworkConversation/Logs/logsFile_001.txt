@@ -1,0 +1,31 @@
+2020-09-09 21:08:32.489 +03:00 [INF] starting up the service
+2020-09-09 21:08:34.884 +03:00 [FTL] There Where Froblam starting the service
+System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   at System.Net.Sockets.TcpListener.Start()
+   at ServerNetworkConversation.Worker.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Worker.cs:line 39
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ServerNetworkConversation.Program.Main(String[] args) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Program.cs:line 31
+2020-09-09 21:08:47.973 +03:00 [INF] starting up the service
+2020-09-09 21:08:49.436 +03:00 [FTL] There Where Froblam starting the service
+System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   at System.Net.Sockets.TcpListener.Start()
+   at ServerNetworkConversation.Worker.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Worker.cs:line 39
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ServerNetworkConversation.Program.Main(String[] args) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Program.cs:line 31
+2020-09-09 21:09:00.403 +03:00 [INF] starting up the service
+2020-09-09 21:09:01.040 +03:00 [INF] server wait for first connection...
+2020-09-09 21:09:19.761 +03:00 [INF] new client connected

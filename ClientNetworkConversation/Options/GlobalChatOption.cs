@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using Common.Enums;
 using System.Threading.Tasks;
+using Common.HandleRequests;
 
 namespace ClientNetworkConversation.Options
 {
@@ -42,12 +43,13 @@ namespace ClientNetworkConversation.Options
                     if (message == "0")
                     {
                         endConnection = true;
+                       
                         _handleServer.SendMessageToServer(_client, message);
                         break;
                     }
                     else
-                    {
-                        _handleServer.SendMessageToServer(_client, message);
+                    {  
+                         _handleServer.SendMessageToServer(_client, message);
                     }
                 }
 
@@ -58,7 +60,6 @@ namespace ClientNetworkConversation.Options
             }
 
             endConnection = false;
-            Console.WriteLine("out of chat");
         }
         private void GetMessage()
         {

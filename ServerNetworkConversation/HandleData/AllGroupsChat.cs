@@ -13,11 +13,33 @@ namespace ServerNetworkConversation.HandleData
 
         private List<GroupChat> _groupsChat;
         public ConcurrentDictionary<GroupChat, List<TcpClient>> ClientConnectToGroup { get; private set; }
+        private ConcurrentDictionary<GroupChat, List<string>> _messagesHistory;
 
         public AllGroupsChat()
         {
             _groupsChat = new List<GroupChat>();
             ClientConnectToGroup = new ConcurrentDictionary<GroupChat, List<TcpClient>>();
+            _messagesHistory = new ConcurrentDictionary<GroupChat, List<string>>();
+        }
+        public void AddMessageToHistory(GroupChat groupChat,string message)
+        {
+            if (_messagesHistory.ContainsKey(groupChat))
+            {
+                _messagesHistory[groupChat].Add(message);
+            }
+            else
+            {
+                _messagesHistory.TryAdd(groupChat, new List<string>() { message });
+            }
+            
+        }
+        public List<string> GetAllGroupHistory(GroupChat groupChat)
+        {
+            if (_messagesHistory.ContainsKey(groupChat))
+            {
+                return _messagesHistory[groupChat];
+            }
+            return new List<string>();
         }
         public List<GroupChat> GetGroupsChat()
         {

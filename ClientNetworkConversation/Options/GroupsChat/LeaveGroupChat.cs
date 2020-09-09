@@ -31,20 +31,29 @@ namespace ClientNetworkConversation.Options.GroupsChat
                 AllGroupChat allGroupChat = (AllGroupChat)_handleServer.GetFromServer(_client);
                 PrintAllGroups(allGroupChat);
 
-                _system.Write("enter group name");
-                string userResponse = _system.ReadString();
-
-                if (CheckGroupName(userResponse, allGroupChat))
+                if (allGroupChat.GroupsName.Count> 0)
                 {
-                    _handleServer.SendMessageToServer(_client, userResponse);
-                    _system.Write("you leave group");
-                   
+                    _system.Write("enter group name");
+                    string userResponse = _system.ReadString();
+
+                    if (CheckGroupName(userResponse, allGroupChat))
+                    {
+                        _handleServer.SendMessageToServer(_client, userResponse);
+                        _system.Write("you leave group");
+
+                    }
+                    else
+                    {
+                        _handleServer.SendMessageToServer(_client, "0");
+                        _system.Write("the group not exist");
+                    }
                 }
                 else
                 {
                     _handleServer.SendMessageToServer(_client, "0");
-                    _system.Write("the group  not exist");
+                    _system.Write("you dont have groups to leave");
                 }
+
             }
             catch (Exception e)
             {

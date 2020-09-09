@@ -9,10 +9,12 @@ namespace ServerNetworkConversation.HandleData
     {
         private readonly object _locker = new object();
         private List<Tuple<Guid, Guid>> _clients;
+        private List<Tuple<Guid, Guid, List<string>>> _messageHistory;
 
         public ClientsConnectedInChat()
         {
             _clients = new List<Tuple<Guid, Guid>>();
+            _messageHistory = new List<Tuple<Guid, Guid, List<string>>>();
         }
 
         public void Add(Guid clientGuid, Guid clientGuidToSend)
@@ -29,6 +31,33 @@ namespace ServerNetworkConversation.HandleData
             {
                 _clients.Remove(new Tuple<Guid, Guid>(clientGuid, clientGuidToSend));
             }
+        }
+        public void AddMessagesToHistory(Guid clientGuid, Guid clientGuidToSend, string message)
+        {
+            lock (_locker)
+            {
+                var messages = _messageHistory.Where(c => (c.Item1 == clientGuidToSend || c.Item1 == clientGuid) && (c.Item1 == clientGuid || c.Item1 == clientGuidToSend));
+
+                if (messages.Any())
+                {
+                    messages.First().Item3.Add(message);
+                }
+                else
+                {
+                    _messageHistory.Add(new Tuple<Guid, Guid, List<string>>(clientGuid, clientGuidToSend, new List<string>() { message }));
+                }
+            }
+        }
+        public List<string> GetMessagesToHistory(Guid clientGuid, Guid clientGuidToSend)
+        {
+            var messages = _messageHistory.Where(c => (c.Item1 == clientGuidToSend || c.Item1 == clientGuid) && (c.Item1 == clientGuid || c.Item1 == clientGuidToSend));
+
+            if (messages.Any())
+            {
+                return messages.First().Item3;
+            }
+           
+            return new List<string>();
         }
         public bool HaveConversition(Guid clientGuid, Guid clientGuidToSend)
         {

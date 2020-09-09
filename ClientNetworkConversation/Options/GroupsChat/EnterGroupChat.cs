@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.Enums;
+using Common.HandleRequests;
 using MenuBuilder.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -31,34 +32,44 @@ namespace ClientNetworkConversation.Options.GroupsChat
             try
             {
                 AllGroupChat allGroupChat = (AllGroupChat)_handleServer.GetFromServer(_client);
+              
                 PrintAllGroups(allGroupChat);
 
-                _system.Write("enter group name");
-                string userResponse = _system.ReadString();
-
-                if (CheckGroupName(userResponse, allGroupChat))
+                if (allGroupChat.GroupsName.Count>0)
                 {
-                    _handleServer.SendMessageToServer(_client, userResponse);
-                    ListenToServer();
+                    _system.Write("enter group name");
+                    string userResponse = _system.ReadString();
 
-                    while (!endConnection)
+                    if (CheckGroupName(userResponse, allGroupChat))
                     {
-                        _system.Write("enter message, if you wand to exist chat enter: 0");
-                        string message = _system.ReadString();
+                        _handleServer.SendMessageToServer(_client, userResponse);
+                        ListenToServer();
 
-                        if (message == "0")
+                        while (!endConnection)
                         {
-                            endConnection = true;
-                        }
+                            _system.Write("enter message, if you wand to exist chat enter: 0");
+                            string message = _system.ReadString();
 
-                        _handleServer.SendMessageToServer(_client, message);
+                            if (message == "0")
+                            {
+                                endConnection = true;
+                            }
+
+                            _handleServer.SendMessageToServer(_client, message);
+                        }
+                    }
+                    else
+                    {
+                        _handleServer.SendMessageToServer(_client, "0");
+                        _system.Write("the group  not exist");
                     }
                 }
-                else 
+                else
                 {
                     _handleServer.SendMessageToServer(_client, "0");
-                    _system.Write("the group  not exist");
+                    _system.Write("you dont have group to enter");
                 }
+
             }
             catch (Exception e)
             {

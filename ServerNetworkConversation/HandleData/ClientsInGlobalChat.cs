@@ -10,10 +10,13 @@ namespace ServerNetworkConversation.HandleData
     public class ClientsInGlobalChat
     {
         public ConcurrentDictionary<Guid, TcpClient> Clients { get; private set; }
+        public List<string> MessagesHistory { get; private set; }
         public ClientsInGlobalChat()
         {
             Clients = new ConcurrentDictionary<Guid, TcpClient>();
+            MessagesHistory = new List<string>();
         }
+
         public void Add(Guid guid, TcpClient tcpClient)
         {
             Clients.TryAdd(guid, tcpClient);

@@ -1,5 +1,4 @@
-﻿using ClientNetworkConversation.IO;
-using ClientNetworkConversation.Options;
+﻿using ClientNetworkConversation.Options;
 using ClientNetworkConversation.Options.GroupsChat;
 using MenuBuilder;
 using MenuBuilder.Options;
@@ -33,6 +32,7 @@ namespace ClientNetworkConversation
             _enterGroupChat=new EnterGroupChat(client, handleServer, _consoleSystem);
             _managerSettings = new ManagerSettings(client, handleServer, _consoleSystem);
             _leaveGroupChat = new LeaveGroupChat(client, handleServer, _consoleSystem);
+            _menuBuilderInt = new MenuBuilder<int>(_consoleSystem, _validation);
             _menuBuilderInt = new MenuBuilder<int>(_consoleSystem, _validation);
   
         }

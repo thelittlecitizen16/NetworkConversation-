@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.Enums;
+using Common.HandleRequests;
 using MenuBuilder.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -27,14 +28,15 @@ namespace ClientNetworkConversation.Options.GroupsChat
             try
             {
                 _handleServer.SendMessageToServer(_client, ClientOptions.CREATE_GROUP_CHAT.ToString());
+             
                 Participants participants = (Participants)_handleServer.GetFromServer(_client);
 
-                Console.WriteLine("enter group name");
+                _system.Write("enter group name");
                 string gropuName = _system.ReadString();
 
                 PrintAllParticipants(participants.AllParticipants);
 
-                Console.WriteLine("add all participants, when end send 0");
+                _system.Write("add all participants, when end send 0");
                 List<Guid> usersToAdd = new List<Guid>();
                 string userResponse = "";
                 usersToAdd = GetAllParticipants(userResponse, participants.AllParticipants);

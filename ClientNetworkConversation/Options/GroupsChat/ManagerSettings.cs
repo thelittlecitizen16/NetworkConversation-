@@ -31,38 +31,46 @@ namespace ClientNetworkConversation.Options.GroupsChat
                 AllGroupChat allGroupChat = (AllGroupChat)_handleServer.GetFromServer(_client);
                 PrintAllGroups(allGroupChat);
 
-                Console.WriteLine("enter group name");
-                string userResponse = _system.ReadString();
-
-                if (CheckGroupName(userResponse, allGroupChat))
+                if (allGroupChat.GroupsName.Count>0)
                 {
-                    _handleServer.SendMessageToServer(_client, userResponse);
-                    GroupChat groupChat = (GroupChat)_handleServer.GetFromServer(_client);
-                    Participants participants = (Participants)_handleServer.GetFromServer(_client);
+                    _system.Write("enter group name");
+                    string userResponse = _system.ReadString();
 
-                   
-                    Console.WriteLine("enter names you want to remove from group, when end enter o");
-                    PrintParticipants(groupChat.Participants);
-                    List<Guid> usersToRemove = GetAllParticipants(groupChat.Participants);
+                    if (CheckGroupName(userResponse, allGroupChat))
+                    {
+                        _handleServer.SendMessageToServer(_client, userResponse);
+                        GroupChat groupChat = (GroupChat)_handleServer.GetFromServer(_client);
+                        Participants participants = (Participants)_handleServer.GetFromServer(_client);
 
-                    
-                    Console.WriteLine("enter names you want to add to group, when end enter o");
-                    PrintParticipants(participants.AllParticipants);
-                    List<Guid> usersToAdd = GetAllParticipants(participants.AllParticipants);
-                    usersToAdd.RemoveAll(u => CheckIfParticipantsExist(u, groupChat.Participants) == true);
-                    
-                    Console.WriteLine("enter names you want to add as mangers, when end enter o");
-                    List<Guid> usersToAddAsMangers =  GetAllParticipants(groupChat.Participants);
-                    usersToAddAsMangers.RemoveAll(u => CheckIfParticipantsExist(u, usersToRemove) == true);
 
-                    ChangeGroup(groupChat, usersToRemove, usersToAdd, usersToAddAsMangers);
+                        _system.Write("enter names you want to remove from group, when end enter o");
+                        PrintParticipants(groupChat.Participants);
+                        List<Guid> usersToRemove = GetAllParticipants(groupChat.Participants);
 
-                    _handleServer.SendToServer(_client, groupChat);
+
+                        _system.Write("enter names you want to add to group, when end enter o");
+                        PrintParticipants(participants.AllParticipants);
+                        List<Guid> usersToAdd = GetAllParticipants(participants.AllParticipants);
+                        usersToAdd.RemoveAll(u => CheckIfParticipantsExist(u, groupChat.Participants) == true);
+
+                        _system.Write("enter names you want to add as mangers, when end enter o");
+                        List<Guid> usersToAddAsMangers = GetAllParticipants(groupChat.Participants);
+                        usersToAddAsMangers.RemoveAll(u => CheckIfParticipantsExist(u, usersToRemove) == true);
+
+                        ChangeGroup(groupChat, usersToRemove, usersToAdd, usersToAddAsMangers);
+
+                        _handleServer.SendToServer(_client, groupChat);
+                    }
+                    else
+                    {
+                        _handleServer.SendMessageToServer(_client, "0");
+                        _system.Write("the group  not exist");
+                    }
                 }
                 else
                 {
                     _handleServer.SendMessageToServer(_client, "0");
-                    _system.Write("the group  not exist");
+                    _system.Write("you dont have any group that you managment");
                 }
             }
             catch (Exception)
