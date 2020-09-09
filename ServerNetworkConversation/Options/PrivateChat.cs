@@ -38,15 +38,8 @@ namespace ServerNetworkConversation.Options
 
             try
             {
-                string message = $"the clients you can chat with: \n";
+                SendAllClientsConnected();
 
-                foreach (var clientConnected in _data.ClientsConnectedInServer.Clients)
-                {
-                    var guidClient = _data.ClientsConnectedInServer.GetGuid(clientConnected.Value);
-                    message += $"{guidClient} \n";
-                }
-
-                _handleClient.SendMessageToClient(clientSocket, message);
                 string dataReceived = _handleClient.GetMessageFromClient(clientSocket);
                 TcpClient clientSend;
               
@@ -55,9 +48,7 @@ namespace ServerNetworkConversation.Options
                 if (_data.ClientsConnectedInServer.Clients.TryGetValue(guidToSend, out clientSend))
                 {      
                     bool end = false;
-                    message = $"success";
-                    _handleClient.SendMessageToClient(clientSocket, message);
-                    _data.ClientsConnectedInChat.Add(clientGuid, guidToSend);
+                    AddPrivateChat(clientGuid, guidToSend);
 
                     while (!end)
                     {
@@ -65,28 +56,18 @@ namespace ServerNetworkConversation.Options
 
                         if (dataReceived == "0")
                         {
-                            _handleClient.SendMessageToClient(clientSocket , "0");
-                            _data.ClientsConnectedInChat.Remove(clientGuid, guidToSend);
+                            ExistChat(clientGuid, guidToSend);
                             end = true;
                         }
                         else
                         {
-                            Console.WriteLine("Received and Sending back: " + dataReceived);
-
-                            if (_data.ClientsConnectedInChat.HaveConversition(clientGuid, guidToSend))
-                            {
-                                _handleClient.SendMessageToClient(clientSend, dataReceived);
-                            }
-                            else
-                            {
-                               // _data.AddMessagesInPrivateChat(guidToSend, clientGuid, new List<string>() { dataReceived });
-                            }
+                            SendMessage(dataReceived, clientGuid, guidToSend, clientSend); 
                         }
                     }          
                 }
                 else
                 {
-                     message = $"fail";
+                    string  message = $"fail";
                     _handleClient.SendMessageToClient(clientSocket, message);
                 }
             }
@@ -95,5 +76,39 @@ namespace ServerNetworkConversation.Options
                 _removeClient.RemoveClientWhenOut(clientSocket,clientGuid);
             }
         }
+
+        private void SendAllClientsConnected()
+        {
+            string message = $"the clients you can chat with: \n";
+
+            foreach (var clientConnected in _data.ClientsConnectedInServer.Clients)
+            {
+                var guidClient = _data.ClientsConnectedInServer.GetGuid(clientConnected.Value);
+                message += $"{guidClient} \n";
+            }
+
+            _handleClient.SendMessageToClient(clientSocket, message);
+        }
+        private void AddPrivateChat(Guid clientGuid, Guid guidToSend)
+        {
+            string message = $"success";
+            _handleClient.SendMessageToClient(clientSocket, message);
+            _data.ClientsConnectedInChat.Add(clientGuid, guidToSend);
+        }
+        private void ExistChat(Guid clientGuid, Guid guidToSend)
+        {
+            _handleClient.SendMessageToClient(clientSocket, "0");
+            _data.ClientsConnectedInChat.Remove(clientGuid, guidToSend);
+        }
+        private void SendMessage(string dataReceived,Guid clientGuid, Guid guidToSend, TcpClient clientSend)
+        {
+            Console.WriteLine("Received and Sending back: " + dataReceived);
+
+            if (_data.ClientsConnectedInChat.HaveConversition(clientGuid, guidToSend))
+            {
+                _handleClient.SendMessageToClient(clientSend, dataReceived);
+            }
+        }
     }
+
 }
