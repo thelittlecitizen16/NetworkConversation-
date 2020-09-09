@@ -37,7 +37,7 @@ namespace ServerNetworkConversation
 
             TcpListener listener = new TcpListener(ipAddr, 7777);
             listener.Start();
-            Console.WriteLine("wait for first connection...");
+            _logger.LogInformation($"server wait for first connection...");
 
             try
             {
@@ -45,15 +45,15 @@ namespace ServerNetworkConversation
                 {
                     TcpClient tcpClient = listener.AcceptTcpClient();
                     data.ClientsConnectedInServer.AddWhenConnect(Guid.NewGuid(), tcpClient);
-                    Console.WriteLine("new connection from client");
+                    _logger.LogInformation($"new client connected");
 
-                    var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient, removeClient, clientOptionsFactory);
+                    var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient, removeClient, clientOptionsFactory, _logger);
                     manageClientOptions.Run();
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                _logger.LogError(e.Message);
             }
         }
     }

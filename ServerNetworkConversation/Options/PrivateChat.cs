@@ -1,4 +1,5 @@
-﻿using ServerNetworkConversation.HandleData;
+﻿using Microsoft.Extensions.Logging;
+using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
 using System;
@@ -17,12 +18,15 @@ namespace ServerNetworkConversation.Options
         private HandleClient _handleClient;
         private RemoveClient _removeClient;
         private Thread _thread;
-        public PrivateChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient)
+        private ILogger<Worker> _logger;
+
+        public PrivateChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
         {
             clientSocket = inClientSocket;
             _data = data;
             _handleClient = handleClient;
             _removeClient = removeClient;
+            _logger = logger;
         }
         public Thread Run()
         {
@@ -99,12 +103,14 @@ namespace ServerNetworkConversation.Options
             string message = $"success";
             _handleClient.SendMessageToClient(clientSocket, message);
             _data.ClientsConnectedInChat.Add(clientGuid, guidToSend);
+            _logger.LogInformation($"client {clientGuid} send {message} to client {message}");
         }
 
         private void ExistChat(Guid clientGuid, Guid guidToSend)
         {
             _handleClient.SendMessageToClient(clientSocket, "0");
             _data.ClientsConnectedInChat.Remove(clientGuid, guidToSend);
+            _logger.LogInformation($"client {clientGuid} leave chat with client {guidToSend}");
         }
 
         private void SendMessage(string dataReceived,Guid clientGuid, Guid guidToSend, TcpClient clientSend)
@@ -114,6 +120,7 @@ namespace ServerNetworkConversation.Options
             if (_data.ClientsConnectedInChat.HaveConversition(clientGuid, guidToSend))
             {
                 _handleClient.SendMessageToClient(clientSend, dataReceived);
+                _logger.LogInformation($"client {clientSend} get message {dataReceived}");
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Common;
+using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
@@ -18,15 +19,16 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private HandleClient _handleClient;
         private RemoveClient _removeClient;
         private Thread _thread;
+        private ILogger<Worker> _logger;
 
-        public EnterGroupChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient)
+        public EnterGroupChat(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
         {
-            _client = inClientSocket;
+            _client = client;
             _data = data;
             _handleClient = handleClient;
             _removeClient = removeClient;
+            _logger = logger;
         }
-
         public Thread Run()
         {
             _thread = new Thread(DoChat);
@@ -47,13 +49,14 @@ namespace ServerNetworkConversation.Options.GroupsChat
                 string dataReceived = _handleClient.GetMessageFromClient(_client);
                 if (dataReceived == "0")
                 {
-                    Console.WriteLine("client send 0");
+                    _logger.LogInformation("client dont want to enter chat in any group");
                 }
                 else
                 {
 
                     group = _data.AllGroupsChat.GroupsChat.Where(g => g.Name == dataReceived).First();
                     _data.AllGroupsChat.AddClientConnected(group, _client);
+                    _logger.LogInformation($"client {clientGuid} enter to group chat {group.Name}");
 
                     while (!end)
                     {
@@ -68,7 +71,6 @@ namespace ServerNetworkConversation.Options.GroupsChat
                         }
                         else
                         {
-                            Console.WriteLine("Received and Sending back: " + dataReceived);
                             SendMessageToEachClient(group, dataReceived);
                         }
                     }
@@ -84,8 +86,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             }
 
 
-            Console.WriteLine("client out thread");
-
+            _logger.LogInformation("client out chat");
         }
         private void SendMessageToEachClient(GroupChat group, string message)
         {
@@ -96,6 +97,8 @@ namespace ServerNetworkConversation.Options.GroupsChat
                     _handleClient.SendMessageToClient(client, message);
                 }
             }
+
+            _logger.LogInformation($"Received in group {group.Name} and Sending all: {message}");
         }
         private void SendAllClientGroups(Guid clientGuid)
         {
@@ -109,7 +112,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private void ClientOutOfGroup(GroupChat group)
         {
             _data.AllGroupsChat.RemoveClientUnConnected(group, _client);
-            Console.WriteLine("client send 0");
+            _logger.LogInformation($"client{_client} out of group");
         }
     }
 }

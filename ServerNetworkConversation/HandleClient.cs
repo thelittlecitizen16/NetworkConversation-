@@ -15,7 +15,6 @@ namespace ServerNetworkConversation
             NetworkStream clientStream = client.GetStream();
             clientStream.Write(bytesToSend, 0, bytesToSend.Length);
         }
-
         public string GetMessageFromClient(TcpClient client)
         {
             NetworkStream nwStream = client.GetStream();
@@ -27,13 +26,6 @@ namespace ServerNetworkConversation
         }
         public void SendToClient(TcpClient client, object obj)
         {
-            //BinaryFormatter bf = new BinaryFormatter();
-            //byte[] bytesToSend;
-            //using (var ms = new MemoryStream())
-            //{
-            //    bf.Serialize(ms, obj);
-            //    bytesToSend = ms.ToArray();
-            //}
             BinaryFormatter bf = new BinaryFormatter();
             MemoryStream ms = new MemoryStream();
             bf.Serialize(ms, obj);

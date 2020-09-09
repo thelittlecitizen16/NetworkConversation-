@@ -62,7 +62,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
 
                 if (Guid.TryParse(userResponse, out userGuid))
                 {
-                    if (CheckIfParticipantsExist(userGuid, participants))
+                    if (CheckIfParticipantsExists(userGuid, participants))
                     {
                         usersToAdd.Add(userGuid);
                     }

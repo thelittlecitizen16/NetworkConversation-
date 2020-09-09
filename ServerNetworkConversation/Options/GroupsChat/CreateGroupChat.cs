@@ -1,4 +1,5 @@
 ﻿using Common;
+using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
@@ -18,13 +19,15 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private HandleClient _handleClient;
         private RemoveClient _removeClient;
         private Thread _thread;
+        private ILogger<Worker> _logger;
 
-        public CreateGroupChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient)
+        public CreateGroupChat(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
         {
-            _client = inClientSocket;
+            _client = client;
             _data = data;
             _handleClient = handleClient;
             _removeClient = removeClient;
+            _logger = logger;
         }
         public Thread Run()
         {
@@ -74,6 +77,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             groupChat.Managers.Add(clientGuid);
             groupChat.Participants.Add(clientGuid);
             _data.AllGroupsChat.GroupsChat.Add(groupChat);
+            _logger.LogInformation($"add new group {groupChat.Name}")
         }
     }
 }

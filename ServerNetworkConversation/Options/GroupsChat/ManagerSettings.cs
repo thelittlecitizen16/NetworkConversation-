@@ -1,4 +1,5 @@
 ﻿using Common;
+using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
@@ -18,13 +19,15 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private HandleClient _handleClient;
         private RemoveClient _removeClient;
         private Thread _thread;
+        private ILogger<Worker> _logger;
 
-        public ManagerSettings(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient)
+        public ManagerSettings(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
         {
-            _client = inClientSocket;
+            _client = client;
             _data = data;
             _handleClient = handleClient;
             _removeClient = removeClient;
+            _logger = logger;
         }
         public Thread Run()
         {
@@ -44,7 +47,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
 
                 if (dataReceived == "0")
                 {
-                    Console.WriteLine("client send 0");
+                    _logger.LogInformation($"client dont want to enter manager settings to any group");
                 }
                 else
                 {
@@ -53,6 +56,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
 
                     GroupChat newGroupChat = WaitToGetGroupFromClient();
                     AddGroup(newGroupChat, oldGroupChat);
+                    _logger.LogInformation($"client {clientGuid} change settings group {newGroupChat.Name}");
                 } 
             }
             catch (Exception)

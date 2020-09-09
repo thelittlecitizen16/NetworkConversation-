@@ -8,6 +8,7 @@ using System.Linq;
 using ServerNetworkConversation.Options.Interfaces;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
+using Microsoft.Extensions.Logging;
 
 namespace ServerNetworkConversation.Options
 {
@@ -18,13 +19,15 @@ namespace ServerNetworkConversation.Options
         private HandleClient _handleClient;
         private RemoveClient _removeClient;
         private Thread _thread;
+        private ILogger<Worker> _logger;
 
-        public GlobalChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient)
+        public GlobalChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
         {
             clientSocket = inClientSocket;
             _data = data;
             _handleClient = handleClient;
             _removeClient = removeClient;
+            _logger = logger;
         }
         public Thread Run()
         {
@@ -39,6 +42,7 @@ namespace ServerNetworkConversation.Options
             bool end = false;
             var clientGuid = _data.ClientsInGlobalChat.GetClient(clientSocket);
             SendAllAboutEnter(clientGuid);
+
 
             while (!end)
             {
@@ -82,6 +86,7 @@ namespace ServerNetworkConversation.Options
         {
             string message = $"{clientGuid} enter to global chat";
             SendMessageToEachClient(message);
+            _logger.LogInformation($"client {clientGuid} enter global chat");
         }
 
         private void SendAllAboutExist(Guid clientGuid)
@@ -90,7 +95,7 @@ namespace ServerNetworkConversation.Options
             SendMessageToEachClient(message);
 
             _handleClient.SendMessageToClient(clientSocket, "0");
-            Console.WriteLine("client send 0");
+            _logger.LogInformation($"client {clientGuid} exit global chat");
         }
 
         private void SendAllMessage(Guid clientGuid, string dataReceived)
