@@ -76,6 +76,10 @@ namespace ServerNetworkConversation.HandleOptions
                                 Thread managerSettings = _clientOptionsFactory.AddClientOptions(ClientOptions.MANAGER_SETTINGS, _data, _clientSocket, _handleClient, _removeClient).Run();
                                 managerSettings.Join();
                                 break;
+                            case ClientOptions.LEAVE_GROUP_CHAT:
+                                Thread leavrGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.LEAVE_GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient).Run();
+                                leavrGroupChat.Join();
+                                break;
                             default:
                                 break;
                         }

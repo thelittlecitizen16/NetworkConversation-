@@ -32,6 +32,9 @@ namespace ServerNetworkConversation.HandleOptions
                 case ClientOptions.MANAGER_SETTINGS:
                     return new ManagerSettings(data, client, handleClient, removeClient);
                     break;
+                case ClientOptions.LEAVE_GROUP_CHAT:
+                    return new LeaveGroupChat(data, client, handleClient, removeClient);
+                    break;
                 default:
                     return null;
                     break;

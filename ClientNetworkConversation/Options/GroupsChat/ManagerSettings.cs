@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 
-namespace ClientNetworkConversation.Options
+namespace ClientNetworkConversation.Options.GroupsChat
 {
     public class ManagerSettings : IOption
     {

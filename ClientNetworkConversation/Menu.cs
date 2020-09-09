@@ -1,4 +1,5 @@
 ﻿using ClientNetworkConversation.Options;
+using ClientNetworkConversation.Options.GroupsChat;
 using MenuBuilder;
 using MenuBuilder.Options;
 using System;
@@ -18,6 +19,7 @@ namespace ClientNetworkConversation
         private CreateGroupChat _createGroupChat;
         private EnterGroupChat _enterGroupChat;
         private ManagerSettings _managerSettings;
+        private LeaveGroupChat _leaveGroupChat;
 
 
         public Menu(TcpClient client, HandleServer handleServer)
@@ -29,6 +31,7 @@ namespace ClientNetworkConversation
             _createGroupChat = new CreateGroupChat(client, handleServer);
             _enterGroupChat=new EnterGroupChat(client, handleServer);
             _managerSettings = new ManagerSettings(client, handleServer);
+            _leaveGroupChat = new LeaveGroupChat(client, handleServer);
             _menuBuilderInt = new MenuBuilder<int>(_consoleSystem, _validation);
   
         }
@@ -40,6 +43,7 @@ namespace ClientNetworkConversation
                .AddOption(3, _createGroupChat)
                .AddOption(4, _enterGroupChat)
                .AddOption(5, _managerSettings)
+               .AddOption(6, _leaveGroupChat)
                .Build();
 
             mainMenu.RunMenu();

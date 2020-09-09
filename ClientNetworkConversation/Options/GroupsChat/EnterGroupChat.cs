@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace ClientNetworkConversation.Options
+namespace ClientNetworkConversation.Options.GroupsChat
 {
     public class EnterGroupChat : IOption
     {
