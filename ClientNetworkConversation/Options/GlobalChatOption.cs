@@ -54,6 +54,7 @@ namespace ClientNetworkConversation.Options
             catch (Exception e)
             {
             }
+
             endConnection = false;
             Console.WriteLine("out of chat");
         }

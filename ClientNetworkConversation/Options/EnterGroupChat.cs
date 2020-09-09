@@ -25,6 +25,7 @@ namespace ClientNetworkConversation.Options
         public void Run()
         {
             _handleServer.SendMessageToServer(_client, ClientOptions.GROUP_CHAT.ToString());
+            endConnection = false;
 
             try
             {
