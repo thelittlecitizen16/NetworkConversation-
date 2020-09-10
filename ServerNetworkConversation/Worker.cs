@@ -27,7 +27,6 @@ namespace ServerNetworkConversation
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             Data data = new Data();
-            HandleClient handleClient = new HandleClient();
             ClientOptionsFactory clientOptionsFactory = new ClientOptionsFactory();
             RemoveClient removeClient = new RemoveClient(data);
             Requests requests = new Requests();
@@ -47,7 +46,7 @@ namespace ServerNetworkConversation
                     data.ClientsConnectedInServer.AddWhenConnect(Guid.NewGuid(), tcpClient);
                     _logger.LogInformation($"new client connected");
 
-                    var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient, removeClient, clientOptionsFactory, _logger, requests);
+                    var manageClientOptions = new ManageClientOptions(data, tcpClient, removeClient, clientOptionsFactory, _logger, requests);
                     manageClientOptions.Run();
                 }
             }

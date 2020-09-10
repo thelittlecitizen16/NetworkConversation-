@@ -18,17 +18,15 @@ namespace ServerNetworkConversation.Options.GroupsChat
     {
         private TcpClient _client;
         private Data _data;
-        private HandleClient _handleClient;
         private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
         private IRequests _requests;
 
-        public LeaveGroupChat(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests)
+        public LeaveGroupChat(Data data, TcpClient client, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests)
         {
             _client = client;
             _data = data;
-            _handleClient = handleClient;
             _removeClient = removeClient;
             _logger = logger;
             _requests = requests;

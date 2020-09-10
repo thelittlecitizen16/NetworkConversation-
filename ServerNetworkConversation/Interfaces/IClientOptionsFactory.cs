@@ -13,6 +13,6 @@ namespace ServerNetworkConversation.Interfaces
 {
     public interface IClientOptionsFactory
     {
-        public IClientOption AddClientOptions(ClientOptions choice, Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests);
+        public IClientOption AddClientOptions(ClientOptions choice, Data data, TcpClient client, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests);
     }
 }

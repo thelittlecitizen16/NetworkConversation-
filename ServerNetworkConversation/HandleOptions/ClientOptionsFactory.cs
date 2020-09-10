@@ -16,32 +16,32 @@ namespace ServerNetworkConversation.HandleOptions
 {
     public class ClientOptionsFactory: IClientOptionsFactory
     {
-        public IClientOption AddClientOptions(ClientOptions choice, Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient,  ILogger<Worker> logger, IRequests requests)
+        public IClientOption AddClientOptions(ClientOptions choice, Data data, TcpClient client, RemoveClient removeClient,  ILogger<Worker> logger, IRequests requests)
         {
             switch (choice)
             {
                 case ClientOptions.GLOBAL_CHAT:
-                    return new GlobalChat(data, client, handleClient, removeClient, logger, requests);
+                    return new GlobalChat(data, client, removeClient, logger, requests);
                     break;
 
                 case ClientOptions.PRIVATE_CHAT:
-                    return new PrivateChat(data, client, handleClient, removeClient, logger, requests);
+                    return new PrivateChat(data, client, removeClient, logger, requests);
                     break;
 
                 case ClientOptions.CREATE_GROUP_CHAT:
-                    return new CreateGroupChat(data, client, handleClient,removeClient, logger, requests);
+                    return new CreateGroupChat(data, client,removeClient, logger, requests);
                     break;
 
                 case ClientOptions.GROUP_CHAT:
-                    return new EnterGroupChat(data, client, handleClient, removeClient, logger, requests);
+                    return new EnterGroupChat(data, client, removeClient, logger, requests);
                     break;
 
                 case ClientOptions.MANAGER_SETTINGS:
-                    return new ManagerSettings(data, client, handleClient, removeClient, logger, requests);
+                    return new ManagerSettings(data, client, removeClient, logger, requests);
                     break;
 
                 case ClientOptions.LEAVE_GROUP_CHAT:
-                    return new LeaveGroupChat(data, client, handleClient, removeClient, logger, requests);
+                    return new LeaveGroupChat(data, client, removeClient, logger, requests);
                     break;
 
                 default:

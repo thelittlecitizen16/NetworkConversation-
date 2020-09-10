@@ -16,17 +16,15 @@ namespace ServerNetworkConversation.Options
     {
         private TcpClient _client;
         private Data _data;
-        private HandleClient _handleClient;
         private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
         private IRequests _requests;
 
-        public PrivateChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests)
+        public PrivateChat(Data data, TcpClient inClientSocket, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests)
         {
             _client = inClientSocket;
             _data = data;
-            _handleClient = handleClient;
             _removeClient = removeClient;
             _logger = logger;
             _requests = requests;
