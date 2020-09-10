@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
+using ServerNetworkConversation.Options.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,12 +67,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
 
         private void SendAllClientGroups(Guid clientGuid)
         {
-            List<string> grouspName = _data.AllGroupsChat.GetGroupsChat()
-               .Where(g => g.Participants.Contains(clientGuid))
-               .Select(g => g.Name).ToList();
-
-            AllGroupChat allGroupChat = new AllGroupChat(grouspName);
-            _requests.SendModelMessage(_client, allGroupChat);
+            GroupUtils.SendAllClientGroups(_client, _requests, _data, clientGuid);
         }
     }
 }

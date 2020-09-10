@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
+using ServerNetworkConversation.Options.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,14 +68,16 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         private GroupChat WaitToGetGroupFromClient()
         {
-            GroupChat groupChat = (GroupChat)_requests.GetModelMessage(_client);
+           return GroupUtils.WaitToGetGroupFromClient(_client, _requests);
 
-            while (groupChat == null)
-            {
-                groupChat = (GroupChat)_requests.GetModelMessage(_client);
-            }
+            //GroupChat groupChat = (GroupChat)_requests.GetModelMessage(_client);
 
-            return groupChat;
+            //while (groupChat == null)
+            //{
+            //    groupChat = (GroupChat)_requests.GetModelMessage(_client);
+            //}
+
+            //return groupChat;
         }
         private void AddGroup(GroupChat groupChat, Guid clientGuid)
         {

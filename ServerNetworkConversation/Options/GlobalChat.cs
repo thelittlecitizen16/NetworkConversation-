@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Common.Enums;
 using Common.HandleRequests;
 using Common.HandleRequests.HandleMessages;
+using ServerNetworkConversation.Options.Utils;
 
 namespace ServerNetworkConversation.Options
 {
@@ -76,25 +77,28 @@ namespace ServerNetworkConversation.Options
         }
         private void SendMessagesHistory()
         {
-            string allMessages = "";
-            foreach (var message in _data.ClientsInGlobalChat.MessagesHistory)
-            {
-                allMessages += message + "\n";
-            }
-            if (allMessages != "")
-            {
-                _requests.SendStringMessage(_client, allMessages);
-            }
+            ChatUtils.SendMessagesHistory(_data.ClientsInGlobalChat.MessagesHistory,_client, _requests);
+
+            //string allMessages = "";
+            //foreach (var message in _data.ClientsInGlobalChat.MessagesHistory)
+            //{
+            //    allMessages += message + "\n";
+            //}
+            //if (allMessages != "")
+            //{
+            //    _requests.SendStringMessage(_client, allMessages);
+            //}
         }
         private void SendMessageToEachClient(string message)
         {
-            foreach (var client in _data.ClientsInGlobalChat.Clients)
-            {
-                if (client.Value.Connected)
-                {
-                    _requests.SendStringMessage(client.Value, message);
-                }
-            }
+            ChatUtils.SendMessageToEachClient(message, _data.ClientsInGlobalChat.Clients.Values.ToList(), _requests);
+            //foreach (var client in _data.ClientsInGlobalChat.Clients)
+            //{
+            //    if (client.Value.Connected)
+            //    {
+            //        _requests.SendStringMessage(client.Value, message);
+            //    }
+            //}
         }
 
         private void SendAllAboutEnter(Guid clientGuid)

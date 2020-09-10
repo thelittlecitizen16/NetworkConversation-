@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
+using ServerNetworkConversation.Options.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,15 +85,17 @@ namespace ServerNetworkConversation.Options
         }
         private void SendMessagesHistory(Guid clientGuid, Guid guidToSend)
         {
-            string allMessages = "";
-            foreach (var message in _data.ClientsConnectedInChat.GetMessagesToHistory(clientGuid, guidToSend))
-            {
-                allMessages += message + "\n";
-            }
-            if (allMessages != "")
-            {
-                _requests.SendStringMessage(_client, allMessages);
-            }
+            ChatUtils.SendMessagesHistory(_data.ClientsConnectedInChat.GetMessagesToHistory(clientGuid, guidToSend), _client, _requests);
+
+            //string allMessages = "";
+            //foreach (var message in _data.ClientsConnectedInChat.GetMessagesToHistory(clientGuid, guidToSend))
+            //{
+            //    allMessages += message + "\n";
+            //}
+            //if (allMessages != "")
+            //{
+            //    _requests.SendStringMessage(_client, allMessages);
+            //}
         }
         private void SendAllClientsConnected(Guid clientGuid)
         {

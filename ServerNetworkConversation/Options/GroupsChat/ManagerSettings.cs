@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
+using ServerNetworkConversation.Options.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,8 +82,10 @@ namespace ServerNetworkConversation.Options.GroupsChat
                .Where(g => g.Managers.Contains(clientGuid))
                .Select(g => g.Name).ToList();
 
-            AllGroupChat allGroupChat = new AllGroupChat(grouspName);
-            _requests.SendModelMessage(_client, allGroupChat);
+            GroupUtils.SendAllGroupChat(_client, _requests, grouspName);
+
+            //AllGroupChat allGroupChat = new AllGroupChat(grouspName);
+            //_requests.SendModelMessage(_client, allGroupChat);
         }
         private GroupChat SendGroup(string groupName)
         {
@@ -93,14 +96,15 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         private GroupChat WaitToGetGroupFromClient()
         {
-            GroupChat groupChat = (GroupChat)_requests.GetModelMessage(_client);
+            return GroupUtils.WaitToGetGroupFromClient(_client, _requests);
+            //GroupChat groupChat = (GroupChat)_requests.GetModelMessage(_client);
 
-            while (groupChat == null)
-            {
-                groupChat = (GroupChat)_requests.GetModelMessage(_client);
-            }
+            //while (groupChat == null)
+            //{
+            //    groupChat = (GroupChat)_requests.GetModelMessage(_client);
+            //}
 
-            return groupChat;
+            //return groupChat;
         }
         private void AddGroup(GroupChat newGroupChat, GroupChat oldGroupChat)
         {
