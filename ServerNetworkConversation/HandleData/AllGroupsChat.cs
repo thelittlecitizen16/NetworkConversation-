@@ -12,7 +12,6 @@ namespace ServerNetworkConversation.HandleData
     public class AllGroupsChat
     {
         private readonly object _locker = new object();
-
         private List<GroupChat> _groupsChat;
         public ConcurrentDictionary<GroupChat, List<TcpClient>> ClientConnectToGroup { get; private set; }
         private ConcurrentDictionary<GroupChat, List<string>> _messagesHistory;

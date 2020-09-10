@@ -22,7 +22,6 @@ namespace ServerNetworkConversation.Options.Utils
             {
                 MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, allMessages);
                 requests.SendModelMessage(client,messageRequest);
-               // requests.SendStringMessage(client, allMessages);
             }
         }
 
@@ -34,7 +33,6 @@ namespace ServerNetworkConversation.Options.Utils
                 {
                     MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, message);
                     requests.SendModelMessage(client, messageRequest);
-                   // requests.SendStringMessage(client, message);
                 }
             }
         }

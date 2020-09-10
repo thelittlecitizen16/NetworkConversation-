@@ -39,7 +39,7 @@ namespace ServerNetworkConversation.Options
             Guid guidToSend;
 
             try
-            {
+            {  
                 SendAllClientsConnected(clientGuid);
 
                 string dataReceived = _requests.GetStringMessage(_client);

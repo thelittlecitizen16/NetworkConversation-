@@ -52,7 +52,6 @@ namespace ClientNetworkConversation.Options.Utils
                 requests.SendStringMessage(client, "0");
                 return false;
             }
-
         }
     }
 }

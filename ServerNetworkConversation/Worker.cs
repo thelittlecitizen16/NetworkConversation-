@@ -38,7 +38,7 @@ namespace ServerNetworkConversation
 
             try
             {
-                Thread alertsThread = new Thread(handleAlerts.Send);
+               Thread alertsThread = new Thread(handleAlerts.Send);
                alertsThread.Start();
 
                 while (true)

@@ -1,15 +1,12 @@
-﻿using ServerNetworkConversation.Options;
-using ServerNetworkConversation.Options.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Net.Sockets;
-using Common.Enums;
-using System.Text;
-using ServerNetworkConversation.HandleData;
-using ServerNetworkConversation.Options.GroupsChat;
-using Microsoft.Extensions.Logging;
-using ServerNetworkConversation.Interfaces;
+﻿using Common.Enums;
 using Common.HandleRequests;
+using Microsoft.Extensions.Logging;
+using ServerNetworkConversation.HandleData;
+using ServerNetworkConversation.Interfaces;
+using ServerNetworkConversation.Options;
+using ServerNetworkConversation.Options.GroupsChat;
+using ServerNetworkConversation.Options.Interfaces;
+using System.Net.Sockets;
 
 namespace ServerNetworkConversation.HandleOptions
 {
