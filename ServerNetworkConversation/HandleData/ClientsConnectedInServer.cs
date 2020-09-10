@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 
 namespace ServerNetworkConversation.HandleData
 {
@@ -17,7 +15,13 @@ namespace ServerNetworkConversation.HandleData
 
         public Guid GetGuid(TcpClient cleint)
         {
-            return Clients.Keys.Where(k => Clients[k] == cleint).First();
+            var clients = Clients.Keys.Where(k => Clients[k] == cleint);
+            if (clients.Any())
+            {
+                return clients.First();
+            }
+
+            return new Guid();
         }
         public void AddWhenConnect(Guid guid, TcpClient tcpClient)
         {

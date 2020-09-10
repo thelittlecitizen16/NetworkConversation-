@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Common.Enums;
 using Common.HandleRequests;
 using Common.Models;
 using Microsoft.Extensions.Logging;
@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace ServerNetworkConversation.Options.GroupsChat
@@ -55,7 +54,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
                     SendAllConecctedClients(clientGuid);
 
                     GroupChat newGroupChat = WaitToGetGroupFromClient();
-                    AddGroup(newGroupChat, oldGroupChat);
+                    AddGroup(newGroupChat, oldGroupChat, clientGuid);
                     _logger.LogInformation($"client {clientGuid} change settings group {newGroupChat.Name}");
                 } 
             }
@@ -92,10 +91,41 @@ namespace ServerNetworkConversation.Options.GroupsChat
         {
             return GroupUtils.WaitToGetGroupFromClient(_client, _requests);
         }
-        private void AddGroup(GroupChat newGroupChat, GroupChat oldGroupChat)
+        private void AddGroup(GroupChat newGroupChat, GroupChat oldGroupChat, Guid clientGuid)
         {
             _data.AllGroupsChat.RemoveGroupChat(oldGroupChat);
             _data.AllGroupsChat.AddGroupChat(newGroupChat);
+            List<Guid> removeClients = GetRemoveClients(newGroupChat, oldGroupChat);
+
+            SaveAlert(removeClients,oldGroupChat, clientGuid);
+        }
+        private List<Guid> GetRemoveClients(GroupChat newGroupChat, GroupChat oldGroupChat)
+        {
+            List<Guid> removeClients = new List<Guid>();
+
+            foreach (var participant in oldGroupChat.Participants)
+            {
+                if (!newGroupChat.Participants.Contains(participant))
+                {
+                    removeClients.Add(participant);
+                }
+            }
+            return removeClients;
+        }
+
+        private void SaveAlert(List<Guid> removeClients,GroupChat oldGroupChat, Guid clientGuid)
+        {
+            Alert alert = new Alert(AlertOptions.EXIT_GROUP, $"you exit  group {oldGroupChat.Name} by {clientGuid}");
+            MessageRequest messageRequestAlert = new MessageRequest(MessageKey.ALERT, alert);
+
+            foreach (var client in removeClients)
+            {
+                var Client = _data.ClientsConnectedInServer.Clients.Where(c => c.Key == client).Select(c => c.Value);
+                if (Client.Any())
+                {
+                    _data.ClientsAlerts.AddNewAlert(Client.First(), messageRequestAlert);
+                }
+            }
         }
     }
 }

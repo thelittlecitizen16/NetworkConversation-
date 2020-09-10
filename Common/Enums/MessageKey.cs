@@ -1,8 +1,9 @@
 ﻿namespace Common.Enums
 {
-    public enum MessageType
+    public enum MessageKey
     {
         STRING,
-        PIC
+        ALERT,
+        Exit
     }
 }

@@ -3,6 +3,7 @@ using Common.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 
@@ -11,7 +12,6 @@ namespace ServerNetworkConversation.HandleData
     public class AllGroupsChat
     {
         private readonly object _locker = new object();
-
         private List<GroupChat> _groupsChat;
         public ConcurrentDictionary<GroupChat, List<TcpClient>> ClientConnectToGroup { get; private set; }
         private ConcurrentDictionary<GroupChat, List<string>> _messagesHistory;
@@ -21,6 +21,18 @@ namespace ServerNetworkConversation.HandleData
             _groupsChat = new List<GroupChat>();
             ClientConnectToGroup = new ConcurrentDictionary<GroupChat, List<TcpClient>>();
             _messagesHistory = new ConcurrentDictionary<GroupChat, List<string>>();
+        }
+        public bool IsClientInAnyGroupChat(TcpClient client)
+        {
+            foreach (var clients in ClientConnectToGroup)
+            {
+                if(clients.Value.Where(c=>c ==client).Any())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
         public void AddMessageToHistory(GroupChat groupChat,string message)
         {

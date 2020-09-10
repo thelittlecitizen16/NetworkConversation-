@@ -1,5 +1,4 @@
-﻿using Common;
-using Common.Enums;
+﻿using Common.Enums;
 using Common.HandleRequests;
 using Common.Models;
 using Microsoft.Extensions.Logging;
@@ -10,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace ServerNetworkConversation.Options.GroupsChat
@@ -23,7 +21,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private ILogger<Worker> _logger;
         private IRequests _requests;
 
-        public CreateGroupChat(Data data, TcpClient client, ILogger<Worker> logger,  IRequests requests)
+        public CreateGroupChat(Data data, TcpClient client, ILogger<Worker> logger, IRequests requests)
         {
             _client = client;
             _data = data;
@@ -64,7 +62,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         private GroupChat WaitToGetGroupFromClient()
         {
-           return GroupUtils.WaitToGetGroupFromClient(_client, _requests);
+            return GroupUtils.WaitToGetGroupFromClient(_client, _requests);
         }
         private void AddGroup(GroupChat groupChat, Guid clientGuid)
         {
@@ -72,6 +70,22 @@ namespace ServerNetworkConversation.Options.GroupsChat
             groupChat.Participants.Add(clientGuid);
             _data.AllGroupsChat.AddGroupChat(groupChat);
             _logger.LogInformation($"add new group {groupChat.Name}");
+
+            SaveAlert(groupChat, clientGuid);
+        }
+        private void SaveAlert(GroupChat groupChat, Guid clientGuid)
+        {
+            Alert alert = new Alert(AlertOptions.NEW_GROUP, $"you enter to group {groupChat.Name} by {clientGuid}");
+            MessageRequest messageRequestAlert = new MessageRequest(MessageKey.ALERT, alert);
+
+            foreach (var client in groupChat.Participants)
+            {
+                var Client = _data.ClientsConnectedInServer.Clients.Where(c => c.Key == client).Select(c => c.Value);
+                if (Client.Any())
+                {
+                    _data.ClientsAlerts.AddNewAlert(Client.First(), messageRequestAlert);
+                }
+            }
         }
     }
 }

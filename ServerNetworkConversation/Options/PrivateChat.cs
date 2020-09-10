@@ -1,13 +1,12 @@
-﻿using Common.HandleRequests;
+﻿using Common.Enums;
+using Common.HandleRequests;
+using Common.Models;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.Interfaces;
 using ServerNetworkConversation.Options.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace ServerNetworkConversation.Options
@@ -20,9 +19,9 @@ namespace ServerNetworkConversation.Options
         private ILogger<Worker> _logger;
         private IRequests _requests;
 
-        public PrivateChat(Data data, TcpClient inClientSocket,  ILogger<Worker> logger, IRequests requests)
+        public PrivateChat(Data data, TcpClient client,  ILogger<Worker> logger, IRequests requests)
         {
-            _client = inClientSocket;
+            _client = client;
             _data = data;
             _logger = logger;
             _requests = requests;
@@ -40,7 +39,7 @@ namespace ServerNetworkConversation.Options
             Guid guidToSend;
 
             try
-            {
+            {  
                 SendAllClientsConnected(clientGuid);
 
                 string dataReceived = _requests.GetStringMessage(_client);
@@ -72,7 +71,7 @@ namespace ServerNetworkConversation.Options
                 else
                 {
                     string message = $"fail";
-                    _requests.SendStringMessage(_client, message);
+                    ChatUtils.SandStringMessage(_client,_requests, message);
                 }
             }
             catch (Exception)
@@ -83,16 +82,6 @@ namespace ServerNetworkConversation.Options
         private void SendMessagesHistory(Guid clientGuid, Guid guidToSend)
         {
             ChatUtils.SendMessagesHistory(_data.ClientsConnectedInChat.GetMessagesToHistory(clientGuid, guidToSend), _client, _requests);
-
-            //string allMessages = "";
-            //foreach (var message in _data.ClientsConnectedInChat.GetMessagesToHistory(clientGuid, guidToSend))
-            //{
-            //    allMessages += message + "\n";
-            //}
-            //if (allMessages != "")
-            //{
-            //    _requests.SendStringMessage(_client, allMessages);
-            //}
         }
         private void SendAllClientsConnected(Guid clientGuid)
         {
@@ -110,7 +99,6 @@ namespace ServerNetworkConversation.Options
 
             _requests.SendStringMessage(_client, message);
         }
-
         private void AddPrivateChat(Guid clientGuid, Guid guidToSend)
         {
             string message = $"success";
@@ -118,26 +106,29 @@ namespace ServerNetworkConversation.Options
             _data.ClientsConnectedInChat.Add(clientGuid, guidToSend);
             _logger.LogInformation($"client {clientGuid} send {message} to client {message}");
         }
-
         private void ExistChat(Guid clientGuid, Guid guidToSend)
         {
-            _requests.SendStringMessage(_client, "0");
+            MessageRequest messageRequest = new MessageRequest(MessageKey.Exit, "0");
+            _requests.SendModelMessage(_client, messageRequest);
+
             _data.ClientsConnectedInChat.Remove(clientGuid, guidToSend);
             _logger.LogInformation($"client {clientGuid} leave chat with client {guidToSend}");
         }
-
         private void SendMessage(string dataReceived, Guid clientGuid, Guid guidToSend, TcpClient clientSend)
         {
             _logger.LogInformation($"Received from {clientGuid} and Sending to {guidToSend} : {dataReceived}");
 
             if (_data.ClientsConnectedInChat.HaveConversition(clientGuid, guidToSend))
             {
-                _requests.SendStringMessage(clientSend, dataReceived);
+                ChatUtils.SandStringMessage(clientSend, _requests, dataReceived);
                 _logger.LogInformation($"client {clientSend} get message {dataReceived}");
             }
+            else
+            {
+                ChatUtils.CreateAlertMessage(clientSend,_data, AlertOptions.NEW_MESSAGE, $"new message from {clientGuid}");       
+            }        
 
             _data.ClientsConnectedInChat.AddMessagesToHistory(clientGuid, guidToSend, dataReceived);
         }
     }
-
 }

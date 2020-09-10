@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ServerNetworkConversation.HandleData
 {
@@ -16,7 +15,10 @@ namespace ServerNetworkConversation.HandleData
             _clients = new List<Tuple<Guid, Guid>>();
             _messageHistory = new List<Tuple<Guid, Guid, List<string>>>();
         }
-
+        public bool IsClientInChat(Guid guidClient)
+        {
+            return _clients.Where(c => c.Item1 == guidClient).Any();
+        }
         public void Add(Guid clientGuid, Guid clientGuidToSend)
         {
             lock (_locker)
@@ -61,7 +63,6 @@ namespace ServerNetworkConversation.HandleData
         }
         public bool HaveConversition(Guid clientGuid, Guid clientGuidToSend)
         {
-
             return _clients.Where(c => c.Item1 == clientGuidToSend && c.Item2 == clientGuid).Any();
         }
     }

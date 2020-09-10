@@ -3,9 +3,7 @@ using Common.Enums;
 using Common.HandleRequests;
 using MenuBuilder.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace ClientNetworkConversation.Options
@@ -29,7 +27,6 @@ namespace ClientNetworkConversation.Options
         public void Run()
         {
             _requests.SendStringMessage(_client, ClientOptions.PRIVATE_CHAT.ToString());
-
 
             try
             {
@@ -56,7 +53,6 @@ namespace ClientNetworkConversation.Options
                         {
                             endConnection = true;
                         }
-
                         _requests.SendStringMessage(_client, message);
                     }
                 }
