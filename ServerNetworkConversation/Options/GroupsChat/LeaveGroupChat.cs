@@ -1,16 +1,11 @@
-﻿using Common;
-using Common.Enums;
-using Common.HandleRequests;
-using Common.Models;
+﻿using Common.HandleRequests;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.Interfaces;
 using ServerNetworkConversation.Options.Utils;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace ServerNetworkConversation.Options.GroupsChat
@@ -72,7 +67,6 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private void RemoveParticipantFromGroup(string dataReceived, Guid clientGuid)
         {
             _data.AllGroupsChat.GetGroupsChat().Where(g => g.Name == dataReceived).First().Participants.Remove(clientGuid);
-
         }
         private void RemoveManagerFromGroup(string dataReceived, Guid clientGuid)
         {

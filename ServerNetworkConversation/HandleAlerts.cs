@@ -2,9 +2,7 @@
 using Common.Models;
 using ServerNetworkConversation.HandleData;
 using System;
-using System.Collections.Generic;
 using System.Net.Sockets;
-using System.Text;
 
 namespace ServerNetworkConversation
 {
@@ -40,9 +38,6 @@ namespace ServerNetworkConversation
 
         private bool CheckIfClientCanGetAlert(TcpClient client, Guid clientGuid)
         {
-            var a = _data.ClientsConnectedInChat.IsClientInChat(clientGuid);
-            var b = _data.ClientsInGlobalChat.IsClientOnChat(clientGuid);
-            var c= _data.AllGroupsChat.IsClientInAnyGroupChat(client); 
             return (_data.ClientsConnectedInChat.IsClientInChat(clientGuid)
                 || _data.ClientsInGlobalChat.IsClientOnChat(clientGuid)
                 || _data.AllGroupsChat.IsClientInAnyGroupChat(client));

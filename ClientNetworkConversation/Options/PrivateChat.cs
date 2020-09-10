@@ -30,7 +30,6 @@ namespace ClientNetworkConversation.Options
         {
             _requests.SendStringMessage(_client, ClientOptions.PRIVATE_CHAT.ToString());
 
-
             try
             {
                 string messageRecive;
@@ -56,7 +55,6 @@ namespace ClientNetworkConversation.Options
                         {
                             endConnection = true;
                         }
-
                         _requests.SendStringMessage(_client, message);
                     }
                 }

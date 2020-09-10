@@ -1,5 +1,4 @@
-﻿using Common;
-using Common.Enums;
+﻿using Common.Enums;
 using Common.HandleRequests;
 using Common.Models;
 using Microsoft.Extensions.Logging;
@@ -10,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace ServerNetworkConversation.Options.GroupsChat
@@ -67,7 +65,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
                         {
                             MessageRequest messageRequest = new MessageRequest(MessageKey.Exit, "0");
                             _requests.SendModelMessage(_client, messageRequest);
-                            // _requests.SendStringMessage(_client, "0");
+
                             ClientOutOfGroup(group);
                             _data.AllGroupsChat.RemoveClientUnConnected(group, _client);
                             end = true;

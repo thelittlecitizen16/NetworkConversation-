@@ -1,12 +1,4 @@
-﻿using ServerNetworkConversation.HandleData;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-
-namespace ServerNetworkConversation.HandleData
+﻿namespace ServerNetworkConversation.HandleData
 {
     public class Data
     {

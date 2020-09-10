@@ -6,10 +6,7 @@ using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.Interfaces;
 using ServerNetworkConversation.Options.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace ServerNetworkConversation.Options
@@ -22,9 +19,9 @@ namespace ServerNetworkConversation.Options
         private ILogger<Worker> _logger;
         private IRequests _requests;
 
-        public PrivateChat(Data data, TcpClient inClientSocket,  ILogger<Worker> logger, IRequests requests)
+        public PrivateChat(Data data, TcpClient client,  ILogger<Worker> logger, IRequests requests)
         {
-            _client = inClientSocket;
+            _client = client;
             _data = data;
             _logger = logger;
             _requests = requests;
@@ -102,7 +99,6 @@ namespace ServerNetworkConversation.Options
 
             _requests.SendStringMessage(_client, message);
         }
-
         private void AddPrivateChat(Guid clientGuid, Guid guidToSend)
         {
             string message = $"success";
@@ -110,7 +106,6 @@ namespace ServerNetworkConversation.Options
             _data.ClientsConnectedInChat.Add(clientGuid, guidToSend);
             _logger.LogInformation($"client {clientGuid} send {message} to client {message}");
         }
-
         private void ExistChat(Guid clientGuid, Guid guidToSend)
         {
             MessageRequest messageRequest = new MessageRequest(MessageKey.Exit, "0");
@@ -119,7 +114,6 @@ namespace ServerNetworkConversation.Options
             _data.ClientsConnectedInChat.Remove(clientGuid, guidToSend);
             _logger.LogInformation($"client {clientGuid} leave chat with client {guidToSend}");
         }
-
         private void SendMessage(string dataReceived, Guid clientGuid, Guid guidToSend, TcpClient clientSend)
         {
             _logger.LogInformation($"Received from {clientGuid} and Sending to {guidToSend} : {dataReceived}");
@@ -137,5 +131,4 @@ namespace ServerNetworkConversation.Options
             _data.ClientsConnectedInChat.AddMessagesToHistory(clientGuid, guidToSend, dataReceived);
         }
     }
-
 }

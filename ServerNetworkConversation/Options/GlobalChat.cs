@@ -24,9 +24,9 @@ namespace ServerNetworkConversation.Options
         private ILogger<Worker> _logger;
         private IRequests _requests;
 
-        public GlobalChat(Data data, TcpClient inClientSocket,  ILogger<Worker> logger, IRequests requests)
+        public GlobalChat(Data data, TcpClient client,  ILogger<Worker> logger, IRequests requests)
         {
-            _client = inClientSocket;
+            _client = client;
             _data = data;
             _logger = logger;
             _requests = requests;
@@ -44,7 +44,6 @@ namespace ServerNetworkConversation.Options
             bool end = false;
             var clientGuid = _data.ClientsInGlobalChat.GetClient(_client);
 
-           
             SendMessagesHistory();
             SendAllAboutEnter(clientGuid);
 
@@ -97,28 +96,23 @@ namespace ServerNetworkConversation.Options
         {
             ChatUtils.SendMessageToEachClient(message, _data.ClientsInGlobalChat.Clients.Values.ToList(), _requests);
         }
-
         private void SendAllAboutEnter(Guid clientGuid)
         {
             string message = $"{clientGuid} enter to global chat";
             SendMessageToEachClient(message);
             _logger.LogInformation($"client {clientGuid} enter global chat");
         }
-
         private void SendAllAboutExist(Guid clientGuid)
         {
             string message = $"{clientGuid} exist the global chat";
             SendMessageToEachClient(message);
             MessageRequest messageRequest = new MessageRequest(MessageKey.Exit, "0");
             _requests.SendModelMessage(_client, messageRequest);
-            //_requests.SendStringMessage(_client, "0");
             _logger.LogInformation($"client {clientGuid} exit global chat");
         }
-
         private void SendAllStringMessage(Guid clientGuid, string dataReceived)
         {
           _logger.LogInformation($"send {dataReceived} from {clientGuid} in globalchat");
-
             string message = $"{clientGuid} send: {dataReceived}";
             SendMessageToEachClient(message);
            _data.ClientsInGlobalChat.MessagesHistory.Add(message);
@@ -129,7 +123,6 @@ namespace ServerNetworkConversation.Options
             string message = $"{clientGuid} send picture";
             SendMessageToEachClient(message);
             _data.ClientsInGlobalChat.MessagesHistory.Add(message);
-
         }
     }
 }

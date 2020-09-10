@@ -1,5 +1,4 @@
-﻿using Common;
-using Common.Enums;
+﻿using Common.Enums;
 using Common.HandleRequests;
 using Common.Models;
 using Microsoft.Extensions.Logging;
@@ -10,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace ServerNetworkConversation.Options.GroupsChat
@@ -23,7 +21,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private ILogger<Worker> _logger;
         private IRequests _requests;
 
-        public CreateGroupChat(Data data, TcpClient client, ILogger<Worker> logger,  IRequests requests)
+        public CreateGroupChat(Data data, TcpClient client, ILogger<Worker> logger, IRequests requests)
         {
             _client = client;
             _data = data;
@@ -64,7 +62,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         private GroupChat WaitToGetGroupFromClient()
         {
-           return GroupUtils.WaitToGetGroupFromClient(_client, _requests);
+            return GroupUtils.WaitToGetGroupFromClient(_client, _requests);
         }
         private void AddGroup(GroupChat groupChat, Guid clientGuid)
         {

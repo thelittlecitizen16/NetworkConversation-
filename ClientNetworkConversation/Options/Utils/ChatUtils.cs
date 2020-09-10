@@ -3,11 +3,8 @@ using Common.Enums;
 using Common.HandleRequests;
 using Common.Models;
 using MenuBuilder.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
-using System.Text;
 
 namespace ClientNetworkConversation.Options.Utils
 {
@@ -21,13 +18,8 @@ namespace ClientNetworkConversation.Options.Utils
                 MessageRequestFactory.GetMessageOptionByKey(messageRequest.Key).HandleMessage(system, messageRequest.Value);
                 messageRequest = (MessageRequest)requests.GetModelMessage(client);
             }
-            //string message = requests.GetStringMessage(client);
-            //while (message != "0")
-            //{
-            //    system.Write(message);
-            //    message = requests.GetStringMessage(client);
-            //}
         }
+
         public static bool SendMessageByType(IRequests requests, TcpClient client,string message)
         {
             var messageType = CheckMessageType.GetMessageType(message);

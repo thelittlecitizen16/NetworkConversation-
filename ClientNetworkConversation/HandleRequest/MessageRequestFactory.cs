@@ -15,9 +15,11 @@ namespace ClientNetworkConversation.HandleRequest
                 case MessageKey.STRING:
                     return new StringMessage();
                     break;
+
                 case MessageKey.ALERT:
                     return new AlertMessage();
                     break;
+
                 default:
                     return null;
                     break;
