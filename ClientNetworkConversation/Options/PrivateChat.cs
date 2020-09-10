@@ -1,4 +1,5 @@
-﻿using Common.Enums;
+﻿using ClientNetworkConversation.Options.Utils;
+using Common.Enums;
 using Common.HandleRequests;
 using MenuBuilder.Interfaces;
 using System;
@@ -70,13 +71,7 @@ namespace ClientNetworkConversation.Options
         }
         private void GetMessage()
         {
-            string message = "";
-
-            while (message != "0")
-            {
-                message = _requests.GetStringMessage(_client);
-                _system.Write(message);
-            }
+            ChatUtils.GetMessage(_requests, _system, _client);
         }
     }
 }

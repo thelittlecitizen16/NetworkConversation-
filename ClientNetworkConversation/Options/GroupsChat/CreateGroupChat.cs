@@ -1,10 +1,12 @@
-﻿using Common;
+﻿using ClientNetworkConversation.Options.Utils;
+using Common;
 using Common.Enums;
 using Common.HandleRequests;
 using Common.Models;
 using MenuBuilder.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 
@@ -50,11 +52,9 @@ namespace ClientNetworkConversation.Options.GroupsChat
         }
         private void PrintAllParticipants(List<Guid> participants)
         {
-            foreach (var participant in participants)
-            {
-                _system.Write(participant.ToString());
-            }
+            GruopUtils.PrintString(participants.Select(p => p.ToString()).ToList(), _system);
         }
+
         private List<Guid> GetAllParticipants(string userResponse, List<Guid> participants)
         {
             List<Guid> usersToAdd = new List<Guid>();

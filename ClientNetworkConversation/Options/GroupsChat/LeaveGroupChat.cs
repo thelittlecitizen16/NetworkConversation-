@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using ClientNetworkConversation.Options.Utils;
+using Common;
 using Common.Enums;
 using Common.HandleRequests;
 using Common.Models;
@@ -64,14 +65,13 @@ namespace ClientNetworkConversation.Options.GroupsChat
 
         private void PrintAllGroups(AllGroupChat allGroupChat)
         {
-            foreach (var groupName in allGroupChat.GroupsName)
-            {
-                _system.Write(groupName);
-            }
+            GruopUtils.PrintString(allGroupChat.GroupsName, _system);
         }
         private bool CheckGroupName(string userResponse, AllGroupChat allGroupChat)
         {
-            return allGroupChat.GroupsName.Contains(userResponse);
+            return GruopUtils.CheckGroupName(userResponse, allGroupChat);
+
+            //return allGroupChat.GroupsName.Contains(userResponse);
         }
 
     }

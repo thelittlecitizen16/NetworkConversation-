@@ -7,6 +7,7 @@ using System.Threading;
 using Common.Enums;
 using System.Threading.Tasks;
 using Common.HandleRequests;
+using ClientNetworkConversation.Options.Utils;
 
 namespace ClientNetworkConversation.Options
 {
@@ -63,13 +64,7 @@ namespace ClientNetworkConversation.Options
         }
         private void GetMessage()
         {
-            string message = "";
-
-            while (message != "0")
-            {
-                message = _requests.GetStringMessage(_client);
-                _system.Write(message);
-            }
+            ChatUtils.GetMessage(_requests, _system, _client);
         }
     }
 }

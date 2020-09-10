@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ClientNetworkConversation.Options.Utils
 {
-    public static class Utils
+    public static class ChatUtils
     {
         public static void GetMessage(IRequests requests, ISystem system, TcpClient client)
         {
