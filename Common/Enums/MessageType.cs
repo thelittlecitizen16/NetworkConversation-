@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Common.Enums
 {
-    public enum MessageTypes
+    public enum MessageType
     {
         STRING,
-        MODAL
+        PIC
     }
 }

@@ -10,8 +10,8 @@ using ServerNetworkConversation.HandleData;
 using Microsoft.Extensions.Logging;
 using Common.Enums;
 using Common.HandleRequests;
-using Common.HandleRequests.HandleMessages;
 using ServerNetworkConversation.Options.Utils;
+using System.IO;
 
 namespace ServerNetworkConversation.Options
 {
@@ -43,6 +43,7 @@ namespace ServerNetworkConversation.Options
             bool end = false;
             var clientGuid = _data.ClientsInGlobalChat.GetClient(_client);
 
+           
             SendMessagesHistory();
             SendAllAboutEnter(clientGuid);
 
@@ -51,9 +52,9 @@ namespace ServerNetworkConversation.Options
                 try
                 {
 
-                    string dataReceived = _requests.GetStringMessage(_client);
+                    string dataReceivedType = _requests.GetStringMessage(_client);
 
-                    if (dataReceived == "0")
+                    if (dataReceivedType == "0")
                     {
                         _data.ClientsInGlobalChat.Remove(clientGuid);
                         SendAllAboutExist(clientGuid);
@@ -61,7 +62,22 @@ namespace ServerNetworkConversation.Options
                     }
                     else
                     {
-                        SendAllMessage(clientGuid, dataReceived);
+                        if (dataReceivedType == MessageType.STRING.ToString())
+                        {
+                            string dataReceived = _requests.GetStringMessage(_client);
+                            SendAllStringMessage(clientGuid, dataReceived);
+                        }
+                        else if (dataReceivedType == MessageType.PIC.ToString())
+                        {
+                            _requests.GetPictureMessage(_client);
+                            SendAllPicMessage(clientGuid);
+                        }   
+                        else
+                        {
+                            _data.ClientsInGlobalChat.Remove(clientGuid);
+                            SendAllAboutExist(clientGuid);
+                            end = true;
+                        }
                     }
                 }
                 catch (Exception)
@@ -75,27 +91,10 @@ namespace ServerNetworkConversation.Options
         private void SendMessagesHistory()
         {
             ChatUtils.SendMessagesHistory(_data.ClientsInGlobalChat.MessagesHistory,_client, _requests);
-
-            //string allMessages = "";
-            //foreach (var message in _data.ClientsInGlobalChat.MessagesHistory)
-            //{
-            //    allMessages += message + "\n";
-            //}
-            //if (allMessages != "")
-            //{
-            //    _requests.SendStringMessage(_client, allMessages);
-            //}
         }
         private void SendMessageToEachClient(string message)
         {
             ChatUtils.SendMessageToEachClient(message, _data.ClientsInGlobalChat.Clients.Values.ToList(), _requests);
-            //foreach (var client in _data.ClientsInGlobalChat.Clients)
-            //{
-            //    if (client.Value.Connected)
-            //    {
-            //        _requests.SendStringMessage(client.Value, message);
-            //    }
-            //}
         }
 
         private void SendAllAboutEnter(Guid clientGuid)
@@ -114,16 +113,21 @@ namespace ServerNetworkConversation.Options
             _logger.LogInformation($"client {clientGuid} exit global chat");
         }
 
-        private void SendAllMessage(Guid clientGuid, string dataReceived)
+        private void SendAllStringMessage(Guid clientGuid, string dataReceived)
         {
           _logger.LogInformation($"send {dataReceived} from {clientGuid} in globalchat");
 
             string message = $"{clientGuid} send: {dataReceived}";
             SendMessageToEachClient(message);
            _data.ClientsInGlobalChat.MessagesHistory.Add(message);
+        }
+        private void SendAllPicMessage(Guid clientGuid)
+        {
+            _logger.LogInformation($"{clientGuid} send picture in globalchat");
+            string message = $"{clientGuid} send picture";
+            SendMessageToEachClient(message);
+            _data.ClientsInGlobalChat.MessagesHistory.Add(message);
 
-            _logger.LogInformation($"client {clientGuid} send {message} in global chat");
         }
     }
-
 }

@@ -1,0 +1,149 @@
+2020-09-10 16:04:14.466 +03:00 [INF] starting up the service
+2020-09-10 16:04:16.799 +03:00 [FTL] There Where Froblam starting the service
+System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   at System.Net.Sockets.TcpListener.Start()
+   at ServerNetworkConversation.Worker.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Worker.cs:line 35
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ServerNetworkConversation.Program.Main(String[] args) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Program.cs:line 31
+2020-09-10 16:04:26.688 +03:00 [INF] starting up the service
+2020-09-10 16:04:28.326 +03:00 [FTL] There Where Froblam starting the service
+System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   at System.Net.Sockets.TcpListener.Start()
+   at ServerNetworkConversation.Worker.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Worker.cs:line 35
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ServerNetworkConversation.Program.Main(String[] args) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Program.cs:line 31
+2020-09-10 16:06:22.584 +03:00 [INF] starting up the service
+2020-09-10 16:06:23.163 +03:00 [INF] server wait for first connection...
+2020-09-10 16:06:37.432 +03:00 [INF] new client connected
+2020-09-10 16:06:38.311 +03:00 [INF] client aba964f8-4663-4a23-b909-ec4c28c19978 enter global chat
+2020-09-10 16:06:43.823 +03:00 [INF] send aaaaa from aba964f8-4663-4a23-b909-ec4c28c19978 in globalchat
+2020-09-10 16:06:47.560 +03:00 [INF] send bbbbbb from aba964f8-4663-4a23-b909-ec4c28c19978 in globalchat
+2020-09-10 16:06:48.476 +03:00 [INF] client aba964f8-4663-4a23-b909-ec4c28c19978 exit global chat
+2020-09-10 16:06:49.090 +03:00 [INF] client aba964f8-4663-4a23-b909-ec4c28c19978 enter global chat
+2020-09-10 16:07:22.095 +03:00 [INF] client aba964f8-4663-4a23-b909-ec4c28c19978 exit global chat
+2020-09-10 16:07:26.136 +03:00 [INF] client aba964f8-4663-4a23-b909-ec4c28c19978 enter global chat
+2020-09-10 16:07:31.205 +03:00 [INF] send hgjfghjgj from aba964f8-4663-4a23-b909-ec4c28c19978 in globalchat
+2020-09-10 16:07:33.320 +03:00 [INF] send nnnn from aba964f8-4663-4a23-b909-ec4c28c19978 in globalchat
+2020-09-10 16:07:33.960 +03:00 [INF] client aba964f8-4663-4a23-b909-ec4c28c19978 exit global chat
+2020-09-10 16:07:34.570 +03:00 [INF] client aba964f8-4663-4a23-b909-ec4c28c19978 enter global chat
+2020-09-10 16:09:26.677 +03:00 [INF] Application is shutting down...
+2020-09-10 16:09:35.196 +03:00 [INF] starting up the service
+2020-09-10 16:09:35.755 +03:00 [INF] server wait for first connection...
+2020-09-10 16:09:42.563 +03:00 [INF] new client connected
+2020-09-10 16:09:43.632 +03:00 [INF] client b2e29550-99af-42cf-afac-f6b1dc34240e enter global chat
+2020-09-10 16:09:50.802 +03:00 [INF] send aaaaa from b2e29550-99af-42cf-afac-f6b1dc34240e in globalchat
+2020-09-10 16:09:53.035 +03:00 [INF] send bbbbb from b2e29550-99af-42cf-afac-f6b1dc34240e in globalchat
+2020-09-10 16:09:53.872 +03:00 [INF] client b2e29550-99af-42cf-afac-f6b1dc34240e exit global chat
+2020-09-10 16:09:54.484 +03:00 [INF] client b2e29550-99af-42cf-afac-f6b1dc34240e enter global chat
+2020-09-10 16:09:57.960 +03:00 [INF] send ssssss from b2e29550-99af-42cf-afac-f6b1dc34240e in globalchat
+2020-09-10 16:09:59.705 +03:00 [INF] send dddddd from b2e29550-99af-42cf-afac-f6b1dc34240e in globalchat
+2020-09-10 16:10:00.763 +03:00 [INF] client b2e29550-99af-42cf-afac-f6b1dc34240e exit global chat
+2020-09-10 16:10:01.725 +03:00 [INF] client b2e29550-99af-42cf-afac-f6b1dc34240e enter global chat
+2020-09-10 16:11:24.491 +03:00 [INF] new client connected
+2020-09-10 16:11:25.312 +03:00 [INF] client 529ae06d-405f-4fc1-b8ca-b1cd4066ebc2 enter global chat
+2020-09-10 16:12:15.884 +03:00 [INF] Application is shutting down...
+2020-09-10 16:12:25.332 +03:00 [INF] starting up the service
+2020-09-10 16:12:27.053 +03:00 [INF] server wait for first connection...
+2020-09-10 16:12:28.068 +03:00 [INF] new client connected
+2020-09-10 16:12:31.914 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 enter global chat
+2020-09-10 16:12:33.374 +03:00 [INF] send aaaa from 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 in globalchat
+2020-09-10 16:12:35.072 +03:00 [INF] send bbb from 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 in globalchat
+2020-09-10 16:12:35.792 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 exit global chat
+2020-09-10 16:12:36.599 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 enter global chat
+2020-09-10 16:12:39.827 +03:00 [INF] send ccccccc from 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 in globalchat
+2020-09-10 16:12:42.037 +03:00 [INF] send dddd from 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 in globalchat
+2020-09-10 16:12:42.950 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 exit global chat
+2020-09-10 16:12:43.672 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 enter global chat
+2020-09-10 16:12:49.337 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 exit global chat
+2020-09-10 16:12:51.189 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 enter global chat
+2020-09-10 16:12:54.282 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 exit global chat
+2020-09-10 16:12:54.897 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 enter global chat
+2020-09-10 16:13:24.527 +03:00 [INF] 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 send picture in globalchat
+2020-09-10 16:13:27.012 +03:00 [INF] send aaaa from 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 in globalchat
+2020-09-10 16:13:28.367 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 exit global chat
+2020-09-10 16:13:29.037 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 enter global chat
+2020-09-10 16:13:33.967 +03:00 [INF] send rerere from 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 in globalchat
+2020-09-10 16:13:35.267 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 exit global chat
+2020-09-10 16:13:37.247 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 enter global chat
+2020-09-10 16:13:40.630 +03:00 [INF] send jhjhjhjh from 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 in globalchat
+2020-09-10 16:13:44.637 +03:00 [INF] send kkkkkkk from 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 in globalchat
+2020-09-10 16:13:45.862 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 exit global chat
+2020-09-10 16:13:46.483 +03:00 [INF] client 4be0759f-6b11-4122-87d4-a47fe3c7fbb1 enter global chat
+2020-09-10 16:17:15.463 +03:00 [INF] starting up the service
+2020-09-10 16:17:17.210 +03:00 [INF] server wait for first connection...
+2020-09-10 16:17:17.404 +03:00 [INF] new client connected
+2020-09-10 16:17:18.337 +03:00 [INF] client 7665cb29-660a-4bff-97da-bd36f7d7090b enter global chat
+2020-09-10 16:17:19.694 +03:00 [INF] send aaa from 7665cb29-660a-4bff-97da-bd36f7d7090b in globalchat
+2020-09-10 16:17:21.817 +03:00 [INF] send vvvv from 7665cb29-660a-4bff-97da-bd36f7d7090b in globalchat
+2020-09-10 16:17:22.772 +03:00 [INF] send \0 from 7665cb29-660a-4bff-97da-bd36f7d7090b in globalchat
+2020-09-10 16:17:24.104 +03:00 [INF] client 7665cb29-660a-4bff-97da-bd36f7d7090b exit global chat
+2020-09-10 16:17:24.823 +03:00 [INF] client 7665cb29-660a-4bff-97da-bd36f7d7090b enter global chat
+2020-09-10 16:17:31.949 +03:00 [INF] client 7665cb29-660a-4bff-97da-bd36f7d7090b exit global chat
+2020-09-10 16:17:33.683 +03:00 [INF] client 7665cb29-660a-4bff-97da-bd36f7d7090b enter global chat
+2020-09-10 16:17:38.478 +03:00 [INF] new client connected
+2020-09-10 16:17:39.188 +03:00 [INF] client af245182-8ae9-4beb-bb63-a8aeaf439840 enter global chat
+2020-09-10 16:17:40.939 +03:00 [INF] send aaaaa from af245182-8ae9-4beb-bb63-a8aeaf439840 in globalchat
+2020-09-10 16:18:02.374 +03:00 [INF] af245182-8ae9-4beb-bb63-a8aeaf439840 send picture in globalchat
+2020-09-10 16:18:06.584 +03:00 [INF] send adadada from af245182-8ae9-4beb-bb63-a8aeaf439840 in globalchat
+2020-09-10 16:18:08.112 +03:00 [INF] client af245182-8ae9-4beb-bb63-a8aeaf439840 exit global chat
+2020-09-10 16:18:09.029 +03:00 [INF] client af245182-8ae9-4beb-bb63-a8aeaf439840 enter global chat
+2020-09-10 16:18:19.799 +03:00 [INF] send jhjhjhjhj from af245182-8ae9-4beb-bb63-a8aeaf439840 in globalchat
+2020-09-10 16:18:21.287 +03:00 [INF] client 7665cb29-660a-4bff-97da-bd36f7d7090b exit global chat
+2020-09-10 16:18:22.999 +03:00 [INF] client af245182-8ae9-4beb-bb63-a8aeaf439840 exit global chat
+2020-09-10 16:25:06.008 +03:00 [INF] starting up the service
+2020-09-10 16:26:14.586 +03:00 [INF] starting up the service
+2020-09-10 16:26:18.007 +03:00 [INF] server wait for first connection...
+2020-09-10 16:26:22.640 +03:00 [INF] new client connected
+2020-09-10 16:26:23.494 +03:00 [INF] client fa5b530d-484d-416d-bbaa-342b019a4bcf enter global chat
+2020-09-10 16:28:02.445 +03:00 [INF] starting up the service
+2020-09-10 16:28:04.326 +03:00 [INF] server wait for first connection...
+2020-09-10 16:28:07.742 +03:00 [INF] new client connected
+2020-09-10 16:28:11.919 +03:00 [INF] client f7511262-dfbe-41d4-a6a3-a5462e233976 enter global chat
+2020-09-10 16:30:48.430 +03:00 [INF] starting up the service
+2020-09-10 16:30:50.067 +03:00 [INF] server wait for first connection...
+2020-09-10 16:30:50.237 +03:00 [INF] new client connected
+2020-09-10 16:30:51.511 +03:00 [INF] client 305ba2d0-933b-435e-8d6d-37afbf213986 enter global chat
+2020-09-10 16:32:48.451 +03:00 [INF] starting up the service
+2020-09-10 16:32:49.984 +03:00 [INF] server wait for first connection...
+2020-09-10 16:32:50.326 +03:00 [INF] new client connected
+2020-09-10 16:32:52.031 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 enter global chat
+2020-09-10 16:32:53.480 +03:00 [INF] send aaa from 50942e85-f609-4bb2-8f77-0278a4ebbf73 in globalchat
+2020-09-10 16:32:54.959 +03:00 [INF] send bbb from 50942e85-f609-4bb2-8f77-0278a4ebbf73 in globalchat
+2020-09-10 16:32:55.631 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 exit global chat
+2020-09-10 16:32:56.430 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 enter global chat
+2020-09-10 16:33:01.167 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 exit global chat
+2020-09-10 16:33:03.224 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 enter global chat
+2020-09-10 16:33:27.645 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 exit global chat
+2020-09-10 16:33:41.672 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 enter global chat
+2020-09-10 16:33:49.884 +03:00 [INF] 50942e85-f609-4bb2-8f77-0278a4ebbf73 send picture in globalchat
+2020-09-10 16:33:53.419 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 exit global chat
+2020-09-10 16:33:53.960 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 enter global chat
+2020-09-10 16:33:55.999 +03:00 [INF] send hgfdhg from 50942e85-f609-4bb2-8f77-0278a4ebbf73 in globalchat
+2020-09-10 16:33:56.884 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 exit global chat
+2020-09-10 16:33:57.590 +03:00 [INF] client 50942e85-f609-4bb2-8f77-0278a4ebbf73 enter global chat
+2020-09-10 16:34:00.666 +03:00 [INF] Application is shutting down...
+2020-09-10 16:34:40.450 +03:00 [INF] starting up the service
+2020-09-10 16:34:41.024 +03:00 [INF] server wait for first connection...
+2020-09-10 16:34:55.297 +03:00 [INF] new client connected
+2020-09-10 16:34:56.144 +03:00 [INF] client 0c2c19bb-6f9f-46a1-b93d-e024cec11370 enter global chat
+2020-09-10 16:34:57.264 +03:00 [INF] send ghdfghfg from 0c2c19bb-6f9f-46a1-b93d-e024cec11370 in globalchat
+2020-09-10 16:34:58.071 +03:00 [INF] client 0c2c19bb-6f9f-46a1-b93d-e024cec11370 exit global chat
+2020-09-10 16:34:59.200 +03:00 [INF] client 0c2c19bb-6f9f-46a1-b93d-e024cec11370 enter global chat
+2020-09-10 16:35:00.248 +03:00 [INF] send gfdfgd from 0c2c19bb-6f9f-46a1-b93d-e024cec11370 in globalchat
+2020-09-10 16:35:01.035 +03:00 [INF] client 0c2c19bb-6f9f-46a1-b93d-e024cec11370 exit global chat
+2020-09-10 16:35:01.654 +03:00 [INF] client 0c2c19bb-6f9f-46a1-b93d-e024cec11370 enter global chat
+2020-09-10 16:35:02.954 +03:00 [INF] client 0c2c19bb-6f9f-46a1-b93d-e024cec11370 exit global chat

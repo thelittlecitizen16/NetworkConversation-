@@ -4,6 +4,11 @@ using System.IO;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Net;
+using static System.Net.Mime.MediaTypeNames;
+using System.Drawing;
+using System.Drawing.Imaging;
+
 
 namespace Common.HandleRequests
 {
@@ -59,6 +64,30 @@ namespace Common.HandleRequests
                 return null;
             }
         }
-        
+        public void SendPictureMessage(TcpClient client, string url) 
+        {
+            WebClient webClient = new WebClient();
+            byte[] data = webClient.DownloadData(url);
+            NetworkStream clientStream = client.GetStream();
+            clientStream.Write(data, 0, data.Length);
+        }
+
+        public void GetPictureMessage(TcpClient client)
+        {
+            NetworkStream nwStream = client.GetStream();
+            byte[] buffer = new byte[client.ReceiveBufferSize];
+
+            int bytesRead = nwStream.Read(buffer, 0, client.ReceiveBufferSize);
+
+            using (MemoryStream mem = new MemoryStream(buffer))
+            {
+                using (var yourImage = System.Drawing.Image.FromStream(mem))
+                {
+                    var i2 = new Bitmap(yourImage);   
+                    i2.Save(@"C:\Users\thelittlecitizen16\Pictures\Camera Roll\i2.jpg", ImageFormat.Jpeg);
+                }
+            }
+        }
+
     }
 }

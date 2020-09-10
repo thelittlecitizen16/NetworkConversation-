@@ -15,6 +15,8 @@ namespace Common.HandleRequests
         void SendModelMessage(TcpClient client, object obj);
 
         Object GetModelMessage(TcpClient client);
-       
+
+        void SendPictureMessage(TcpClient client, string url);
+        void GetPictureMessage(TcpClient client);
     }
 }

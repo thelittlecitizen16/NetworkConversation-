@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Common.HandleRequests;
 using ClientNetworkConversation.Options.Utils;
 
+
 namespace ClientNetworkConversation.Options
 {
     public class GlobalChatOption : IOption
@@ -50,11 +51,12 @@ namespace ClientNetworkConversation.Options
                     }
                     else
                     {
-                        _requests.SendStringMessage(_client, message);
+                        if (!ChatUtils.SendMessageByType(_requests, _client, message))
+                        {
+                            endConnection = true;
+                        }
                     }
                 }
-
-
             }
             catch (Exception e)
             {

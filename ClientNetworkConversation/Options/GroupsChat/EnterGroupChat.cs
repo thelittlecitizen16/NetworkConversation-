@@ -94,7 +94,6 @@ namespace ClientNetworkConversation.Options.GroupsChat
         private bool CheckGroupName(string userResponse, AllGroupChat allGroupChat)
         {
             return GruopUtils.CheckGroupName(userResponse, allGroupChat);
-            //return allGroupChat.GroupsName.Contains(userResponse);
         }
         private void ListenToServer()
         {

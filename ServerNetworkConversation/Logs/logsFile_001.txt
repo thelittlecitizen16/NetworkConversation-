@@ -1,0 +1,32 @@
+2020-09-10 14:55:46.813 +03:00 [INF] starting up the service
+2020-09-10 14:55:49.348 +03:00 [FTL] There Where Froblam starting the service
+System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   at System.Net.Sockets.TcpListener.Start()
+   at ServerNetworkConversation.Worker.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Worker.cs:line 35
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at ServerNetworkConversation.Program.Main(String[] args) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Program.cs:line 31
+2020-09-10 14:55:59.622 +03:00 [INF] starting up the service
+2020-09-10 14:56:11.012 +03:00 [INF] starting up the service
+2020-09-10 14:56:11.552 +03:00 [INF] server wait for first connection...
+2020-09-10 14:56:44.765 +03:00 [INF] new client connected
+2020-09-10 14:56:45.622 +03:00 [INF] client 93921957-8658-4ba6-8f4b-a357d0535323 enter global chat
+2020-09-10 15:00:41.046 +03:00 [INF] new client connected
+2020-09-10 15:00:41.965 +03:00 [INF] client fe57d5fc-a3bd-42b5-95ec-879965d36cb7 enter global chat
+2020-09-10 15:00:44.168 +03:00 [INF] send afek from fe57d5fc-a3bd-42b5-95ec-879965d36cb7 in globalchat
+2020-09-10 15:00:44.168 +03:00 [INF] client fe57d5fc-a3bd-42b5-95ec-879965d36cb7 send fe57d5fc-a3bd-42b5-95ec-879965d36cb7 send: afek in global chat
+2020-09-10 15:00:46.289 +03:00 [INF] send fff from fe57d5fc-a3bd-42b5-95ec-879965d36cb7 in globalchat
+2020-09-10 15:00:46.289 +03:00 [INF] client fe57d5fc-a3bd-42b5-95ec-879965d36cb7 send fe57d5fc-a3bd-42b5-95ec-879965d36cb7 send: fff in global chat
+2020-09-10 15:00:46.953 +03:00 [INF] client fe57d5fc-a3bd-42b5-95ec-879965d36cb7 exit global chat
+2020-09-10 15:00:48.383 +03:00 [INF] client fe57d5fc-a3bd-42b5-95ec-879965d36cb7 enter global chat
+2020-09-10 15:00:59.365 +03:00 [INF] client fe57d5fc-a3bd-42b5-95ec-879965d36cb7 exit global chat
+2020-09-10 15:01:27.153 +03:00 [INF] new client connected
+2020-09-10 15:01:30.619 +03:00 [INF] client 5d476cc4-2965-4586-a9be-541f68104cbc enter global chat
+2020-09-10 15:01:44.221 +03:00 [INF] client 5d476cc4-2965-4586-a9be-541f68104cbc exit global chat
+2020-09-10 15:02:38.336 +03:00 [INF] Application is shutting down...
