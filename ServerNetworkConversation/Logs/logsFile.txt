@@ -102,3 +102,13 @@
 2020-09-10 22:12:20.886 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 enter global chat
 2020-09-10 22:12:22.957 +03:00 [INF] send hhhh from 9703f048-6a1d-45c4-9948-b54e0289d6d7 in globalchat
 2020-09-10 22:12:23.840 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 exit global chat
+2020-09-10 22:15:59.621 +03:00 [INF] starting up the service
+2020-09-10 22:16:01.920 +03:00 [INF] server wait for first connection...
+2020-09-10 22:16:02.386 +03:00 [INF] new client connected
+2020-09-10 22:16:03.196 +03:00 [INF] new client connected
+2020-09-10 22:16:04.423 +03:00 [INF] new client connected
+2020-09-10 22:16:52.279 +03:00 [INF] client 7101ae4a-f178-4bdb-a8d6-8add0c92594a enter global chat
+2020-09-10 22:16:53.980 +03:00 [INF] send ggg from 7101ae4a-f178-4bdb-a8d6-8add0c92594a in globalchat
+2020-09-10 22:17:05.266 +03:00 [INF] new client connected
+2020-09-10 22:17:06.816 +03:00 [INF] client afc7c055-91f7-470c-9fe4-843988d87486 enter global chat
+2020-09-10 22:17:07.927 +03:00 [INF] send jjjj from afc7c055-91f7-470c-9fe4-843988d87486 in globalchat
