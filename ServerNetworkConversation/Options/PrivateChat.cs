@@ -138,6 +138,9 @@ namespace ServerNetworkConversation.Options
                 _logger.LogInformation($"client {clientSend} get message {dataReceived}");
             }
 
+            Alert alert = new Alert(AlertOptions.NEW_MESSAGE, $"new message from {clientGuid}");
+            MessageRequest messageRequestAlert = new MessageRequest(MessageKey.ALERT, alert);
+            _requests.SendModelMessage(clientSend, messageRequestAlert);
             _data.ClientsConnectedInChat.AddMessagesToHistory(clientGuid, guidToSend, dataReceived);
         }
     }

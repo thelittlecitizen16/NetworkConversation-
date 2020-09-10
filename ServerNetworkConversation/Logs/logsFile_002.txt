@@ -33,3 +33,28 @@
 2020-09-10 17:43:16.732 +03:00 [INF] client 879d0d2f-b41a-4e5e-bd52-993786a59df4 leave chat with client 112b3ac6-0794-4462-bcb3-90e40c44cadb
 2020-09-10 17:43:18.341 +03:00 [INF] client 879d0d2f-b41a-4e5e-bd52-993786a59df4 send success to client success
 2020-09-10 17:43:30.911 +03:00 [INF] Application is shutting down...
+2020-09-10 18:09:08.802 +03:00 [INF] starting up the service
+2020-09-10 18:09:09.398 +03:00 [INF] server wait for first connection...
+2020-09-10 18:09:16.009 +03:00 [INF] new client connected
+2020-09-10 18:09:17.237 +03:00 [INF] new client connected
+2020-09-10 18:09:19.352 +03:00 [INF] client 6461bdbe-233a-4eba-ab23-0c11a33a901f enter global chat
+2020-09-10 18:09:20.516 +03:00 [INF] client dc25152c-9f72-49b6-8687-e1036bd36967 enter global chat
+2020-09-10 18:09:22.317 +03:00 [INF] send aaaa from 6461bdbe-233a-4eba-ab23-0c11a33a901f in globalchat
+2020-09-10 18:09:23.044 +03:00 [INF] client 6461bdbe-233a-4eba-ab23-0c11a33a901f exit global chat
+2020-09-10 18:09:23.673 +03:00 [INF] client 6461bdbe-233a-4eba-ab23-0c11a33a901f enter global chat
+2020-09-10 18:09:24.217 +03:00 [INF] client 6461bdbe-233a-4eba-ab23-0c11a33a901f exit global chat
+2020-09-10 18:09:26.141 +03:00 [INF] client dc25152c-9f72-49b6-8687-e1036bd36967 exit global chat
+2020-09-10 18:09:33.023 +03:00 [INF] client dc25152c-9f72-49b6-8687-e1036bd36967 enter global chat
+2020-09-10 18:09:35.937 +03:00 [INF] client 6461bdbe-233a-4eba-ab23-0c11a33a901f send success to client success
+2020-09-10 18:09:38.816 +03:00 [INF] Received from 6461bdbe-233a-4eba-ab23-0c11a33a901f and Sending to dc25152c-9f72-49b6-8687-e1036bd36967 : afek
+2020-09-10 18:10:08.022 +03:00 [INF] new client connected
+2020-09-10 18:10:20.221 +03:00 [INF] Application is shutting down...
+2020-09-10 18:10:25.233 +03:00 [INF] Waiting for the host to be disposed. Ensure all 'IHost' instances are wrapped in 'using' blocks.
+2020-09-10 18:10:53.470 +03:00 [INF] starting up the service
+2020-09-10 18:10:54.030 +03:00 [INF] server wait for first connection...
+2020-09-10 18:10:58.706 +03:00 [INF] new client connected
+2020-09-10 18:11:04.730 +03:00 [INF] new client connected
+2020-09-10 18:11:05.271 +03:00 [INF] client 8aabc820-14ea-402f-a679-8e2093128ccb enter global chat
+2020-09-10 18:11:18.136 +03:00 [INF] client fc0ab682-e87a-4a6b-8816-3c0306ca0f66 send success to client success
+2020-09-10 18:11:19.841 +03:00 [INF] Received from fc0ab682-e87a-4a6b-8816-3c0306ca0f66 and Sending to 8aabc820-14ea-402f-a679-8e2093128ccb : afek
+2020-09-10 18:11:39.900 +03:00 [INF] Application is shutting down...

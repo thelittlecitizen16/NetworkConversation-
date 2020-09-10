@@ -1,4 +1,5 @@
-﻿using Common.Enums;
+﻿using ClientNetworkConversation.HandleRequest;
+using Common.Enums;
 using Common.HandleRequests;
 using Common.Models;
 using MenuBuilder.Interfaces;
@@ -17,19 +18,8 @@ namespace ClientNetworkConversation.Options.Utils
             MessageRequest messageRequest = (MessageRequest)requests.GetModelMessage(client);
             while (messageRequest.Key != MessageKey.Exit)
             {
-                switch (messageRequest.Key)
-                {
-                    case MessageKey.STRING:
-                        system.Write(messageRequest.Value.ToString());
-                        break;
-                    case MessageKey.ALERT:
-                        //system.Write(messageRequest.Value.ToString());
-                        break;
-                    default:
-                        break;
-                }
-
-                 messageRequest = (MessageRequest)requests.GetModelMessage(client);
+                MessageRequestFactory.GetMessageOptionByKey(messageRequest.Key).HandleMessage(system, messageRequest.Value);
+                messageRequest = (MessageRequest)requests.GetModelMessage(client);
             }
             //string message = requests.GetStringMessage(client);
             //while (message != "0")
