@@ -74,9 +74,7 @@ namespace ServerNetworkConversation.Options
                 else
                 {
                     string message = $"fail";
-                    MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, message);
-                    _requests.SendModelMessage(_client, messageRequest);
-                    //_requests.SendStringMessage(_client, message);
+                    ChatUtils.SandStringMessage(_client,_requests, message);
                 }
             }
             catch (Exception)
@@ -102,16 +100,12 @@ namespace ServerNetworkConversation.Options
                 }
             }
 
-           // MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, message);
-           // _requests.SendModelMessage(_client, messageRequest);
             _requests.SendStringMessage(_client, message);
         }
 
         private void AddPrivateChat(Guid clientGuid, Guid guidToSend)
         {
             string message = $"success";
-            //MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, message);
-            //_requests.SendModelMessage(_client, messageRequest);
             _requests.SendStringMessage(_client, message);
             _data.ClientsConnectedInChat.Add(clientGuid, guidToSend);
             _logger.LogInformation($"client {clientGuid} send {message} to client {message}");
@@ -121,7 +115,7 @@ namespace ServerNetworkConversation.Options
         {
             MessageRequest messageRequest = new MessageRequest(MessageKey.Exit, "0");
             _requests.SendModelMessage(_client, messageRequest);
-            // _requests.SendStringMessage(_client, "0");
+
             _data.ClientsConnectedInChat.Remove(clientGuid, guidToSend);
             _logger.LogInformation($"client {clientGuid} leave chat with client {guidToSend}");
         }
@@ -132,15 +126,14 @@ namespace ServerNetworkConversation.Options
 
             if (_data.ClientsConnectedInChat.HaveConversition(clientGuid, guidToSend))
             {
-                MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, dataReceived);
-                _requests.SendModelMessage(clientSend, messageRequest);
-                // _requests.SendStringMessage(clientSend, dataReceived);
+                ChatUtils.SandStringMessage(clientSend, _requests, dataReceived);
                 _logger.LogInformation($"client {clientSend} get message {dataReceived}");
             }
+            else
+            {
+                ChatUtils.CreateAlertMessage(clientSend,_data, AlertOptions.NEW_MESSAGE, $"new message from {clientGuid}");       
+            }        
 
-            Alert alert = new Alert(AlertOptions.NEW_MESSAGE, $"new message from {clientGuid}");
-            MessageRequest messageRequestAlert = new MessageRequest(MessageKey.ALERT, alert);
-            _requests.SendModelMessage(clientSend, messageRequestAlert);
             _data.ClientsConnectedInChat.AddMessagesToHistory(clientGuid, guidToSend, dataReceived);
         }
     }

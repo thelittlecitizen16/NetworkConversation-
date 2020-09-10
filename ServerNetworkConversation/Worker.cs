@@ -27,6 +27,7 @@ namespace ServerNetworkConversation
             Data data = new Data();
             ClientOptionsFactory clientOptionsFactory = new ClientOptionsFactory();
             Requests requests = new Requests();
+            HandleAlerts handleAlerts = new HandleAlerts(data, requests);
 
             IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddr = ipHost.AddressList[0];
@@ -37,6 +38,9 @@ namespace ServerNetworkConversation
 
             try
             {
+                Thread alertsThread = new Thread(handleAlerts.Send);
+               alertsThread.Start();
+
                 while (true)
                 {
                     TcpClient tcpClient = listener.AcceptTcpClient();

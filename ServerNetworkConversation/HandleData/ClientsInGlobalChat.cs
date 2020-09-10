@@ -16,7 +16,10 @@ namespace ServerNetworkConversation.HandleData
             Clients = new ConcurrentDictionary<Guid, TcpClient>();
             MessagesHistory = new List<string>();
         }
-
+        public bool IsClientOnChat(Guid guid)
+        {
+            return Clients.Where(c => c.Key == guid).Any();
+        }
         public void Add(Guid guid, TcpClient tcpClient)
         {
             Clients.TryAdd(guid, tcpClient);

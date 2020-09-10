@@ -72,6 +72,22 @@ namespace ServerNetworkConversation.Options.GroupsChat
             groupChat.Participants.Add(clientGuid);
             _data.AllGroupsChat.AddGroupChat(groupChat);
             _logger.LogInformation($"add new group {groupChat.Name}");
+
+            SaveAlert(groupChat, clientGuid);
+        }
+        private void SaveAlert(GroupChat groupChat, Guid clientGuid)
+        {
+            Alert alert = new Alert(AlertOptions.NEW_GROUP, $"you enter to group {groupChat.Name} by {clientGuid}");
+            MessageRequest messageRequestAlert = new MessageRequest(MessageKey.ALERT, alert);
+
+            foreach (var client in groupChat.Participants)
+            {
+                var Client = _data.ClientsConnectedInServer.Clients.Where(c => c.Key == client).Select(c => c.Value);
+                if (Client.Any())
+                {
+                    _data.ClientsAlerts.AddNewAlert(Client.First(), messageRequestAlert);
+                }
+            }
         }
     }
 }

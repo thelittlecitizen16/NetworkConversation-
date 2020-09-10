@@ -43,5 +43,16 @@ namespace ServerNetworkConversation.Options.Utils
             client.Close();
             data.ClientsConnectedInServer.Remove(clientGuid);
         }
+        public static void SandStringMessage(TcpClient client, IRequests requests, string message)
+        {
+            MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, message);
+            requests.SendModelMessage(client, messageRequest);
+        }
+        public static void CreateAlertMessage(TcpClient client,Data data, AlertOptions alertOptions, string message)
+        {
+            Alert alert = new Alert(alertOptions, message);
+            MessageRequest messageRequestAlert = new MessageRequest(MessageKey.ALERT, alert);
+            data.ClientsAlerts.AddNewAlert(client, messageRequestAlert);
+        }
     }
 }

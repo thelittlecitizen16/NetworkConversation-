@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Enums;
 using Common.HandleRequests;
 using Common.Models;
 using Microsoft.Extensions.Logging;
@@ -52,7 +53,9 @@ namespace ServerNetworkConversation.Options.GroupsChat
                 }
                 else
                 {
-                    _data.AllGroupsChat.GetGroupsChat().Where(g => g.Name == dataReceived).First().Participants.Remove(clientGuid);
+                    RemoveParticipantFromGroup(dataReceived, clientGuid);
+                    RemoveManagerFromGroup(dataReceived, clientGuid);
+
                     _logger.LogInformation($"client {clientGuid} leave group {dataReceived}");
                 }
             }
@@ -65,6 +68,19 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private void SendAllClientGroups(Guid clientGuid)
         {
             GroupUtils.SendAllClientGroups(_client, _requests, _data, clientGuid);
+        }
+        private void RemoveParticipantFromGroup(string dataReceived, Guid clientGuid)
+        {
+            _data.AllGroupsChat.GetGroupsChat().Where(g => g.Name == dataReceived).First().Participants.Remove(clientGuid);
+
+        }
+        private void RemoveManagerFromGroup(string dataReceived, Guid clientGuid)
+        {
+            var managers = _data.AllGroupsChat.GetGroupsChat().Where(g => g.Name == dataReceived).First().Managers;
+            if (managers.Contains(clientGuid))
+            {
+                managers.Remove(clientGuid);
+            }
         }
     }
 }

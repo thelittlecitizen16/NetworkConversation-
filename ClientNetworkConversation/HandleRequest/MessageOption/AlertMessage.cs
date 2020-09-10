@@ -15,16 +15,21 @@ namespace ClientNetworkConversation.HandleRequest.MessageOption
             switch (alert.Option)
             {
                 case AlertOptions.NEW_MESSAGE:
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     system.Write(alert.Message);
+                    Console.ForegroundColor = ConsoleColor.White;
                     break;
+
                 case AlertOptions.NEW_GROUP:
                     Console.ForegroundColor = ConsoleColor.Green;
                     system.Write(alert.Message);
+                    Console.ForegroundColor = ConsoleColor.White;
                     break;
+
                 case AlertOptions.EXIT_GROUP:
-                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     system.Write(alert.Message);
+                    Console.ForegroundColor = ConsoleColor.White;
                     break;
                 default:
                     break;
