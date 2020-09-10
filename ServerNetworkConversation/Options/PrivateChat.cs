@@ -1,4 +1,6 @@
-﻿using Common.HandleRequests;
+﻿using Common.Enums;
+using Common.HandleRequests;
+using Common.Models;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.Interfaces;
@@ -72,7 +74,9 @@ namespace ServerNetworkConversation.Options
                 else
                 {
                     string message = $"fail";
-                    _requests.SendStringMessage(_client, message);
+                    MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, message);
+                    _requests.SendModelMessage(_client, messageRequest);
+                    //_requests.SendStringMessage(_client, message);
                 }
             }
             catch (Exception)
@@ -83,16 +87,6 @@ namespace ServerNetworkConversation.Options
         private void SendMessagesHistory(Guid clientGuid, Guid guidToSend)
         {
             ChatUtils.SendMessagesHistory(_data.ClientsConnectedInChat.GetMessagesToHistory(clientGuid, guidToSend), _client, _requests);
-
-            //string allMessages = "";
-            //foreach (var message in _data.ClientsConnectedInChat.GetMessagesToHistory(clientGuid, guidToSend))
-            //{
-            //    allMessages += message + "\n";
-            //}
-            //if (allMessages != "")
-            //{
-            //    _requests.SendStringMessage(_client, allMessages);
-            //}
         }
         private void SendAllClientsConnected(Guid clientGuid)
         {
@@ -108,12 +102,16 @@ namespace ServerNetworkConversation.Options
                 }
             }
 
+           // MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, message);
+           // _requests.SendModelMessage(_client, messageRequest);
             _requests.SendStringMessage(_client, message);
         }
 
         private void AddPrivateChat(Guid clientGuid, Guid guidToSend)
         {
             string message = $"success";
+            //MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, message);
+            //_requests.SendModelMessage(_client, messageRequest);
             _requests.SendStringMessage(_client, message);
             _data.ClientsConnectedInChat.Add(clientGuid, guidToSend);
             _logger.LogInformation($"client {clientGuid} send {message} to client {message}");
@@ -121,7 +119,9 @@ namespace ServerNetworkConversation.Options
 
         private void ExistChat(Guid clientGuid, Guid guidToSend)
         {
-            _requests.SendStringMessage(_client, "0");
+            MessageRequest messageRequest = new MessageRequest(MessageKey.Exit, "0");
+            _requests.SendModelMessage(_client, messageRequest);
+            // _requests.SendStringMessage(_client, "0");
             _data.ClientsConnectedInChat.Remove(clientGuid, guidToSend);
             _logger.LogInformation($"client {clientGuid} leave chat with client {guidToSend}");
         }
@@ -132,7 +132,9 @@ namespace ServerNetworkConversation.Options
 
             if (_data.ClientsConnectedInChat.HaveConversition(clientGuid, guidToSend))
             {
-                _requests.SendStringMessage(clientSend, dataReceived);
+                MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, dataReceived);
+                _requests.SendModelMessage(clientSend, messageRequest);
+                // _requests.SendStringMessage(clientSend, dataReceived);
                 _logger.LogInformation($"client {clientSend} get message {dataReceived}");
             }
 

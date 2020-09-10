@@ -12,6 +12,7 @@ using Common.Enums;
 using Common.HandleRequests;
 using ServerNetworkConversation.Options.Utils;
 using System.IO;
+using Common.Models;
 
 namespace ServerNetworkConversation.Options
 {
@@ -108,8 +109,9 @@ namespace ServerNetworkConversation.Options
         {
             string message = $"{clientGuid} exist the global chat";
             SendMessageToEachClient(message);
-
-            _requests.SendStringMessage(_client, "0");
+            MessageRequest messageRequest = new MessageRequest(MessageKey.Exit, "0");
+            _requests.SendModelMessage(_client, messageRequest);
+            //_requests.SendStringMessage(_client, "0");
             _logger.LogInformation($"client {clientGuid} exit global chat");
         }
 

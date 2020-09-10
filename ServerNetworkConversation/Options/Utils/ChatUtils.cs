@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using ServerNetworkConversation.HandleData;
 using System.Text;
+using Common.Models;
+using Common.Enums;
 
 namespace ServerNetworkConversation.Options.Utils
 {
@@ -18,7 +20,9 @@ namespace ServerNetworkConversation.Options.Utils
             }
             if (allMessages != "")
             {
-                requests.SendStringMessage(client, allMessages);
+                MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, allMessages);
+                requests.SendModelMessage(client,messageRequest);
+               // requests.SendStringMessage(client, allMessages);
             }
         }
 
@@ -28,7 +32,9 @@ namespace ServerNetworkConversation.Options.Utils
             {
                 if (client.Connected)
                 {
-                    requests.SendStringMessage(client, message);
+                    MessageRequest messageRequest = new MessageRequest(MessageKey.STRING, message);
+                    requests.SendModelMessage(client, messageRequest);
+                   // requests.SendStringMessage(client, message);
                 }
             }
         }

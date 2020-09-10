@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Enums;
 using Common.HandleRequests;
 using Common.Models;
 using Microsoft.Extensions.Logging;
@@ -65,7 +66,9 @@ namespace ServerNetworkConversation.Options.GroupsChat
 
                         if (dataReceived == "0")
                         {
-                            _requests.SendStringMessage(_client, "0");
+                            MessageRequest messageRequest = new MessageRequest(MessageKey.Exit, "0");
+                            _requests.SendModelMessage(_client, messageRequest);
+                           // _requests.SendStringMessage(_client, "0");
                             ClientOutOfGroup(group);
                             _data.AllGroupsChat.RemoveClientUnConnected(group, _client);
                             end = true;
@@ -93,16 +96,6 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private void SendMessagesHistory(GroupChat groupChat)
         {
             ChatUtils.SendMessagesHistory(_data.AllGroupsChat.GetAllGroupHistory(groupChat), _client,_requests);
-            //string allMessages = "";
-
-            //foreach (var message in _data.AllGroupsChat.GetAllGroupHistory(groupChat))
-            //{
-            //    allMessages += message + "\n";
-            //}
-            //if (allMessages != "")
-            //{
-            //    _requests.SendStringMessage(_client, allMessages);
-            //}
         }
         private void SendMessageToEachClient(GroupChat group, string message)
         {

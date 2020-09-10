@@ -1,5 +1,6 @@
 ﻿using Common.Enums;
 using Common.HandleRequests;
+using Common.Models;
 using MenuBuilder.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,29 @@ namespace ClientNetworkConversation.Options.Utils
     {
         public static void GetMessage(IRequests requests, ISystem system, TcpClient client)
         {
-            string message = requests.GetStringMessage(client);
-            while (message != "0")
+            MessageRequest messageRequest = (MessageRequest)requests.GetModelMessage(client);
+            while (messageRequest.Key != MessageKey.Exit)
             {
-                system.Write(message);
-                message = requests.GetStringMessage(client);
+                switch (messageRequest.Key)
+                {
+                    case MessageKey.STRING:
+                        system.Write(messageRequest.Value.ToString());
+                        break;
+                    case MessageKey.ALERT:
+                        //system.Write(messageRequest.Value.ToString());
+                        break;
+                    default:
+                        break;
+                }
+
+                 messageRequest = (MessageRequest)requests.GetModelMessage(client);
             }
+            //string message = requests.GetStringMessage(client);
+            //while (message != "0")
+            //{
+            //    system.Write(message);
+            //    message = requests.GetStringMessage(client);
+            //}
         }
         public static bool SendMessageByType(IRequests requests, TcpClient client,string message)
         {

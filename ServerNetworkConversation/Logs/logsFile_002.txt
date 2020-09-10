@@ -1,190 +1,35 @@
-2020-09-10 14:56:19.219 +03:00 [INF] starting up the service
-2020-09-10 14:56:20.669 +03:00 [FTL] There Where Froblam starting the service
-System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
-   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
-   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
-   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
-   at System.Net.Sockets.TcpListener.Start(Int32 backlog)
-   at System.Net.Sockets.TcpListener.Start()
-   at ServerNetworkConversation.Worker.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Worker.cs:line 35
-   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
-   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
-   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
-   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
-   at ServerNetworkConversation.Program.Main(String[] args) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Program.cs:line 31
-2020-09-10 14:56:30.037 +03:00 [INF] starting up the service
-2020-09-10 14:56:30.688 +03:00 [FTL] There Where Froblam starting the service
-System.InvalidOperationException: Process has exited, so the requested information is not available.
-   at System.Diagnostics.Process.EnsureState(State state)
-   at System.Diagnostics.Process.get_SessionId()
-   at Microsoft.Extensions.Hosting.WindowsServices.WindowsServiceHelpers.IsWindowsService()
-   at Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService(IHostBuilder hostBuilder)
-   at ServerNetworkConversation.Program.CreateHostBuilder(String[] args) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Program.cs:line 45
-   at ServerNetworkConversation.Program.Main(String[] args) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Program.cs:line 31
-2020-09-10 15:02:45.751 +03:00 [INF] starting up the service
-2020-09-10 15:02:46.296 +03:00 [INF] server wait for first connection...
-2020-09-10 15:02:55.039 +03:00 [INF] new client connected
-2020-09-10 15:02:56.132 +03:00 [INF] client 79b00a2c-3445-43f3-96a9-4cac4877efea enter global chat
-2020-09-10 15:02:57.427 +03:00 [INF] send afek from 79b00a2c-3445-43f3-96a9-4cac4877efea in globalchat
-2020-09-10 15:02:57.428 +03:00 [INF] client 79b00a2c-3445-43f3-96a9-4cac4877efea send 79b00a2c-3445-43f3-96a9-4cac4877efea send: afek in global chat
-2020-09-10 15:02:59.009 +03:00 [INF] send dd from 79b00a2c-3445-43f3-96a9-4cac4877efea in globalchat
-2020-09-10 15:02:59.010 +03:00 [INF] client 79b00a2c-3445-43f3-96a9-4cac4877efea send 79b00a2c-3445-43f3-96a9-4cac4877efea send: dd in global chat
-2020-09-10 15:03:00.333 +03:00 [INF] client 79b00a2c-3445-43f3-96a9-4cac4877efea exit global chat
-2020-09-10 15:03:01.004 +03:00 [INF] client 79b00a2c-3445-43f3-96a9-4cac4877efea enter global chat
-2020-09-10 15:03:18.301 +03:00 [INF] client 79b00a2c-3445-43f3-96a9-4cac4877efea exit global chat
-2020-09-10 15:03:39.966 +03:00 [INF] Application is shutting down...
-2020-09-10 15:03:49.789 +03:00 [INF] starting up the service
-2020-09-10 15:03:50.225 +03:00 [FTL] There Where Froblam starting the service
-System.InvalidOperationException: Process has exited, so the requested information is not available.
-   at System.Diagnostics.Process.EnsureState(State state)
-   at System.Diagnostics.Process.get_SessionId()
-   at Microsoft.Extensions.Hosting.WindowsServices.WindowsServiceHelpers.IsWindowsService()
-   at Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService(IHostBuilder hostBuilder)
-   at ServerNetworkConversation.Program.CreateHostBuilder(String[] args) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Program.cs:line 45
-   at ServerNetworkConversation.Program.Main(String[] args) in C:\Users\thelittlecitizen16\source\repos\NetworkConversation\ServerNetworkConversation\Program.cs:line 31
-2020-09-10 15:04:10.349 +03:00 [INF] starting up the service
-2020-09-10 15:04:11.653 +03:00 [INF] server wait for first connection...
-2020-09-10 15:04:11.974 +03:00 [INF] new client connected
-2020-09-10 15:04:13.596 +03:00 [INF] client 00dcadf0-bb5f-46af-9b53-03e2f6d89974 enter global chat
-2020-09-10 15:07:40.141 +03:00 [INF] starting up the service
-2020-09-10 15:07:41.771 +03:00 [INF] server wait for first connection...
-2020-09-10 15:07:52.519 +03:00 [INF] new client connected
-2020-09-10 15:08:12.886 +03:00 [INF] client b38786fe-a9f1-498a-ba9c-d33568ce26f9 enter global chat
-2020-09-10 15:08:20.525 +03:00 [INF] send aaaa from b38786fe-a9f1-498a-ba9c-d33568ce26f9 in globalchat
-2020-09-10 15:08:20.526 +03:00 [INF] client b38786fe-a9f1-498a-ba9c-d33568ce26f9 send b38786fe-a9f1-498a-ba9c-d33568ce26f9 send: aaaa in global chat
-2020-09-10 15:08:22.044 +03:00 [INF] send bbb from b38786fe-a9f1-498a-ba9c-d33568ce26f9 in globalchat
-2020-09-10 15:08:22.044 +03:00 [INF] client b38786fe-a9f1-498a-ba9c-d33568ce26f9 send b38786fe-a9f1-498a-ba9c-d33568ce26f9 send: bbb in global chat
-2020-09-10 15:08:26.228 +03:00 [INF] client b38786fe-a9f1-498a-ba9c-d33568ce26f9 exit global chat
-2020-09-10 15:09:28.706 +03:00 [INF] starting up the service
-2020-09-10 15:09:29.798 +03:00 [INF] server wait for first connection...
-2020-09-10 15:09:30.996 +03:00 [INF] new client connected
-2020-09-10 15:09:32.940 +03:00 [INF] client 9d7ecbb7-81a9-4a18-8173-d2c761090758 enter global chat
-2020-09-10 15:10:20.461 +03:00 [INF] starting up the service
-2020-09-10 15:10:21.034 +03:00 [INF] server wait for first connection...
-2020-09-10 15:10:30.005 +03:00 [INF] new client connected
-2020-09-10 15:10:31.088 +03:00 [INF] client 238ccad4-50bd-4b82-8321-27d1eb921d0b enter global chat
-2020-09-10 15:10:54.840 +03:00 [INF] client 238ccad4-50bd-4b82-8321-27d1eb921d0b exit global chat
-2020-09-10 15:11:24.295 +03:00 [INF] client 238ccad4-50bd-4b82-8321-27d1eb921d0b enter global chat
-2020-09-10 15:11:32.499 +03:00 [INF] client 238ccad4-50bd-4b82-8321-27d1eb921d0b exit global chat
-2020-09-10 15:11:41.354 +03:00 [INF] client 238ccad4-50bd-4b82-8321-27d1eb921d0b enter global chat
-2020-09-10 15:11:50.014 +03:00 [INF] client 238ccad4-50bd-4b82-8321-27d1eb921d0b exit global chat
-2020-09-10 15:11:53.940 +03:00 [INF] client 238ccad4-50bd-4b82-8321-27d1eb921d0b enter global chat
-2020-09-10 15:11:55.720 +03:00 [INF] send sssss from 238ccad4-50bd-4b82-8321-27d1eb921d0b in globalchat
-2020-09-10 15:11:55.721 +03:00 [INF] client 238ccad4-50bd-4b82-8321-27d1eb921d0b send 238ccad4-50bd-4b82-8321-27d1eb921d0b send: sssss in global chat
-2020-09-10 15:12:14.406 +03:00 [INF] Application is shutting down...
-2020-09-10 15:15:56.401 +03:00 [INF] starting up the service
-2020-09-10 15:15:56.959 +03:00 [INF] server wait for first connection...
-2020-09-10 15:16:09.568 +03:00 [INF] new client connected
-2020-09-10 15:16:10.490 +03:00 [INF] client efb8e445-1de9-4d51-93c2-458e87d7a4ca enter global chat
-2020-09-10 15:16:12.327 +03:00 [INF] send aaa from efb8e445-1de9-4d51-93c2-458e87d7a4ca in globalchat
-2020-09-10 15:16:12.328 +03:00 [INF] client efb8e445-1de9-4d51-93c2-458e87d7a4ca send efb8e445-1de9-4d51-93c2-458e87d7a4ca send: aaa in global chat
-2020-09-10 15:16:38.270 +03:00 [INF] efb8e445-1de9-4d51-93c2-458e87d7a4ca send picture in globalchat
-2020-09-10 15:40:12.351 +03:00 [INF] Application is shutting down...
-2020-09-10 15:40:46.843 +03:00 [INF] starting up the service
-2020-09-10 15:40:47.391 +03:00 [INF] server wait for first connection...
-2020-09-10 15:40:54.634 +03:00 [INF] new client connected
-2020-09-10 15:41:04.537 +03:00 [INF] client d9666981-ebb9-477e-9399-dbe5f4bba092 enter global chat
-2020-09-10 15:41:05.704 +03:00 [INF] send aaa from d9666981-ebb9-477e-9399-dbe5f4bba092 in globalchat
-2020-09-10 15:41:07.327 +03:00 [INF] send vvvv from d9666981-ebb9-477e-9399-dbe5f4bba092 in globalchat
-2020-09-10 15:41:08.114 +03:00 [INF] client d9666981-ebb9-477e-9399-dbe5f4bba092 exit global chat
-2020-09-10 15:41:08.807 +03:00 [INF] client d9666981-ebb9-477e-9399-dbe5f4bba092 enter global chat
-2020-09-10 15:41:13.837 +03:00 [INF] send llllll from d9666981-ebb9-477e-9399-dbe5f4bba092 in globalchat
-2020-09-10 15:41:16.204 +03:00 [INF] client d9666981-ebb9-477e-9399-dbe5f4bba092 exit global chat
-2020-09-10 15:41:16.907 +03:00 [INF] client d9666981-ebb9-477e-9399-dbe5f4bba092 enter global chat
-2020-09-10 15:41:20.417 +03:00 [INF] send afek from d9666981-ebb9-477e-9399-dbe5f4bba092 in globalchat
-2020-09-10 15:41:23.192 +03:00 [INF] send dddd from d9666981-ebb9-477e-9399-dbe5f4bba092 in globalchat
-2020-09-10 15:41:34.242 +03:00 [INF] d9666981-ebb9-477e-9399-dbe5f4bba092 send picture in globalchat
-2020-09-10 15:42:40.064 +03:00 [INF] Application is shutting down...
-2020-09-10 15:42:48.881 +03:00 [INF] starting up the service
-2020-09-10 15:42:49.398 +03:00 [INF] server wait for first connection...
-2020-09-10 15:42:56.536 +03:00 [INF] new client connected
-2020-09-10 15:43:13.512 +03:00 [INF] client cbaa505d-7770-41f8-95d2-488348b81ee0 enter global chat
-2020-09-10 15:43:15.056 +03:00 [INF] send aaaaa from cbaa505d-7770-41f8-95d2-488348b81ee0 in globalchat
-2020-09-10 15:43:21.175 +03:00 [INF] send bbbbbbb from cbaa505d-7770-41f8-95d2-488348b81ee0 in globalchat
-2020-09-10 15:43:23.049 +03:00 [INF] client cbaa505d-7770-41f8-95d2-488348b81ee0 exit global chat
-2020-09-10 15:43:23.673 +03:00 [INF] client cbaa505d-7770-41f8-95d2-488348b81ee0 enter global chat
-2020-09-10 15:43:49.127 +03:00 [INF] new client connected
-2020-09-10 15:43:49.889 +03:00 [INF] client 17ad7d08-3294-470a-ae8d-c1c0d377f7d2 enter global chat
-2020-09-10 15:44:05.580 +03:00 [INF] send 1 from 17ad7d08-3294-470a-ae8d-c1c0d377f7d2 in globalchat
-2020-09-10 15:44:09.281 +03:00 [INF] client 17ad7d08-3294-470a-ae8d-c1c0d377f7d2 exit global chat
-2020-09-10 15:44:09.987 +03:00 [INF] client 17ad7d08-3294-470a-ae8d-c1c0d377f7d2 enter global chat
-2020-09-10 15:44:51.077 +03:00 [INF] send llklkl from 17ad7d08-3294-470a-ae8d-c1c0d377f7d2 in globalchat
-2020-09-10 15:45:18.213 +03:00 [INF] client 17ad7d08-3294-470a-ae8d-c1c0d377f7d2 exit global chat
-2020-09-10 15:47:00.847 +03:00 [INF] new client connected
-2020-09-10 15:47:01.849 +03:00 [INF] client 05c2f639-40e7-445a-9010-ec70506e8a65 enter global chat
-2020-09-10 15:47:27.380 +03:00 [INF] send aaaaaaaa from 05c2f639-40e7-445a-9010-ec70506e8a65 in globalchat
-2020-09-10 15:49:13.926 +03:00 [INF] new client connected
-2020-09-10 15:49:17.439 +03:00 [INF] Application is shutting down...
-2020-09-10 15:49:24.973 +03:00 [INF] starting up the service
-2020-09-10 15:49:25.516 +03:00 [INF] server wait for first connection...
-2020-09-10 15:49:33.991 +03:00 [INF] new client connected
-2020-09-10 15:49:34.163 +03:00 [INF] client 7e8f0ffa-0523-4ada-9263-af0f8f6249ba enter global chat
-2020-09-10 15:49:45.452 +03:00 [INF] send aaaa from 7e8f0ffa-0523-4ada-9263-af0f8f6249ba in globalchat
-2020-09-10 15:49:49.522 +03:00 [INF] send bbbbbbb from 7e8f0ffa-0523-4ada-9263-af0f8f6249ba in globalchat
-2020-09-10 15:49:50.684 +03:00 [INF] client 7e8f0ffa-0523-4ada-9263-af0f8f6249ba exit global chat
-2020-09-10 15:49:51.334 +03:00 [INF] client 7e8f0ffa-0523-4ada-9263-af0f8f6249ba enter global chat
-2020-09-10 15:49:54.188 +03:00 [INF] send gggggg from 7e8f0ffa-0523-4ada-9263-af0f8f6249ba in globalchat
-2020-09-10 15:49:59.262 +03:00 [INF] Application is shutting down...
-2020-09-10 15:50:39.687 +03:00 [INF] starting up the service
-2020-09-10 15:50:40.287 +03:00 [INF] server wait for first connection...
-2020-09-10 15:50:46.509 +03:00 [INF] new client connected
-2020-09-10 15:50:47.349 +03:00 [INF] client 71cd850b-6b57-4413-8325-7528cb3e6ede enter global chat
-2020-09-10 15:50:53.143 +03:00 [INF] send aaaaaaaaaaa from 71cd850b-6b57-4413-8325-7528cb3e6ede in globalchat
-2020-09-10 15:50:55.651 +03:00 [INF] send bbb from 71cd850b-6b57-4413-8325-7528cb3e6ede in globalchat
-2020-09-10 15:50:56.580 +03:00 [INF] client 71cd850b-6b57-4413-8325-7528cb3e6ede exit global chat
-2020-09-10 15:50:57.088 +03:00 [INF] client 71cd850b-6b57-4413-8325-7528cb3e6ede enter global chat
-2020-09-10 15:51:33.612 +03:00 [INF] new client connected
-2020-09-10 15:51:34.362 +03:00 [INF] client f38eaac4-96ea-4d62-bc9f-84c9b36d300e enter global chat
-2020-09-10 15:51:44.524 +03:00 [INF] send aaaa from f38eaac4-96ea-4d62-bc9f-84c9b36d300e in globalchat
-2020-09-10 15:52:28.557 +03:00 [INF] new client connected
-2020-09-10 15:52:30.076 +03:00 [INF] client f756a3fc-c474-46e5-90ee-21307a035a07 enter global chat
-2020-09-10 15:53:41.552 +03:00 [INF] new client connected
-2020-09-10 15:53:42.805 +03:00 [INF] client 241fdd56-23d2-4929-a0c7-83ce6502e5bc enter global chat
-2020-09-10 15:53:51.456 +03:00 [INF] client 241fdd56-23d2-4929-a0c7-83ce6502e5bc exit global chat
-2020-09-10 15:53:59.732 +03:00 [INF] client 241fdd56-23d2-4929-a0c7-83ce6502e5bc enter global chat
-2020-09-10 15:54:41.818 +03:00 [INF] Application is shutting down...
-2020-09-10 15:55:01.247 +03:00 [INF] starting up the service
-2020-09-10 15:55:01.810 +03:00 [INF] server wait for first connection...
-2020-09-10 15:55:08.347 +03:00 [INF] Application is shutting down...
-2020-09-10 15:55:15.720 +03:00 [INF] starting up the service
-2020-09-10 15:55:16.874 +03:00 [INF] server wait for first connection...
-2020-09-10 15:55:19.929 +03:00 [INF] new client connected
-2020-09-10 15:55:35.758 +03:00 [INF] client 23b8a914-659b-4644-ac53-7aa984f1a22a enter global chat
-2020-09-10 15:55:40.170 +03:00 [INF] send sssss from 23b8a914-659b-4644-ac53-7aa984f1a22a in globalchat
-2020-09-10 15:55:41.926 +03:00 [INF] client 23b8a914-659b-4644-ac53-7aa984f1a22a exit global chat
-2020-09-10 15:57:18.200 +03:00 [INF] starting up the service
-2020-09-10 15:57:19.898 +03:00 [INF] server wait for first connection...
-2020-09-10 15:57:20.333 +03:00 [INF] new client connected
-2020-09-10 15:57:21.150 +03:00 [INF] client 666fa819-89f2-436f-be78-8a8d14486923 enter global chat
-2020-09-10 15:57:23.343 +03:00 [INF] send afek from 666fa819-89f2-436f-be78-8a8d14486923 in globalchat
-2020-09-10 15:57:25.802 +03:00 [INF] send cccc from 666fa819-89f2-436f-be78-8a8d14486923 in globalchat
-2020-09-10 15:57:26.623 +03:00 [INF] client 666fa819-89f2-436f-be78-8a8d14486923 exit global chat
-2020-09-10 15:57:27.216 +03:00 [INF] client 666fa819-89f2-436f-be78-8a8d14486923 enter global chat
-2020-09-10 15:57:33.913 +03:00 [INF] client 666fa819-89f2-436f-be78-8a8d14486923 exit global chat
-2020-09-10 15:57:35.582 +03:00 [INF] client 666fa819-89f2-436f-be78-8a8d14486923 enter global chat
-2020-09-10 15:57:56.638 +03:00 [INF] 666fa819-89f2-436f-be78-8a8d14486923 send picture in globalchat
-2020-09-10 15:58:05.461 +03:00 [INF] client 666fa819-89f2-436f-be78-8a8d14486923 exit global chat
-2020-09-10 15:58:09.972 +03:00 [INF] client 666fa819-89f2-436f-be78-8a8d14486923 enter global chat
-2020-09-10 15:58:12.256 +03:00 [INF] client 666fa819-89f2-436f-be78-8a8d14486923 exit global chat
-2020-09-10 15:58:13.810 +03:00 [INF] client 666fa819-89f2-436f-be78-8a8d14486923 enter global chat
-2020-09-10 15:59:31.197 +03:00 [INF] starting up the service
-2020-09-10 15:59:32.843 +03:00 [INF] server wait for first connection...
-2020-09-10 15:59:32.989 +03:00 [INF] new client connected
-2020-09-10 15:59:33.917 +03:00 [INF] client eb0572e6-51f1-4049-bafa-85ee0e123c10 enter global chat
-2020-09-10 15:59:35.612 +03:00 [INF] send aaaaa from eb0572e6-51f1-4049-bafa-85ee0e123c10 in globalchat
-2020-09-10 15:59:37.181 +03:00 [INF] send bbb from eb0572e6-51f1-4049-bafa-85ee0e123c10 in globalchat
-2020-09-10 15:59:37.956 +03:00 [INF] client eb0572e6-51f1-4049-bafa-85ee0e123c10 exit global chat
-2020-09-10 15:59:40.127 +03:00 [INF] client eb0572e6-51f1-4049-bafa-85ee0e123c10 enter global chat
-2020-09-10 15:59:50.936 +03:00 [INF] eb0572e6-51f1-4049-bafa-85ee0e123c10 send picture in globalchat
-2020-09-10 16:04:04.448 +03:00 [INF] starting up the service
-2020-09-10 16:04:05.020 +03:00 [INF] server wait for first connection...
-2020-09-10 16:04:42.665 +03:00 [INF] new client connected
-2020-09-10 16:04:44.408 +03:00 [INF] client 97f26715-9de0-4af8-ab9d-a2b6ac59f0fd enter global chat
-2020-09-10 16:04:45.826 +03:00 [INF] send aaaa from 97f26715-9de0-4af8-ab9d-a2b6ac59f0fd in globalchat
-2020-09-10 16:04:47.720 +03:00 [INF] send vvbbb from 97f26715-9de0-4af8-ab9d-a2b6ac59f0fd in globalchat
-2020-09-10 16:04:48.843 +03:00 [INF] client 97f26715-9de0-4af8-ab9d-a2b6ac59f0fd exit global chat
-2020-09-10 16:04:49.352 +03:00 [INF] client 97f26715-9de0-4af8-ab9d-a2b6ac59f0fd enter global chat
-2020-09-10 16:05:16.131 +03:00 [INF] 97f26715-9de0-4af8-ab9d-a2b6ac59f0fd send picture in globalchat
-2020-09-10 16:05:20.084 +03:00 [INF] send gggggg from 97f26715-9de0-4af8-ab9d-a2b6ac59f0fd in globalchat
-2020-09-10 16:05:21.395 +03:00 [INF] client 97f26715-9de0-4af8-ab9d-a2b6ac59f0fd exit global chat
-2020-09-10 16:05:24.246 +03:00 [INF] Application is shutting down...
+2020-09-10 17:35:52.378 +03:00 [INF] starting up the service
+2020-09-10 17:39:54.960 +03:00 [INF] starting up the service
+2020-09-10 17:39:55.485 +03:00 [INF] server wait for first connection...
+2020-09-10 17:40:21.434 +03:00 [INF] new client connected
+2020-09-10 17:40:28.052 +03:00 [INF] new client connected
+2020-09-10 17:40:33.553 +03:00 [INF] client 11276cbe-658b-417d-ae94-1e4e20707c3d send success to client success
+2020-09-10 17:40:38.282 +03:00 [INF] client 33c3841b-3ad8-4e25-83af-af7adc4df963 send success to client success
+2020-09-10 17:40:47.407 +03:00 [INF] Received from 33c3841b-3ad8-4e25-83af-af7adc4df963 and Sending to 11276cbe-658b-417d-ae94-1e4e20707c3d : aaaaa
+2020-09-10 17:40:47.425 +03:00 [INF] client System.Net.Sockets.TcpClient get message aaaaa
+2020-09-10 17:41:10.632 +03:00 [INF] Received from 11276cbe-658b-417d-ae94-1e4e20707c3d and Sending to 33c3841b-3ad8-4e25-83af-af7adc4df963 : hello
+2020-09-10 17:41:10.633 +03:00 [INF] client System.Net.Sockets.TcpClient get message hello
+2020-09-10 17:41:14.063 +03:00 [INF] Received from 11276cbe-658b-417d-ae94-1e4e20707c3d and Sending to 33c3841b-3ad8-4e25-83af-af7adc4df963 : cccccc
+2020-09-10 17:41:14.064 +03:00 [INF] client System.Net.Sockets.TcpClient get message cccccc
+2020-09-10 17:41:19.369 +03:00 [INF] client 11276cbe-658b-417d-ae94-1e4e20707c3d leave chat with client 33c3841b-3ad8-4e25-83af-af7adc4df963
+2020-09-10 17:41:20.192 +03:00 [INF] client 11276cbe-658b-417d-ae94-1e4e20707c3d enter global chat
+2020-09-10 17:42:09.353 +03:00 [INF] Application is shutting down...
+2020-09-10 17:42:20.277 +03:00 [INF] starting up the service
+2020-09-10 17:42:20.826 +03:00 [INF] server wait for first connection...
+2020-09-10 17:42:24.127 +03:00 [INF] new client connected
+2020-09-10 17:42:30.157 +03:00 [INF] new client connected
+2020-09-10 17:42:35.175 +03:00 [INF] client 112b3ac6-0794-4462-bcb3-90e40c44cadb send success to client success
+2020-09-10 17:42:40.152 +03:00 [INF] client 879d0d2f-b41a-4e5e-bd52-993786a59df4 send success to client success
+2020-09-10 17:42:45.438 +03:00 [INF] Received from 879d0d2f-b41a-4e5e-bd52-993786a59df4 and Sending to 112b3ac6-0794-4462-bcb3-90e40c44cadb : hello
+2020-09-10 17:42:45.439 +03:00 [INF] client System.Net.Sockets.TcpClient get message hello
+2020-09-10 17:42:52.541 +03:00 [INF] Received from 112b3ac6-0794-4462-bcb3-90e40c44cadb and Sending to 879d0d2f-b41a-4e5e-bd52-993786a59df4 : bye
+2020-09-10 17:42:52.542 +03:00 [INF] client System.Net.Sockets.TcpClient get message bye
+2020-09-10 17:43:02.012 +03:00 [INF] Received from 112b3ac6-0794-4462-bcb3-90e40c44cadb and Sending to 879d0d2f-b41a-4e5e-bd52-993786a59df4 : whatapp
+2020-09-10 17:43:02.013 +03:00 [INF] client System.Net.Sockets.TcpClient get message whatapp
+2020-09-10 17:43:06.557 +03:00 [INF] Received from 879d0d2f-b41a-4e5e-bd52-993786a59df4 and Sending to 112b3ac6-0794-4462-bcb3-90e40c44cadb : ok
+2020-09-10 17:43:06.557 +03:00 [INF] client System.Net.Sockets.TcpClient get message ok
+2020-09-10 17:43:10.008 +03:00 [INF] client 112b3ac6-0794-4462-bcb3-90e40c44cadb leave chat with client 879d0d2f-b41a-4e5e-bd52-993786a59df4
+2020-09-10 17:43:14.003 +03:00 [INF] client 112b3ac6-0794-4462-bcb3-90e40c44cadb send success to client success
+2020-09-10 17:43:16.732 +03:00 [INF] client 879d0d2f-b41a-4e5e-bd52-993786a59df4 leave chat with client 112b3ac6-0794-4462-bcb3-90e40c44cadb
+2020-09-10 17:43:18.341 +03:00 [INF] client 879d0d2f-b41a-4e5e-bd52-993786a59df4 send success to client success
+2020-09-10 17:43:30.911 +03:00 [INF] Application is shutting down...
