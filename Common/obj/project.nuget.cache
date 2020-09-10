@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZCVRwtVA4DyS3h83pfiililFdPRgXKGyiWlBQ1wwThSOFU+M6S71wXYQ5iSU4IMHcK3PsiXLLz7YFmiiszC9Lg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\thelittlecitizen16\\source\\repos\\NetworkConversation\\Common\\Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\thelittlecitizen16\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

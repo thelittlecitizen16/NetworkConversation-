@@ -1,0 +1,114 @@
+﻿2020-09-10 22:06:08.402 +03:00 [INF] starting up the service
+2020-09-10 22:06:11.272 +03:00 [INF] server wait for first connection...
+2020-09-10 22:06:11.496 +03:00 [INF] new client connected
+2020-09-10 22:06:11.671 +03:00 [INF] new client connected
+2020-09-10 22:06:12.491 +03:00 [INF] new client connected
+2020-09-10 22:06:18.533 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c enter global chat
+2020-09-10 22:06:20.013 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c enter global chat
+2020-09-10 22:06:22.548 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 enter global chat
+2020-09-10 22:06:26.874 +03:00 [INF] send afek from 9703f048-6a1d-45c4-9948-b54e0289d6d7 in globalchat
+2020-09-10 22:06:29.349 +03:00 [INF] send afek2 from 1acffd37-33c5-4909-afc9-6a610c34a80c in globalchat
+2020-09-10 22:06:32.190 +03:00 [INF] send afek3 from 2f87a002-41ff-45dc-804e-c5f1a633350c in globalchat
+2020-09-10 22:06:32.845 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c exit global chat
+2020-09-10 22:06:40.273 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c send success to client success
+2020-09-10 22:06:42.323 +03:00 [INF] Received from 2f87a002-41ff-45dc-804e-c5f1a633350c and Sending to 9703f048-6a1d-45c4-9948-b54e0289d6d7 : hello
+2020-09-10 22:06:44.558 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 exit global chat
+2020-09-10 22:06:47.768 +03:00 [INF] Received from 2f87a002-41ff-45dc-804e-c5f1a633350c and Sending to 9703f048-6a1d-45c4-9948-b54e0289d6d7 : hello2
+2020-09-10 22:06:49.619 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 enter global chat
+2020-09-10 22:06:51.229 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 exit global chat
+2020-09-10 22:06:54.449 +03:00 [INF] Received from 2f87a002-41ff-45dc-804e-c5f1a633350c and Sending to 9703f048-6a1d-45c4-9948-b54e0289d6d7 : hello3
+2020-09-10 22:07:04.200 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 send success to client success
+2020-09-10 22:07:07.047 +03:00 [INF] Received from 9703f048-6a1d-45c4-9948-b54e0289d6d7 and Sending to 2f87a002-41ff-45dc-804e-c5f1a633350c : hellooo
+2020-09-10 22:07:07.048 +03:00 [INF] client System.Net.Sockets.TcpClient get message hellooo
+2020-09-10 22:07:17.254 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 leave chat with client 2f87a002-41ff-45dc-804e-c5f1a633350c
+2020-09-10 22:07:20.273 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 send success to client success
+2020-09-10 22:07:23.821 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c leave chat with client 9703f048-6a1d-45c4-9948-b54e0289d6d7
+2020-09-10 22:07:32.893 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 leave chat with client 2f87a002-41ff-45dc-804e-c5f1a633350c
+2020-09-10 22:07:49.102 +03:00 [INF] add new group wow
+2020-09-10 22:07:51.739 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c enter global chat
+2020-09-10 22:07:53.648 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c exit global chat
+2020-09-10 22:07:54.788 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c exit global chat
+2020-09-10 22:07:59.194 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 enter to group chat wow
+2020-09-10 22:08:02.745 +03:00 [INF] Received in group wow and Sending all: 9703f048-6a1d-45c4-9948-b54e0289d6d7 send:  aaaaaaaa
+2020-09-10 22:08:06.798 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c enter to group chat wow
+2020-09-10 22:08:11.545 +03:00 [INF] Received in group wow and Sending all: 1acffd37-33c5-4909-afc9-6a610c34a80c send:  dddd
+2020-09-10 22:08:17.583 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c enter to group chat wow
+2020-09-10 22:08:23.379 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 22:08:23.379 +03:00 [INF] client out chat
+2020-09-10 22:08:26.320 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 enter to group chat wow
+2020-09-10 22:08:28.528 +03:00 [INF] Received in group wow and Sending all: 9703f048-6a1d-45c4-9948-b54e0289d6d7 send:  hello
+2020-09-10 22:08:31.446 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 22:08:31.446 +03:00 [INF] client out chat
+2020-09-10 22:08:32.483 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 22:08:32.483 +03:00 [INF] client out chat
+2020-09-10 22:08:33.612 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 22:08:33.612 +03:00 [INF] client out chat
+2020-09-10 22:08:44.459 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 change settings group wow
+2020-09-10 22:08:48.092 +03:00 [INF] client dont want to enter chat in any group
+2020-09-10 22:08:48.093 +03:00 [INF] client out chat
+2020-09-10 22:08:49.259 +03:00 [INF] client dont want to enter chat in any group
+2020-09-10 22:08:49.259 +03:00 [INF] client out chat
+2020-09-10 22:08:53.025 +03:00 [INF] client dont want to enter chat in any group
+2020-09-10 22:08:53.025 +03:00 [INF] client out chat
+2020-09-10 22:09:01.242 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 change settings group wow
+2020-09-10 22:09:05.373 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c enter to group chat wow
+2020-09-10 22:09:10.407 +03:00 [INF] Received in group wow and Sending all: 2f87a002-41ff-45dc-804e-c5f1a633350c send:  hello
+2020-09-10 22:09:11.660 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 22:09:11.660 +03:00 [INF] client out chat
+2020-09-10 22:09:15.597 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c enter to group chat wow
+2020-09-10 22:09:16.778 +03:00 [INF] Received in group wow and Sending all: 2f87a002-41ff-45dc-804e-c5f1a633350c send:  ddddd
+2020-09-10 22:09:17.432 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 22:09:17.432 +03:00 [INF] client out chat
+2020-09-10 22:09:19.948 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c enter global chat
+2020-09-10 22:09:31.782 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c exit global chat
+2020-09-10 22:09:32.411 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c enter global chat
+2020-09-10 22:09:49.374 +03:00 [INF] add new group aaaa
+2020-09-10 22:10:03.789 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c enter global chat
+2020-09-10 22:10:11.503 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c exit global chat
+2020-09-10 22:10:24.599 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 change settings group aaaa
+2020-09-10 22:10:33.259 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c leave group wow
+2020-09-10 22:10:34.757 +03:00 [INF] client dont want to enter manager settings to any group
+2020-09-10 22:10:37.082 +03:00 [INF] client dont want to enter chat in any group
+2020-09-10 22:10:37.083 +03:00 [INF] client out chat
+2020-09-10 22:10:39.174 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c exit global chat
+2020-09-10 22:10:44.283 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c leave group wow
+2020-09-10 22:10:49.696 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c dont want to leave any group
+2020-09-10 22:10:55.253 +03:00 [INF] client dont want to enter chat in any group
+2020-09-10 22:10:55.253 +03:00 [INF] client out chat
+2020-09-10 22:11:01.184 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c enter global chat
+2020-09-10 22:11:04.922 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c exit global chat
+2020-09-10 22:11:13.062 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 change settings group aaaa
+2020-09-10 22:11:22.686 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c change settings group aaaa
+2020-09-10 22:11:25.143 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c leave group aaaa
+2020-09-10 22:11:26.541 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c dont want to leave any group
+2020-09-10 22:11:29.928 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c leave group aaaa
+2020-09-10 22:11:30.806 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c dont want to leave any group
+2020-09-10 22:11:32.752 +03:00 [INF] client dont want to enter manager settings to any group
+2020-09-10 22:11:36.660 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 leave group aaaa
+2020-09-10 22:11:41.277 +03:00 [INF] client dont want to enter manager settings to any group
+2020-09-10 22:11:47.714 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 send success to client success
+2020-09-10 22:11:49.486 +03:00 [INF] Received from 9703f048-6a1d-45c4-9948-b54e0289d6d7 and Sending to 2f87a002-41ff-45dc-804e-c5f1a633350c : aaaaaa
+2020-09-10 22:11:53.513 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c enter global chat
+2020-09-10 22:11:55.163 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c enter global chat
+2020-09-10 22:11:56.958 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c exit global chat
+2020-09-10 22:12:02.157 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c send success to client success
+2020-09-10 22:12:04.307 +03:00 [INF] Received from 2f87a002-41ff-45dc-804e-c5f1a633350c and Sending to 9703f048-6a1d-45c4-9948-b54e0289d6d7 : ssssss
+2020-09-10 22:12:04.307 +03:00 [INF] client System.Net.Sockets.TcpClient get message ssssss
+2020-09-10 22:12:06.765 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c leave chat with client 9703f048-6a1d-45c4-9948-b54e0289d6d7
+2020-09-10 22:12:11.392 +03:00 [INF] client 2f87a002-41ff-45dc-804e-c5f1a633350c send success to client success
+2020-09-10 22:12:13.592 +03:00 [INF] Received from 2f87a002-41ff-45dc-804e-c5f1a633350c and Sending to 1acffd37-33c5-4909-afc9-6a610c34a80c : ffffff
+2020-09-10 22:12:15.662 +03:00 [INF] client 1acffd37-33c5-4909-afc9-6a610c34a80c exit global chat
+2020-09-10 22:12:20.002 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 leave chat with client 2f87a002-41ff-45dc-804e-c5f1a633350c
+2020-09-10 22:12:20.886 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 enter global chat
+2020-09-10 22:12:22.957 +03:00 [INF] send hhhh from 9703f048-6a1d-45c4-9948-b54e0289d6d7 in globalchat
+2020-09-10 22:12:23.840 +03:00 [INF] client 9703f048-6a1d-45c4-9948-b54e0289d6d7 exit global chat
+2020-09-10 22:15:59.621 +03:00 [INF] starting up the service
+2020-09-10 22:16:01.920 +03:00 [INF] server wait for first connection...
+2020-09-10 22:16:02.386 +03:00 [INF] new client connected
+2020-09-10 22:16:03.196 +03:00 [INF] new client connected
+2020-09-10 22:16:04.423 +03:00 [INF] new client connected
+2020-09-10 22:16:52.279 +03:00 [INF] client 7101ae4a-f178-4bdb-a8d6-8add0c92594a enter global chat
+2020-09-10 22:16:53.980 +03:00 [INF] send ggg from 7101ae4a-f178-4bdb-a8d6-8add0c92594a in globalchat
+2020-09-10 22:17:05.266 +03:00 [INF] new client connected
+2020-09-10 22:17:06.816 +03:00 [INF] client afc7c055-91f7-470c-9fe4-843988d87486 enter global chat
+2020-09-10 22:17:07.927 +03:00 [INF] send jjjj from afc7c055-91f7-470c-9fe4-843988d87486 in globalchat

@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("dotnet-ServerNetworkConversation-B496F73F-F001-4D95-A014-00BDB1CB5FF1")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("ServerNetworkConversation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
