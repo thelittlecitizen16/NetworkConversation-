@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Common
+namespace Common.Models
 {
     [Serializable()]
     public class AllGroupChat

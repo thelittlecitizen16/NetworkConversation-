@@ -2,6 +2,7 @@
 using Common.Enums;
 using Common.HandleRequests;
 using Common.HandleRequests.HandleMessages;
+using Common.Models;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
