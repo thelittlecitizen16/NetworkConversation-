@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using ServerNetworkConversation.HandleData;
 using System.Text;
 
 namespace ServerNetworkConversation.Options.Utils
@@ -30,6 +31,11 @@ namespace ServerNetworkConversation.Options.Utils
                     requests.SendStringMessage(client, message);
                 }
             }
+        }
+        public static void RemoveClientWhenOut(TcpClient client, Guid clientGuid, Data data)
+        {
+            client.Close();
+            data.ClientsConnectedInServer.Remove(clientGuid);
         }
     }
 }

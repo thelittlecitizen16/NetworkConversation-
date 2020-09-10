@@ -1,7 +1,6 @@
 ﻿using Common.HandleRequests;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
-using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
 using ServerNetworkConversation.Options.Utils;
 using System;
@@ -17,16 +16,14 @@ namespace ServerNetworkConversation.Options
     {
         private TcpClient _client;
         private Data _data;
-        private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
         private IRequests _requests;
 
-        public PrivateChat(Data data, TcpClient inClientSocket, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests)
+        public PrivateChat(Data data, TcpClient inClientSocket,  ILogger<Worker> logger, IRequests requests)
         {
             _client = inClientSocket;
             _data = data;
-            _removeClient = removeClient;
             _logger = logger;
             _requests = requests;
         }
@@ -80,7 +77,7 @@ namespace ServerNetworkConversation.Options
             }
             catch (Exception)
             {
-                _removeClient.RemoveClientWhenOut(_client, clientGuid);
+                ChatUtils.RemoveClientWhenOut(_client, clientGuid, _data);
             }
         }
         private void SendMessagesHistory(Guid clientGuid, Guid guidToSend)

@@ -11,8 +11,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.HandleOptions;
-using ServerNetworkConversation.Options;
-using ServerNetworkConversation.Options.HandleOptions;
 
 namespace ServerNetworkConversation
 {
@@ -28,7 +26,6 @@ namespace ServerNetworkConversation
         {
             Data data = new Data();
             ClientOptionsFactory clientOptionsFactory = new ClientOptionsFactory();
-            RemoveClient removeClient = new RemoveClient(data);
             Requests requests = new Requests();
 
             IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
@@ -46,7 +43,7 @@ namespace ServerNetworkConversation
                     data.ClientsConnectedInServer.AddWhenConnect(Guid.NewGuid(), tcpClient);
                     _logger.LogInformation($"new client connected");
 
-                    var manageClientOptions = new ManageClientOptions(data, tcpClient, removeClient, clientOptionsFactory, _logger, requests);
+                    var manageClientOptions = new ManageClientOptions(data, tcpClient, clientOptionsFactory, _logger, requests);
                     manageClientOptions.Run();
                 }
             }

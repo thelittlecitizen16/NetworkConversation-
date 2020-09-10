@@ -5,7 +5,6 @@ using Common.HandleRequests.HandleMessages;
 using Common.Models;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
-using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
 using ServerNetworkConversation.Options.Utils;
 using System;
@@ -21,16 +20,14 @@ namespace ServerNetworkConversation.Options.GroupsChat
     {
         private TcpClient _client;
         private Data _data;
-        private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
         private IRequests _requests;
 
-        public CreateGroupChat(Data data, TcpClient client,RemoveClient removeClient, ILogger<Worker> logger,  IRequests requests)
+        public CreateGroupChat(Data data, TcpClient client, ILogger<Worker> logger,  IRequests requests)
         {
             _client = client;
             _data = data;
-            _removeClient = removeClient;
             _logger = logger;
             _requests = requests;
         }
@@ -54,7 +51,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             }
             catch (Exception)
             {
-                _removeClient.RemoveClientWhenOut(_client, clientGuid);
+                ChatUtils.RemoveClientWhenOut(_client, clientGuid, _data);
             }
         }
 
@@ -69,15 +66,6 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private GroupChat WaitToGetGroupFromClient()
         {
            return GroupUtils.WaitToGetGroupFromClient(_client, _requests);
-
-            //GroupChat groupChat = (GroupChat)_requests.GetModelMessage(_client);
-
-            //while (groupChat == null)
-            //{
-            //    groupChat = (GroupChat)_requests.GetModelMessage(_client);
-            //}
-
-            //return groupChat;
         }
         private void AddGroup(GroupChat groupChat, Guid clientGuid)
         {

@@ -1,1 +1,37 @@
-﻿
+﻿2020-09-10 10:08:46.250 +03:00 [INF] starting up the service
+2020-09-10 10:08:46.802 +03:00 [INF] server wait for first connection...
+2020-09-10 10:08:51.426 +03:00 [INF] new client connected
+2020-09-10 10:08:52.251 +03:00 [INF] new client connected
+2020-09-10 10:08:53.864 +03:00 [INF] client 635d4015-6db0-454c-8dd7-42bd7521904a enter global chat
+2020-09-10 10:08:55.136 +03:00 [INF] client 300d5bbc-8292-460c-8887-6fbecb2fd55b enter global chat
+2020-09-10 10:08:57.515 +03:00 [INF] send aaaa from 635d4015-6db0-454c-8dd7-42bd7521904a in globalchat
+2020-09-10 10:08:57.515 +03:00 [INF] client 635d4015-6db0-454c-8dd7-42bd7521904a send 635d4015-6db0-454c-8dd7-42bd7521904a send: aaaa in global chat
+2020-09-10 10:08:58.560 +03:00 [INF] client 635d4015-6db0-454c-8dd7-42bd7521904a exit global chat
+2020-09-10 10:08:59.575 +03:00 [INF] client 635d4015-6db0-454c-8dd7-42bd7521904a enter global chat
+2020-09-10 10:09:01.164 +03:00 [INF] client 635d4015-6db0-454c-8dd7-42bd7521904a exit global chat
+2020-09-10 10:09:03.867 +03:00 [INF] client 300d5bbc-8292-460c-8887-6fbecb2fd55b exit global chat
+2020-09-10 10:09:10.361 +03:00 [INF] client 635d4015-6db0-454c-8dd7-42bd7521904a send success to client success
+2020-09-10 10:09:12.235 +03:00 [INF] Received from 635d4015-6db0-454c-8dd7-42bd7521904a and Sending to 300d5bbc-8292-460c-8887-6fbecb2fd55b : 1212
+2020-09-10 10:09:18.396 +03:00 [INF] client 300d5bbc-8292-460c-8887-6fbecb2fd55b send success to client success
+2020-09-10 10:09:19.995 +03:00 [INF] Received from 300d5bbc-8292-460c-8887-6fbecb2fd55b and Sending to 635d4015-6db0-454c-8dd7-42bd7521904a : fffrf
+2020-09-10 10:09:19.995 +03:00 [INF] client System.Net.Sockets.TcpClient get message fffrf
+2020-09-10 10:09:20.918 +03:00 [INF] client 300d5bbc-8292-460c-8887-6fbecb2fd55b leave chat with client 635d4015-6db0-454c-8dd7-42bd7521904a
+2020-09-10 10:09:22.340 +03:00 [INF] client 635d4015-6db0-454c-8dd7-42bd7521904a leave chat with client 300d5bbc-8292-460c-8887-6fbecb2fd55b
+2020-09-10 10:09:25.039 +03:00 [INF] add new group a
+2020-09-10 10:09:32.983 +03:00 [INF] add new group b
+2020-09-10 10:09:34.984 +03:00 [INF] client dont want to enter chat in any group
+2020-09-10 10:09:34.985 +03:00 [INF] client out chat
+2020-09-10 10:09:38.185 +03:00 [INF] client 635d4015-6db0-454c-8dd7-42bd7521904a enter to group chat b
+2020-09-10 10:09:39.631 +03:00 [INF] Received in group b and Sending all: 635d4015-6db0-454c-8dd7-42bd7521904a send:  aaa
+2020-09-10 10:09:43.015 +03:00 [INF] client 300d5bbc-8292-460c-8887-6fbecb2fd55b enter to group chat b
+2020-09-10 10:09:45.014 +03:00 [INF] Received in group b and Sending all: 300d5bbc-8292-460c-8887-6fbecb2fd55b send:  bbbb
+2020-09-10 10:09:46.169 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 10:09:46.170 +03:00 [INF] client out chat
+2020-09-10 10:09:47.539 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 10:09:47.540 +03:00 [INF] client out chat
+2020-09-10 10:09:54.407 +03:00 [INF] client 635d4015-6db0-454c-8dd7-42bd7521904a change settings group b
+2020-09-10 10:09:56.854 +03:00 [INF] client dont want to enter chat in any group
+2020-09-10 10:09:56.854 +03:00 [INF] client out chat
+2020-09-10 10:10:02.594 +03:00 [INF] client 635d4015-6db0-454c-8dd7-42bd7521904a leave group a
+2020-09-10 10:10:05.708 +03:00 [INF] client out chat
+2020-09-10 10:10:09.387 +03:00 [INF] Application is shutting down...
