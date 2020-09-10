@@ -14,13 +14,13 @@ namespace ClientNetworkConversation.Options.GroupsChat
     {
         public string OptionMessage => "Create Group Chat";
         private static TcpClient _client;
-        private HandleServer _handleServer;
+        private IRequests _requests;
         private ISystem _system;
 
-        public CreateGroupChat(TcpClient client, HandleServer handleServer, ISystem system)
+        public CreateGroupChat(TcpClient client,IRequests requests, ISystem system)
         {
-            _handleServer = handleServer;
             _client = client;
+            _requests = requests;
             _system = system;
         }
 
@@ -28,9 +28,9 @@ namespace ClientNetworkConversation.Options.GroupsChat
         {
             try
             {
-                _handleServer.SendMessageToServer(_client, ClientOptions.CREATE_GROUP_CHAT.ToString());
+                _requests.SendStringMessage(_client, ClientOptions.CREATE_GROUP_CHAT.ToString());
              
-                Participants participants = (Participants)_handleServer.GetFromServer(_client);
+                Participants participants = (Participants)_requests.GetModelMessage(_client);
 
                 _system.Write("enter group name");
                 string gropuName = _system.ReadString();
@@ -91,7 +91,7 @@ namespace ClientNetworkConversation.Options.GroupsChat
         private void SendGroupToServer(string gropuName, List<Guid> usersToAdd)
         {
              GroupChat groupChat = new GroupChat(gropuName, usersToAdd, new List<Guid>());
-            _handleServer.SendToServer(_client, groupChat);
+            _requests.SendModelMessage(_client, groupChat);
         }
     }
 }

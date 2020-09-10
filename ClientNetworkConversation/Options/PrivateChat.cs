@@ -1,4 +1,5 @@
 ﻿using Common.Enums;
+using Common.HandleRequests;
 using MenuBuilder.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,32 +13,32 @@ namespace ClientNetworkConversation.Options
     {
         public string OptionMessage => "Enter To private Chats";
         private static TcpClient _client;
-        private HandleServer _handleServer;
+        private IRequests _requests;
         private ISystem _system;
 
 
         private bool endConnection = false;
-        public PrivateChat(TcpClient client, HandleServer handleServer, ISystem system)
+        public PrivateChat(TcpClient client,  IRequests requests, ISystem system)
         {
-            _handleServer = handleServer;
             _client = client;
+            _requests = requests;
             _system = system;
         }
 
         public void Run()
         {
-            _handleServer.SendMessageToServer(_client, ClientOptions.PRIVATE_CHAT.ToString());
+            _requests.SendStringMessage(_client, ClientOptions.PRIVATE_CHAT.ToString());
 
 
             try
             {
                 string messageRecive;
-                messageRecive = _handleServer.GetMessageFromServer(_client);
+                messageRecive = _requests.GetStringMessage(_client);
                 _system.Write(messageRecive);
 
                 string messageToSend = _system.ReadString();
-                _handleServer.SendMessageToServer(_client, messageToSend);
-                messageRecive = _handleServer.GetMessageFromServer(_client);
+                _requests.SendStringMessage(_client, messageToSend);
+                messageRecive = _requests.GetStringMessage(_client);
 
                 if (messageRecive == "success")
                 {
@@ -55,7 +56,7 @@ namespace ClientNetworkConversation.Options
                             endConnection = true;
                         }
 
-                        _handleServer.SendMessageToServer(_client, message);
+                        _requests.SendStringMessage(_client, message);
                     }
                 }
                 else
@@ -73,7 +74,7 @@ namespace ClientNetworkConversation.Options
 
             while (message != "0")
             {
-                message = _handleServer.GetMessageFromServer(_client);
+                message = _requests.GetStringMessage(_client);
                 _system.Write(message);
             }
         }

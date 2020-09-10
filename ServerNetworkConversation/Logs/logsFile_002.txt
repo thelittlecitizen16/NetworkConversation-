@@ -228,3 +228,82 @@ System.InvalidOperationException: Process has exited, so the requested informati
 2020-09-09 22:47:27.440 +03:00 [INF] client d521420a-c7c1-4f04-8c07-0d6ca4741650 enter to group chat afek
 2020-09-09 22:47:33.576 +03:00 [INF] client out chat
 2020-09-09 22:47:39.346 +03:00 [INF] Application is shutting down...
+2020-09-10 09:08:46.412 +03:00 [INF] starting up the service
+2020-09-10 09:08:48.174 +03:00 [INF] server wait for first connection...
+2020-09-10 09:08:55.590 +03:00 [INF] new client connected
+2020-09-10 09:09:00.027 +03:00 [INF] new client connected
+2020-09-10 09:09:04.084 +03:00 [INF] client 073400d8-397b-4cb1-9063-69e5c6c70f46 enter global chat
+2020-09-10 09:09:07.185 +03:00 [INF] client 4dd4ccb6-7adc-4524-a067-0345a8bbf730 enter global chat
+2020-09-10 09:09:08.733 +03:00 [INF] send aaaaa from 4dd4ccb6-7adc-4524-a067-0345a8bbf730 in globalchat
+2020-09-10 09:09:08.734 +03:00 [INF] client 4dd4ccb6-7adc-4524-a067-0345a8bbf730 send 4dd4ccb6-7adc-4524-a067-0345a8bbf730 send: aaaaa in global chat
+2020-09-10 09:09:11.534 +03:00 [INF] client 4dd4ccb6-7adc-4524-a067-0345a8bbf730 exit global chat
+2020-09-10 09:09:12.193 +03:00 [INF] client 4dd4ccb6-7adc-4524-a067-0345a8bbf730 enter global chat
+2020-09-10 09:09:13.889 +03:00 [INF] client 4dd4ccb6-7adc-4524-a067-0345a8bbf730 exit global chat
+2020-09-10 09:09:15.503 +03:00 [INF] client 073400d8-397b-4cb1-9063-69e5c6c70f46 exit global chat
+2020-09-10 09:09:24.682 +03:00 [INF] client 4dd4ccb6-7adc-4524-a067-0345a8bbf730 send success to client success
+2020-09-10 09:09:30.830 +03:00 [INF] client 073400d8-397b-4cb1-9063-69e5c6c70f46 send success to client success
+2020-09-10 09:09:33.970 +03:00 [INF] Received from 4dd4ccb6-7adc-4524-a067-0345a8bbf730 and Sending to 073400d8-397b-4cb1-9063-69e5c6c70f46 : afek
+2020-09-10 09:09:33.971 +03:00 [INF] client System.Net.Sockets.TcpClient get message afek
+2020-09-10 09:09:36.078 +03:00 [INF] client 073400d8-397b-4cb1-9063-69e5c6c70f46 leave chat with client 4dd4ccb6-7adc-4524-a067-0345a8bbf730
+2020-09-10 09:09:38.800 +03:00 [INF] Received from 4dd4ccb6-7adc-4524-a067-0345a8bbf730 and Sending to 073400d8-397b-4cb1-9063-69e5c6c70f46 : send
+2020-09-10 09:09:42.095 +03:00 [INF] client 073400d8-397b-4cb1-9063-69e5c6c70f46 send success to client success
+2020-09-10 09:09:44.775 +03:00 [INF] Received from 073400d8-397b-4cb1-9063-69e5c6c70f46 and Sending to 4dd4ccb6-7adc-4524-a067-0345a8bbf730 : aaa
+2020-09-10 09:09:44.775 +03:00 [INF] client System.Net.Sockets.TcpClient get message aaa
+2020-09-10 09:09:45.775 +03:00 [INF] client 073400d8-397b-4cb1-9063-69e5c6c70f46 leave chat with client 4dd4ccb6-7adc-4524-a067-0345a8bbf730
+2020-09-10 09:09:47.840 +03:00 [INF] client 4dd4ccb6-7adc-4524-a067-0345a8bbf730 leave chat with client 073400d8-397b-4cb1-9063-69e5c6c70f46
+2020-09-10 09:09:56.547 +03:00 [INF] add new group afek
+2020-09-10 09:09:59.321 +03:00 [INF] client 4dd4ccb6-7adc-4524-a067-0345a8bbf730 enter to group chat afek
+2020-09-10 09:10:00.716 +03:00 [INF] Received in group afek and Sending all: 4dd4ccb6-7adc-4524-a067-0345a8bbf730 send:  ddddd
+2020-09-10 09:10:05.425 +03:00 [INF] client 073400d8-397b-4cb1-9063-69e5c6c70f46 enter to group chat afek
+2020-09-10 09:10:06.975 +03:00 [INF] Received in group afek and Sending all: 073400d8-397b-4cb1-9063-69e5c6c70f46 send:  ssss
+2020-09-10 09:10:07.831 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 09:10:07.831 +03:00 [INF] client out chat
+2020-09-10 09:10:09.124 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 09:10:09.124 +03:00 [INF] client out chat
+2020-09-10 09:10:21.190 +03:00 [INF] client 4dd4ccb6-7adc-4524-a067-0345a8bbf730 change settings group afek
+2020-09-10 09:10:23.470 +03:00 [INF] client 073400d8-397b-4cb1-9063-69e5c6c70f46 dont want to leave any group
+2020-09-10 09:10:32.531 +03:00 [INF] Application is shutting down...
+2020-09-10 09:22:36.954 +03:00 [INF] starting up the service
+2020-09-10 09:22:37.502 +03:00 [INF] server wait for first connection...
+2020-09-10 09:22:41.676 +03:00 [INF] new client connected
+2020-09-10 09:22:46.395 +03:00 [INF] new client connected
+2020-09-10 09:22:49.881 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 enter global chat
+2020-09-10 09:22:51.216 +03:00 [INF] client 6bfd330e-ff0a-4fa5-a8f2-9400f326af29 enter global chat
+2020-09-10 09:22:53.650 +03:00 [INF] send aaaaaa from d10dc75d-f566-47af-a6df-0a04854619a6 in globalchat
+2020-09-10 09:22:53.651 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 send d10dc75d-f566-47af-a6df-0a04854619a6 send: aaaaaa in global chat
+2020-09-10 09:22:55.514 +03:00 [INF] send bbbb from d10dc75d-f566-47af-a6df-0a04854619a6 in globalchat
+2020-09-10 09:22:55.515 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 send d10dc75d-f566-47af-a6df-0a04854619a6 send: bbbb in global chat
+2020-09-10 09:22:56.147 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 exit global chat
+2020-09-10 09:22:59.674 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 enter global chat
+2020-09-10 09:23:01.693 +03:00 [INF] send llll from d10dc75d-f566-47af-a6df-0a04854619a6 in globalchat
+2020-09-10 09:23:01.694 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 send d10dc75d-f566-47af-a6df-0a04854619a6 send: llll in global chat
+2020-09-10 09:23:02.384 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 exit global chat
+2020-09-10 09:23:03.624 +03:00 [INF] client 6bfd330e-ff0a-4fa5-a8f2-9400f326af29 exit global chat
+2020-09-10 09:23:08.740 +03:00 [INF] client 6bfd330e-ff0a-4fa5-a8f2-9400f326af29 send success to client success
+2020-09-10 09:23:09.844 +03:00 [INF] Received from 6bfd330e-ff0a-4fa5-a8f2-9400f326af29 and Sending to d10dc75d-f566-47af-a6df-0a04854619a6 : afek
+2020-09-10 09:23:17.548 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 send success to client success
+2020-09-10 09:23:19.424 +03:00 [INF] Received from d10dc75d-f566-47af-a6df-0a04854619a6 and Sending to 6bfd330e-ff0a-4fa5-a8f2-9400f326af29 : afek
+2020-09-10 09:23:19.425 +03:00 [INF] client System.Net.Sockets.TcpClient get message afek
+2020-09-10 09:23:21.820 +03:00 [INF] Received from d10dc75d-f566-47af-a6df-0a04854619a6 and Sending to 6bfd330e-ff0a-4fa5-a8f2-9400f326af29 : 0000
+2020-09-10 09:23:21.820 +03:00 [INF] client System.Net.Sockets.TcpClient get message 0000
+2020-09-10 09:23:27.130 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 leave chat with client 6bfd330e-ff0a-4fa5-a8f2-9400f326af29
+2020-09-10 09:23:28.813 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 send success to client success
+2020-09-10 09:23:29.597 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 leave chat with client 6bfd330e-ff0a-4fa5-a8f2-9400f326af29
+2020-09-10 09:23:36.513 +03:00 [INF] client 6bfd330e-ff0a-4fa5-a8f2-9400f326af29 leave chat with client d10dc75d-f566-47af-a6df-0a04854619a6
+2020-09-10 09:23:43.435 +03:00 [INF] add new group afek
+2020-09-10 09:23:46.958 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 enter to group chat afek
+2020-09-10 09:23:48.303 +03:00 [INF] Received in group afek and Sending all: d10dc75d-f566-47af-a6df-0a04854619a6 send:  aaaa
+2020-09-10 09:23:51.973 +03:00 [INF] client 6bfd330e-ff0a-4fa5-a8f2-9400f326af29 enter to group chat afek
+2020-09-10 09:23:53.528 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 09:23:53.528 +03:00 [INF] client out chat
+2020-09-10 09:23:56.689 +03:00 [INF] client dont want to enter manager settings to any group
+2020-09-10 09:23:58.712 +03:00 [INF] Received in group afek and Sending all: d10dc75d-f566-47af-a6df-0a04854619a6 send:  5
+2020-09-10 09:24:01.067 +03:00 [INF] Received in group afek and Sending all: d10dc75d-f566-47af-a6df-0a04854619a6 send:  6bfd330e-ff0a-4fa5-a8f2-9400f326af29
+2020-09-10 09:24:01.827 +03:00 [INF] clientSystem.Net.Sockets.TcpClient out of group
+2020-09-10 09:24:01.827 +03:00 [INF] client out chat
+2020-09-10 09:24:06.759 +03:00 [INF] client 6bfd330e-ff0a-4fa5-a8f2-9400f326af29 leave group afek
+2020-09-10 09:24:11.299 +03:00 [INF] client d10dc75d-f566-47af-a6df-0a04854619a6 leave group afek
+2020-09-10 09:24:14.211 +03:00 [INF] client dont want to enter chat in any group
+2020-09-10 09:24:14.211 +03:00 [INF] client out chat
+2020-09-10 09:26:18.686 +03:00 [INF] Application is shutting down...
+2020-09-10 09:26:23.693 +03:00 [INF] Waiting for the host to be disposed. Ensure all 'IHost' instances are wrapped in 'using' blocks.
