@@ -1,8 +1,10 @@
 ﻿using Common;
+using Common.HandleRequests;
+using Common.Models;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
-using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
+using ServerNetworkConversation.Options.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +18,16 @@ namespace ServerNetworkConversation.Options.GroupsChat
     {
         private TcpClient _client;
         private Data _data;
-        private HandleClient _handleClient;
-        private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
+        private IRequests _requests;
 
-        public ManagerSettings(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
+        public ManagerSettings(Data data, TcpClient client,  ILogger<Worker> logger, IRequests requests)
         {
             _client = client;
             _data = data;
-            _handleClient = handleClient;
-            _removeClient = removeClient;
             _logger = logger;
+            _requests = requests;
         }
         public Thread Run()
         {
@@ -42,7 +42,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             try
             {
                 AllGroupsManagedByClient(clientGuid);
-                string dataReceived = _handleClient.GetMessageFromClient(_client);
+                string dataReceived = _requests.GetStringMessage(_client);
                 GroupChat oldGroupChat = null;
 
                 if (dataReceived == "0")
@@ -61,7 +61,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             }
             catch (Exception)
             {
-                _removeClient.RemoveClientWhenOut(_client, clientGuid);
+                ChatUtils.RemoveClientWhenOut(_client, clientGuid, _data);
             }
         }
 
@@ -71,7 +71,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             clientsToAdd.Remove(clientGuid);
 
             Participants participants = new Participants(clientsToAdd);
-            _handleClient.SendToClient(_client, participants);
+            _requests.SendModelMessage(_client, participants);
         }
         private void AllGroupsManagedByClient(Guid clientGuid)
         {
@@ -79,26 +79,18 @@ namespace ServerNetworkConversation.Options.GroupsChat
                .Where(g => g.Managers.Contains(clientGuid))
                .Select(g => g.Name).ToList();
 
-            AllGroupChat allGroupChat = new AllGroupChat(grouspName);
-            _handleClient.SendToClient(_client, allGroupChat);
+            GroupUtils.SendAllGroupChat(_client, _requests, grouspName);
         }
         private GroupChat SendGroup(string groupName)
         {
             GroupChat groupChat = _data.AllGroupsChat.GetGroupsChat().Where(g=>g.Name == groupName).First();
-            _handleClient.SendToClient(_client, groupChat);
+            _requests.SendModelMessage(_client, groupChat);
 
             return groupChat;
         }
         private GroupChat WaitToGetGroupFromClient()
         {
-            GroupChat groupChat = (GroupChat)_handleClient.GetFromClient(_client);
-
-            while (groupChat == null)
-            {
-                groupChat = (GroupChat)_handleClient.GetFromClient(_client);
-            }
-
-            return groupChat;
+            return GroupUtils.WaitToGetGroupFromClient(_client, _requests);
         }
         private void AddGroup(GroupChat newGroupChat, GroupChat oldGroupChat)
         {

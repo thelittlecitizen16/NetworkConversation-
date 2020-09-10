@@ -668,7 +668,7 @@
           "Microsoft.Win32.SystemEvents": "4.7.0"
         },
         "compile": {
-          "ref/netcoreapp3.0/_._": {}
+          "ref/netcoreapp3.0/System.Drawing.Common.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Drawing.Common.dll": {}
@@ -1167,7 +1167,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "12.0.3",
+          "System.Drawing.Common": "4.7.0"
         },
         "compile": {
           "bin/placeholder/Common.dll": {}
@@ -4101,7 +4102,8 @@
       "Serilog.AspNetCore >= 3.4.0",
       "Serilog.Extensions.Logging >= 3.0.1",
       "Serilog.Sinks.File >= 4.1.0",
-      "System.Configuration.ConfigurationManager >= 4.7.0"
+      "System.Configuration.ConfigurationManager >= 4.7.0",
+      "System.Drawing.Common >= 4.7.0"
     ]
   },
   "packageFolders": {
@@ -4174,6 +4176,10 @@
             "version": "[4.1.0, )"
           },
           "System.Configuration.ConfigurationManager": {
+            "target": "Package",
+            "version": "[4.7.0, )"
+          },
+          "System.Drawing.Common": {
             "target": "Package",
             "version": "[4.7.0, )"
           }

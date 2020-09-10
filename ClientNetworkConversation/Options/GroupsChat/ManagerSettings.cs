@@ -1,5 +1,8 @@
-﻿using Common;
+﻿using ClientNetworkConversation.Options.Utils;
+using Common;
 using Common.Enums;
+using Common.HandleRequests;
+using Common.Models;
 using MenuBuilder.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,12 +16,12 @@ namespace ClientNetworkConversation.Options.GroupsChat
     {
         public string OptionMessage => "Manager Settings";
         private static TcpClient _client;
-        private HandleServer _handleServer;
+        private IRequests _requests;
         private ISystem _system;
-        public ManagerSettings(TcpClient client, HandleServer handleServer, ISystem system)
+        public ManagerSettings(TcpClient client,  IRequests requests, ISystem system)
         {
-            _handleServer = handleServer;
             _client = client;
+            _requests = requests;
             _system = system;
         }
 
@@ -26,9 +29,9 @@ namespace ClientNetworkConversation.Options.GroupsChat
         {
             try
             {
-                _handleServer.SendMessageToServer(_client, ClientOptions.MANAGER_SETTINGS.ToString());
+                _requests.SendStringMessage(_client, ClientOptions.MANAGER_SETTINGS.ToString());
 
-                AllGroupChat allGroupChat = (AllGroupChat)_handleServer.GetFromServer(_client);
+                AllGroupChat allGroupChat = (AllGroupChat)_requests.GetModelMessage(_client);
                 PrintAllGroups(allGroupChat);
 
                 if (allGroupChat.GroupsName.Count>0)
@@ -38,9 +41,9 @@ namespace ClientNetworkConversation.Options.GroupsChat
 
                     if (CheckGroupName(userResponse, allGroupChat))
                     {
-                        _handleServer.SendMessageToServer(_client, userResponse);
-                        GroupChat groupChat = (GroupChat)_handleServer.GetFromServer(_client);
-                        Participants participants = (Participants)_handleServer.GetFromServer(_client);
+                        _requests.SendStringMessage(_client, userResponse);
+                        GroupChat groupChat = (GroupChat)_requests.GetModelMessage(_client);
+                        Participants participants = (Participants)_requests.GetModelMessage(_client);
 
 
                         _system.Write("enter names you want to remove from group, when end enter o");
@@ -59,17 +62,17 @@ namespace ClientNetworkConversation.Options.GroupsChat
 
                         ChangeGroup(groupChat, usersToRemove, usersToAdd, usersToAddAsMangers);
 
-                        _handleServer.SendToServer(_client, groupChat);
+                        _requests.SendModelMessage(_client, groupChat);
                     }
                     else
                     {
-                        _handleServer.SendMessageToServer(_client, "0");
+                        _requests.SendStringMessage(_client, "0");
                         _system.Write("the group  not exist");
                     }
                 }
                 else
                 {
-                    _handleServer.SendMessageToServer(_client, "0");
+                    _requests.SendStringMessage(_client, "0");
                     _system.Write("you dont have any group that you managment");
                 }
             }
@@ -80,21 +83,15 @@ namespace ClientNetworkConversation.Options.GroupsChat
 
         private void PrintAllGroups(AllGroupChat allGroupChat)
         {
-            foreach (var groupName in allGroupChat.GroupsName)
-            {
-                _system.Write(groupName);
-            }
+            GruopUtils.PrintString(allGroupChat.GroupsName, _system);
         }
         private void PrintParticipants(List<Guid> participants)
         {
-            foreach (var participant in participants)
-            {
-                _system.Write(participant.ToString());
-            }
+            GruopUtils.PrintString(participants.Select(p=>p.ToString()).ToList(), _system);
         }
         private bool CheckGroupName(string userResponse, AllGroupChat allGroupChat)
         {
-            return allGroupChat.GroupsName.Contains(userResponse);
+            return GruopUtils.CheckGroupName(userResponse, allGroupChat);
         }
         private bool CheckIfParticipantsExist(Guid userGuid, List<Guid> participants)
         {

@@ -7,11 +7,11 @@ using System.Threading;
 using System.Linq;
 using ServerNetworkConversation.Options.Interfaces;
 using ServerNetworkConversation.HandleData;
-using ServerNetworkConversation.Options.HandleOptions;
 using Microsoft.Extensions.Logging;
 using Common.Enums;
 using Common.HandleRequests;
-using Common.HandleRequests.HandleMessages;
+using ServerNetworkConversation.Options.Utils;
+using System.IO;
 
 namespace ServerNetworkConversation.Options
 {
@@ -19,18 +19,16 @@ namespace ServerNetworkConversation.Options
     {
         private TcpClient _client;
         private Data _data;
-        private HandleClient _handleClient;
-        private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
+        private IRequests _requests;
 
-        public GlobalChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
+        public GlobalChat(Data data, TcpClient inClientSocket,  ILogger<Worker> logger, IRequests requests)
         {
             _client = inClientSocket;
             _data = data;
-            _handleClient = handleClient;
-            _removeClient = removeClient;
             _logger = logger;
+            _requests = requests;
         }
         public Thread Run()
         {
@@ -45,6 +43,7 @@ namespace ServerNetworkConversation.Options
             bool end = false;
             var clientGuid = _data.ClientsInGlobalChat.GetClient(_client);
 
+           
             SendMessagesHistory();
             SendAllAboutEnter(clientGuid);
 
@@ -53,9 +52,9 @@ namespace ServerNetworkConversation.Options
                 try
                 {
 
-                    string dataReceived = _handleClient.GetMessageFromClient(_client);
+                    string dataReceivedType = _requests.GetStringMessage(_client);
 
-                    if (dataReceived == "0")
+                    if (dataReceivedType == "0")
                     {
                         _data.ClientsInGlobalChat.Remove(clientGuid);
                         SendAllAboutExist(clientGuid);
@@ -63,38 +62,39 @@ namespace ServerNetworkConversation.Options
                     }
                     else
                     {
-                        SendAllMessage(clientGuid, dataReceived);
+                        if (dataReceivedType == MessageType.STRING.ToString())
+                        {
+                            string dataReceived = _requests.GetStringMessage(_client);
+                            SendAllStringMessage(clientGuid, dataReceived);
+                        }
+                        else if (dataReceivedType == MessageType.PIC.ToString())
+                        {
+                            _requests.GetPictureMessage(_client);
+                            SendAllPicMessage(clientGuid);
+                        }   
+                        else
+                        {
+                            _data.ClientsInGlobalChat.Remove(clientGuid);
+                            SendAllAboutExist(clientGuid);
+                            end = true;
+                        }
                     }
                 }
                 catch (Exception)
                 {
                     end = true;
-                    _removeClient.RemoveClientWhenOut(_client,clientGuid);
+                    ChatUtils.RemoveClientWhenOut(_client,clientGuid, _data);
                     _data.ClientsInGlobalChat.Remove(clientGuid);
                 }
             }
         }
         private void SendMessagesHistory()
         {
-            string allMessages = "";
-            foreach (var message in _data.ClientsInGlobalChat.MessagesHistory)
-            {
-                allMessages += message + "\n";
-            }
-            if (allMessages != "")
-            {
-                _handleClient.SendMessageToClient(_client, allMessages);
-            }
+            ChatUtils.SendMessagesHistory(_data.ClientsInGlobalChat.MessagesHistory,_client, _requests);
         }
         private void SendMessageToEachClient(string message)
         {
-            foreach (var client in _data.ClientsInGlobalChat.Clients)
-            {
-                if (client.Value.Connected)
-                {
-                    _handleClient.SendMessageToClient(client.Value, message);
-                }
-            }
+            ChatUtils.SendMessageToEachClient(message, _data.ClientsInGlobalChat.Clients.Values.ToList(), _requests);
         }
 
         private void SendAllAboutEnter(Guid clientGuid)
@@ -109,20 +109,25 @@ namespace ServerNetworkConversation.Options
             string message = $"{clientGuid} exist the global chat";
             SendMessageToEachClient(message);
 
-            _handleClient.SendMessageToClient(_client, "0");
+            _requests.SendStringMessage(_client, "0");
             _logger.LogInformation($"client {clientGuid} exit global chat");
         }
 
-        private void SendAllMessage(Guid clientGuid, string dataReceived)
+        private void SendAllStringMessage(Guid clientGuid, string dataReceived)
         {
           _logger.LogInformation($"send {dataReceived} from {clientGuid} in globalchat");
 
             string message = $"{clientGuid} send: {dataReceived}";
             SendMessageToEachClient(message);
            _data.ClientsInGlobalChat.MessagesHistory.Add(message);
+        }
+        private void SendAllPicMessage(Guid clientGuid)
+        {
+            _logger.LogInformation($"{clientGuid} send picture in globalchat");
+            string message = $"{clientGuid} send picture";
+            SendMessageToEachClient(message);
+            _data.ClientsInGlobalChat.MessagesHistory.Add(message);
 
-            _logger.LogInformation($"client {clientGuid} send {message} in global chat");
         }
     }
-
 }

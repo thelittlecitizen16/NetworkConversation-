@@ -7,6 +7,8 @@ using System.Threading;
 using Common.Enums;
 using System.Threading.Tasks;
 using Common.HandleRequests;
+using ClientNetworkConversation.Options.Utils;
+
 
 namespace ClientNetworkConversation.Options
 {
@@ -14,21 +16,21 @@ namespace ClientNetworkConversation.Options
     {
         public string OptionMessage => "Enter To Global Chat";
         private static TcpClient _client;
-        private HandleServer _handleServer;
+        private IRequests _requests;
         private ISystem _system;
         private string message;
 
         private bool endConnection = false;
-        public GlobalChatOption(TcpClient client, HandleServer handleServer, ISystem system)
+        public GlobalChatOption(TcpClient client, IRequests requests, ISystem system)
         {
-            _handleServer = handleServer;
             _client = client;
+            _requests = requests;
             _system = system;
         }
 
         public void Run()
         {
-            _handleServer.SendMessageToServer(_client, ClientOptions.GLOBAL_CHAT.ToString());
+            _requests.SendStringMessage(_client, ClientOptions.GLOBAL_CHAT.ToString());
 
             try
             {
@@ -43,17 +45,18 @@ namespace ClientNetworkConversation.Options
                     if (message == "0")
                     {
                         endConnection = true;
-                       
-                        _handleServer.SendMessageToServer(_client, message);
+
+                        _requests.SendStringMessage(_client, message);
                         break;
                     }
                     else
-                    {  
-                         _handleServer.SendMessageToServer(_client, message);
+                    {
+                        if (!ChatUtils.SendMessageByType(_requests, _client, message))
+                        {
+                            endConnection = true;
+                        }
                     }
                 }
-
-
             }
             catch (Exception e)
             {
@@ -63,13 +66,7 @@ namespace ClientNetworkConversation.Options
         }
         private void GetMessage()
         {
-            string message = "";
-
-            while (message != "0")
-            {
-                message = _handleServer.GetMessageFromServer(_client);
-                _system.Write(message);
-            }
+            ChatUtils.GetMessage(_requests, _system, _client);
         }
     }
 }

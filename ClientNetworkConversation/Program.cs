@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.HandleRequests;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -12,7 +13,7 @@ namespace ClientNetworkConversation
 
         static void Main(string[] args)
         { 
-            HandleServer handleServer = new HandleServer();
+            Requests requests = new Requests();
 
             try
             {
@@ -26,7 +27,7 @@ namespace ClientNetworkConversation
             {
             }
 
-            Menu menuOption1 = new Menu(client, handleServer);
+            Menu menuOption1 = new Menu(client, requests);
             menuOption1.RunMenu();
             Console.ReadLine();
         }

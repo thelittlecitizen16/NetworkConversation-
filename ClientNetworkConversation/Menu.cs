@@ -1,5 +1,6 @@
 ﻿using ClientNetworkConversation.Options;
 using ClientNetworkConversation.Options.GroupsChat;
+using Common.HandleRequests;
 using MenuBuilder;
 using MenuBuilder.Options;
 using System;
@@ -22,16 +23,16 @@ namespace ClientNetworkConversation
         private LeaveGroupChat _leaveGroupChat;
 
 
-        public Menu(TcpClient client, HandleServer handleServer)
+        public Menu(TcpClient client, IRequests requests)
         {
             _consoleSystem = new ConsoleSystem();
             _validation = new Validation();
-            _globalChatOption = new GlobalChatOption(client, handleServer, _consoleSystem);
-            _privateChat = new PrivateChat(client, handleServer, _consoleSystem);
-            _createGroupChat = new CreateGroupChat(client, handleServer, _consoleSystem);
-            _enterGroupChat=new EnterGroupChat(client, handleServer, _consoleSystem);
-            _managerSettings = new ManagerSettings(client, handleServer, _consoleSystem);
-            _leaveGroupChat = new LeaveGroupChat(client, handleServer, _consoleSystem);
+            _globalChatOption = new GlobalChatOption(client, requests, _consoleSystem);
+            _privateChat = new PrivateChat(client,requests, _consoleSystem);
+            _createGroupChat = new CreateGroupChat(client,requests, _consoleSystem);
+            _enterGroupChat=new EnterGroupChat(client,requests, _consoleSystem);
+            _managerSettings = new ManagerSettings(client,requests, _consoleSystem);
+            _leaveGroupChat = new LeaveGroupChat(client,requests, _consoleSystem);
             _menuBuilderInt = new MenuBuilder<int>(_consoleSystem, _validation);
             _menuBuilderInt = new MenuBuilder<int>(_consoleSystem, _validation);
   

@@ -6,12 +6,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.HandleRequests;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.HandleOptions;
-using ServerNetworkConversation.Options;
-using ServerNetworkConversation.Options.HandleOptions;
 
 namespace ServerNetworkConversation
 {
@@ -21,16 +20,13 @@ namespace ServerNetworkConversation
         public Worker(ILogger<Worker> logger)
         {
             _logger = logger;
-           
-
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             Data data = new Data();
-            HandleClient handleClient = new HandleClient();
             ClientOptionsFactory clientOptionsFactory = new ClientOptionsFactory();
-            RemoveClient removeClient = new RemoveClient(data);
+            Requests requests = new Requests();
 
             IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddr = ipHost.AddressList[0];
@@ -47,7 +43,7 @@ namespace ServerNetworkConversation
                     data.ClientsConnectedInServer.AddWhenConnect(Guid.NewGuid(), tcpClient);
                     _logger.LogInformation($"new client connected");
 
-                    var manageClientOptions = new ManageClientOptions(data, tcpClient, handleClient, removeClient, clientOptionsFactory, _logger);
+                    var manageClientOptions = new ManageClientOptions(data, tcpClient, clientOptionsFactory, _logger, requests);
                     manageClientOptions.Run();
                 }
             }

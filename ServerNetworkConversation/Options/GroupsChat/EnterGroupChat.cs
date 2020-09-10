@@ -1,8 +1,10 @@
 ﻿using Common;
+using Common.HandleRequests;
+using Common.Models;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
-using ServerNetworkConversation.Options.HandleOptions;
 using ServerNetworkConversation.Options.Interfaces;
+using ServerNetworkConversation.Options.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +18,15 @@ namespace ServerNetworkConversation.Options.GroupsChat
     {
         private TcpClient _client;
         private Data _data;
-        private HandleClient _handleClient;
-        private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
-
-        public EnterGroupChat(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
+        private IRequests _requests;
+        public EnterGroupChat(Data data, TcpClient client, ILogger<Worker> logger, IRequests requests)
         {
             _client = client;
             _data = data;
-            _handleClient = handleClient;
-            _removeClient = removeClient;
             _logger = logger;
+            _requests = requests;
         }
         public Thread Run()
         {
@@ -46,7 +45,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             {
                 SendAllClientGroups(clientGuid);
 
-                string dataReceived = _handleClient.GetMessageFromClient(_client);
+                string dataReceived = _requests.GetStringMessage(_client);
                 if (dataReceived == "0")
                 {
                     _logger.LogInformation("client dont want to enter chat in any group");
@@ -57,15 +56,16 @@ namespace ServerNetworkConversation.Options.GroupsChat
                     group = _data.AllGroupsChat.GetGroupsChat().Where(g => g.Name == dataReceived).First();
                     _data.AllGroupsChat.AddClientConnected(group, _client);
                     _logger.LogInformation($"client {clientGuid} enter to group chat {group.Name}");
+
                     SendMessagesHistory(group);
 
                     while (!end)
                     {
-                        dataReceived = _handleClient.GetMessageFromClient(_client);
+                        dataReceived = _requests.GetStringMessage(_client);
 
                         if (dataReceived == "0")
                         {
-                            _handleClient.SendMessageToClient(_client, "0");
+                            _requests.SendStringMessage(_client, "0");
                             ClientOutOfGroup(group);
                             _data.AllGroupsChat.RemoveClientUnConnected(group, _client);
                             end = true;
@@ -84,7 +84,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             {
                 end = true;
                 _data.AllGroupsChat.RemoveClientUnConnected(group, _client);
-                _removeClient.RemoveClientWhenOut(_client, clientGuid);
+                ChatUtils.RemoveClientWhenOut(_client, clientGuid, _data);
             }
 
 
@@ -92,37 +92,28 @@ namespace ServerNetworkConversation.Options.GroupsChat
         }
         private void SendMessagesHistory(GroupChat groupChat)
         {
-            string allMessages = "";
-            foreach (var message in _data.AllGroupsChat.GetAllGroupHistory(groupChat))
-            {
-                allMessages += message + "\n";
-            }
-            if (allMessages != "")
-            {
-                _handleClient.SendMessageToClient(_client, allMessages);
-            }
+            ChatUtils.SendMessagesHistory(_data.AllGroupsChat.GetAllGroupHistory(groupChat), _client,_requests);
+            //string allMessages = "";
+
+            //foreach (var message in _data.AllGroupsChat.GetAllGroupHistory(groupChat))
+            //{
+            //    allMessages += message + "\n";
+            //}
+            //if (allMessages != "")
+            //{
+            //    _requests.SendStringMessage(_client, allMessages);
+            //}
         }
         private void SendMessageToEachClient(GroupChat group, string message)
         {
-            foreach (var client in _data.AllGroupsChat.ClientConnectToGroup[group])
-            {
-                if (client.Connected)
-                {
-                    _handleClient.SendMessageToClient(client, message);
-                }
-            }
-
+            ChatUtils.SendMessageToEachClient(message, _data.AllGroupsChat.ClientConnectToGroup[group], _requests);
+           
             _data.AllGroupsChat.AddMessageToHistory(group, message);
             _logger.LogInformation($"Received in group {group.Name} and Sending all: {message}");
         }
         private void SendAllClientGroups(Guid clientGuid)
         {
-            List<string> grouspName = _data.AllGroupsChat.GetGroupsChat()
-               .Where(g => g.Participants.Contains(clientGuid))
-               .Select(g => g.Name).ToList();
-
-            AllGroupChat allGroupChat = new AllGroupChat(grouspName);
-            _handleClient.SendToClient(_client, allGroupChat);
+            GroupUtils.SendAllClientGroups( _client, _requests, _data, clientGuid);   
         }
         private void ClientOutOfGroup(GroupChat group)
         {
