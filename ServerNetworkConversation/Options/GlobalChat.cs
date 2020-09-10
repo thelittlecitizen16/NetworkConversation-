@@ -23,14 +23,16 @@ namespace ServerNetworkConversation.Options
         private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
+        private IRequests _requests;
 
-        public GlobalChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
+        public GlobalChat(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests)
         {
             _client = inClientSocket;
             _data = data;
             _handleClient = handleClient;
             _removeClient = removeClient;
             _logger = logger;
+            _requests = requests;
         }
         public Thread Run()
         {
@@ -53,7 +55,7 @@ namespace ServerNetworkConversation.Options
                 try
                 {
 
-                    string dataReceived = _handleClient.GetMessageFromClient(_client);
+                    string dataReceived = _requests.GetStringMessage(_client);
 
                     if (dataReceived == "0")
                     {
@@ -83,7 +85,7 @@ namespace ServerNetworkConversation.Options
             }
             if (allMessages != "")
             {
-                _handleClient.SendMessageToClient(_client, allMessages);
+                _requests.SendStringMessage(_client, allMessages);
             }
         }
         private void SendMessageToEachClient(string message)
@@ -92,7 +94,7 @@ namespace ServerNetworkConversation.Options
             {
                 if (client.Value.Connected)
                 {
-                    _handleClient.SendMessageToClient(client.Value, message);
+                    _requests.SendStringMessage(client.Value, message);
                 }
             }
         }
@@ -109,7 +111,7 @@ namespace ServerNetworkConversation.Options
             string message = $"{clientGuid} exist the global chat";
             SendMessageToEachClient(message);
 
-            _handleClient.SendMessageToClient(_client, "0");
+            _requests.SendStringMessage(_client, "0");
             _logger.LogInformation($"client {clientGuid} exit global chat");
         }
 

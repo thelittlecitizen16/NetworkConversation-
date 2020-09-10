@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.HandleRequests;
 using Common.Models;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
@@ -21,14 +22,16 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
+        private IRequests _requests;
 
-        public LeaveGroupChat(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
+        public LeaveGroupChat(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests)
         {
             _client = client;
             _data = data;
             _handleClient = handleClient;
             _removeClient = removeClient;
             _logger = logger;
+            _requests = requests;
         }
 
         public Thread Run()
@@ -45,7 +48,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             {
                 SendAllClientGroups(clientGuid);
 
-                string dataReceived = _handleClient.GetMessageFromClient(_client);
+                string dataReceived = _requests.GetStringMessage(_client);
 
                 if (dataReceived == "0")
                 {
@@ -70,7 +73,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
                .Select(g => g.Name).ToList();
 
             AllGroupChat allGroupChat = new AllGroupChat(grouspName);
-            _handleClient.SendToClient(_client, allGroupChat);
+            _requests.SendModelMessage(_client, allGroupChat);
         }
     }
 }

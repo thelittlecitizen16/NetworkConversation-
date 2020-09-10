@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.HandleRequests;
 using Common.Models;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
@@ -21,14 +22,15 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
-
-        public EnterGroupChat(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
+        private IRequests _requests;
+        public EnterGroupChat(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests)
         {
             _client = client;
             _data = data;
             _handleClient = handleClient;
             _removeClient = removeClient;
             _logger = logger;
+            _requests = requests;
         }
         public Thread Run()
         {
@@ -47,7 +49,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             {
                 SendAllClientGroups(clientGuid);
 
-                string dataReceived = _handleClient.GetMessageFromClient(_client);
+                string dataReceived = _requests.GetStringMessage(_client);
                 if (dataReceived == "0")
                 {
                     _logger.LogInformation("client dont want to enter chat in any group");
@@ -63,11 +65,11 @@ namespace ServerNetworkConversation.Options.GroupsChat
 
                     while (!end)
                     {
-                        dataReceived = _handleClient.GetMessageFromClient(_client);
+                        dataReceived = _requests.GetStringMessage(_client);
 
                         if (dataReceived == "0")
                         {
-                            _handleClient.SendMessageToClient(_client, "0");
+                            _requests.SendStringMessage(_client, "0");
                             ClientOutOfGroup(group);
                             _data.AllGroupsChat.RemoveClientUnConnected(group, _client);
                             end = true;
@@ -102,7 +104,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             }
             if (allMessages != "")
             {
-                _handleClient.SendMessageToClient(_client, allMessages);
+                _requests.SendStringMessage(_client, allMessages);
             }
         }
         private void SendMessageToEachClient(GroupChat group, string message)
@@ -111,7 +113,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
             {
                 if (client.Connected)
                 {
-                    _handleClient.SendMessageToClient(client, message);
+                    _requests.SendStringMessage(client, message);
                 }
             }
 
@@ -125,7 +127,7 @@ namespace ServerNetworkConversation.Options.GroupsChat
                .Select(g => g.Name).ToList();
 
             AllGroupChat allGroupChat = new AllGroupChat(grouspName);
-            _handleClient.SendToClient(_client, allGroupChat);
+            _requests.SendModelMessage(_client, allGroupChat);
         }
         private void ClientOutOfGroup(GroupChat group)
         {

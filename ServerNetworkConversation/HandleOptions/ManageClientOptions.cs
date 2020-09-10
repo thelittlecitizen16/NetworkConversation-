@@ -12,6 +12,7 @@ using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.Interfaces;
+using Common.HandleRequests;
 
 namespace ServerNetworkConversation.HandleOptions
 {
@@ -23,7 +24,8 @@ namespace ServerNetworkConversation.HandleOptions
         private RemoveClient _removeClient;
         private IClientOptionsFactory _clientOptionsFactory;
         private ILogger<Worker> _logger;
-        public ManageClientOptions(Data data, TcpClient inClientSocket, HandleClient handleClient, RemoveClient removeClient, IClientOptionsFactory clientOptionsFactory, ILogger<Worker> logger)
+        private IRequests _requests;
+        public ManageClientOptions(Data data, TcpClient inClientSocket,   HandleClient handleClient, RemoveClient removeClient, IClientOptionsFactory clientOptionsFactory, ILogger<Worker> logger, IRequests requests)
         {
             _clientSocket = inClientSocket;
             _data = data;
@@ -31,6 +33,7 @@ namespace ServerNetworkConversation.HandleOptions
             _removeClient = removeClient;
             _clientOptionsFactory = clientOptionsFactory;
             _logger = logger;
+            _requests = requests;
         }
 
         public void Run()
@@ -52,7 +55,7 @@ namespace ServerNetworkConversation.HandleOptions
                 {
                     try
                     {
-                        string dataReceived = _handleClient.GetMessageFromClient(_clientSocket);
+                        string dataReceived = _requests.GetStringMessage(_clientSocket); //_handleClient.GetMessageFromClient(_clientSocket);
                         ClientOptions choice;
 
                         if (Enum.TryParse(dataReceived, out choice))
@@ -61,32 +64,32 @@ namespace ServerNetworkConversation.HandleOptions
                             {
                                 case ClientOptions.GLOBAL_CHAT:
                                     _data.ClientsInGlobalChat.Add(_data.ClientsConnectedInServer.GetGuid(_clientSocket), _clientSocket);
-                                    Thread globalChat = _clientOptionsFactory.AddClientOptions(ClientOptions.GLOBAL_CHAT, _data, _clientSocket, _handleClient, _removeClient, _logger).Run();
+                                    Thread globalChat = _clientOptionsFactory.AddClientOptions(ClientOptions.GLOBAL_CHAT, _data, _clientSocket, _handleClient, _removeClient, _logger, _requests).Run();
                                     globalChat.Join();
                                     break;
 
                                 case ClientOptions.PRIVATE_CHAT:
-                                    Thread privateChat = _clientOptionsFactory.AddClientOptions(ClientOptions.PRIVATE_CHAT, _data, _clientSocket, _handleClient, _removeClient, _logger).Run();
+                                    Thread privateChat = _clientOptionsFactory.AddClientOptions(ClientOptions.PRIVATE_CHAT, _data, _clientSocket, _handleClient, _removeClient, _logger, _requests).Run();
                                     privateChat.Join();
                                     break;
 
                                 case ClientOptions.CREATE_GROUP_CHAT:
-                                    Thread CreateGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.CREATE_GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient, _logger).Run();
+                                    Thread CreateGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.CREATE_GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient, _logger, _requests).Run();
                                     CreateGroupChat.Join();
                                     break;
 
                                 case ClientOptions.GROUP_CHAT:
-                                    Thread EnterGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient, _logger).Run();
+                                    Thread EnterGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient, _logger, _requests).Run();
                                     EnterGroupChat.Join();
                                     break;
 
                                 case ClientOptions.MANAGER_SETTINGS:
-                                    Thread managerSettings = _clientOptionsFactory.AddClientOptions(ClientOptions.MANAGER_SETTINGS, _data, _clientSocket, _handleClient, _removeClient, _logger).Run();
+                                    Thread managerSettings = _clientOptionsFactory.AddClientOptions(ClientOptions.MANAGER_SETTINGS, _data, _clientSocket, _handleClient, _removeClient, _logger, _requests).Run();
                                     managerSettings.Join();
                                     break;
 
                                 case ClientOptions.LEAVE_GROUP_CHAT:
-                                    Thread leavrGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.LEAVE_GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient, _logger).Run();
+                                    Thread leavrGroupChat = _clientOptionsFactory.AddClientOptions(ClientOptions.LEAVE_GROUP_CHAT, _data, _clientSocket, _handleClient, _removeClient, _logger, _requests).Run();
                                     leavrGroupChat.Join();
                                     break;
 

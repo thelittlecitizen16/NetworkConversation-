@@ -24,14 +24,16 @@ namespace ServerNetworkConversation.Options.GroupsChat
         private RemoveClient _removeClient;
         private Thread _thread;
         private ILogger<Worker> _logger;
+        private IRequests _requests;
 
-        public CreateGroupChat(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger)
+        public CreateGroupChat(Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger,  IRequests requests)
         {
             _client = client;
             _data = data;
             _handleClient = handleClient;
             _removeClient = removeClient;
             _logger = logger;
+            _requests = requests;
         }
         public Thread Run()
         {
@@ -63,15 +65,15 @@ namespace ServerNetworkConversation.Options.GroupsChat
             clientsToAdd.Remove(clientGuid);
 
             Participants participants = new Participants(clientsToAdd);
-            _handleClient.SendToClient(_client, participants);
+            _requests.SendModelMessage(_client, participants);
         }
         private GroupChat WaitToGetGroupFromClient()
         {
-            GroupChat groupChat = (GroupChat)_handleClient.GetFromClient(_client);
+            GroupChat groupChat = (GroupChat)_requests.GetModelMessage(_client);
 
             while (groupChat == null)
             {
-                groupChat = (GroupChat)_handleClient.GetFromClient(_client);
+                groupChat = (GroupChat)_requests.GetModelMessage(_client);
             }
 
             return groupChat;

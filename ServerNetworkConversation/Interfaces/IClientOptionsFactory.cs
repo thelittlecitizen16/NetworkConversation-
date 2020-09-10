@@ -1,4 +1,5 @@
 ﻿using Common.Enums;
+using Common.HandleRequests;
 using Microsoft.Extensions.Logging;
 using ServerNetworkConversation.HandleData;
 using ServerNetworkConversation.Options.HandleOptions;
@@ -12,6 +13,6 @@ namespace ServerNetworkConversation.Interfaces
 {
     public interface IClientOptionsFactory
     {
-        public IClientOption AddClientOptions(ClientOptions choice, Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger);
+        public IClientOption AddClientOptions(ClientOptions choice, Data data, TcpClient client, HandleClient handleClient, RemoveClient removeClient, ILogger<Worker> logger, IRequests requests);
     }
 }
